@@ -1,0 +1,20 @@
+{
+  "name": "ns-uploader",
+  "version": "0.0.3",
+  "description": "",
+  "main": "./src/index.js",
+  "scripts": {
+    "test": "node node_modules/jasmine/bin/jasmine.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "async": "2.5.0",
+    "jasmine": "^2.8.0",
+    "q": "1.5.1",
+    "shelljs": "0.7.8",
+    "suitetalk": "file:../suitetalk4node",
+    "underscore": "1.8.3",
+    "yargs": "10.0.3"
+  }
+}

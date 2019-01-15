@@ -1,0 +1,1245 @@
+this was tested using suitetalk java dmeo for 2013_2
+
+
+
+search folder request: 
+
+<soapenv:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+    <soapenv:Body>
+        <search xmlns="urn:messages_2013_2.platform.webservices.netsuite.com">
+            <searchRecord xsi:type="ns1:FolderSearch" xmlns:ns1="urn:filecabinet_2013_2.documents.webservices.netsuite.com">
+                <ns1:basic xsi:type="ns2:FolderSearchBasic" xmlns:ns2="urn:common_2013_2.platform.webservices.netsuite.com">
+                    <ns2:parent xsi:type="ns3:SearchMultiSelectField" operator="anyOf" xmlns:ns3="urn:core_2013_2.platform.webservices.netsuite.com">
+                        <ns3:searchValue xsi:type="ns3:RecordRef" internalId="11689"/>
+                    </ns2:parent>
+                </ns1:basic>
+            </searchRecord>
+        </search>
+    </soapenv:Body>
+</soapenv:Envelope>
+
+
+
+file add request:
+<soapenv:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+    <soapenv:Body>
+        <add xmlns="urn:messages_2013_2.platform.webservices.netsuite.com">
+            <record xsi:type="ns1:File" xmlns:ns1="urn:filecabinet_2013_2.documents.webservices.netsuite.com">
+                <ns1:name xsi:type="xsd:string">newFile1.txt</ns1:name>
+                <ns1:fileType xsi:type="ns2:MediaType" xmlns:ns2="urn:types.filecabinet_2013_2.documents.webservices.netsuite.com">_PLAINTEXT</ns1:fileType>
+                <ns1:content>aGVsbG8gd29ybGQ=</ns1:content>
+                <ns1:folder xsi:type="ns3:RecordRef" type="folder" internalId="11689" xmlns:ns3="urn:core_2013_2.platform.webservices.netsuite.com"/>
+            </record>
+        </add>
+    </soapenv:Body>
+</soapenv:Envelope>
+
+
+
+
+search request - all customers
+
+<soapenv:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+    <soapenv:Header>
+        <ns1:preferences soapenv:mustUnderstand="0" soapenv:actor="http://schemas.xmlsoap.org/soap/actor/next" xmlns:ns1="urn:messages.platform.webservices.netsuite.com">
+            <ns2:ignoreReadOnlyFields xmlns:ns2="urn:messages_2013_2.platform.webservices.netsuite.com">true</ns2:ignoreReadOnlyFields>
+        </ns1:preferences>
+        <ns3:searchPreferences soapenv:mustUnderstand="0" soapenv:actor="http://schemas.xmlsoap.org/soap/actor/next" xmlns:ns3="urn:messages.platform.webservices.netsuite.com">
+            <ns4:bodyFieldsOnly xmlns:ns4="urn:messages_2013_2.platform.webservices.netsuite.com">true</ns4:bodyFieldsOnly>
+            <ns5:pageSize xmlns:ns5="urn:messages_2013_2.platform.webservices.netsuite.com">20</ns5:pageSize>
+        </ns3:searchPreferences>
+    </soapenv:Header>
+    <soapenv:Body>
+        <search xmlns="urn:messages_2013_2.platform.webservices.netsuite.com">
+            <searchRecord xsi:type="ns6:CustomerSearch" xmlns:ns6="urn:relationships_2013_2.lists.webservices.netsuite.com">
+                <ns6:basic xsi:type="ns7:CustomerSearchBasic" xmlns:ns7="urn:common_2013_2.platform.webservices.netsuite.com"/>
+            </searchRecord>
+        </search>
+    </soapenv:Body>
+</soapenv:Envelope>
+
+
+
+
+
+
+
+
+
+
+search response - all customers
+
+<soapenv:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+    <soapenv:Header>
+        <platformMsgs:documentInfo xmlns:platformMsgs="urn:messages_2013_2.platform.webservices.netsuite.com">
+            <platformMsgs:nsId>WEBSERVICES_3690872_061020155375507081159580198_894e4c84d8b6</platformMsgs:nsId>
+        </platformMsgs:documentInfo>
+    </soapenv:Header>
+    <soapenv:Body>
+        <searchResponse xmlns="urn:messages_2013_2.platform.webservices.netsuite.com">
+            <platformCore:searchResult xmlns:platformCore="urn:core_2013_2.platform.webservices.netsuite.com">
+                <platformCore:status isSuccess="true"/>
+                <platformCore:totalRecords>751</platformCore:totalRecords>
+                <platformCore:pageSize>20</platformCore:pageSize>
+                <platformCore:totalPages>38</platformCore:totalPages>
+                <platformCore:pageIndex>1</platformCore:pageIndex>
+                <platformCore:searchId>WEBSERVICES_3690872_061020155375507081159580198_894e4c84d8b6</platformCore:searchId>
+                <platformCore:recordList>
+                    <platformCore:record xsi:type="listRel:Customer" internalId="3" xmlns:listRel="urn:relationships_2013_2.lists.webservices.netsuite.com">
+                        <listRel:entityId>1 Sebasti&#225;n Gurin</listRel:entityId>
+                        <listRel:isPerson>true</listRel:isPerson>
+                        <listRel:firstName>Sebasti&#225;n</listRel:firstName>
+                        <listRel:lastName>Gurin</listRel:lastName>
+                        <listRel:entityStatus internalId="13">
+                            <platformCore:name>CUSTOMER-Closed Won</platformCore:name>
+                        </listRel:entityStatus>
+                        <listRel:phone>3216549</listRel:phone>
+                        <listRel:email>sgurin@montevideo.com.uy</listRel:email>
+                        <listRel:defaultAddress>Sebasti&#225;n Gurin&lt;br&gt;asdasd&lt;br&gt;Sss 123&lt;br&gt;FF 345&lt;br&gt;22222 asdasd&lt;br&gt;Germany</listRel:defaultAddress>
+                        <listRel:isInactive>false</listRel:isInactive>
+                        <listRel:language>_usEnglish</listRel:language>
+                        <listRel:dateCreated>2013-04-24T09:33:43.000-07:00</listRel:dateCreated>
+                        <listRel:emailPreference>_default</listRel:emailPreference>
+                        <listRel:subsidiary internalId="1">
+                            <platformCore:name>Parent Company</platformCore:name>
+                        </listRel:subsidiary>
+                        <listRel:creditHoldOverride>_auto</listRel:creditHoldOverride>
+                        <listRel:unbilledOrders>151.0</listRel:unbilledOrders>
+                        <listRel:currency internalId="1">
+                            <platformCore:name>US Dollar</platformCore:name>
+                        </listRel:currency>
+                        <listRel:shipComplete>false</listRel:shipComplete>
+                        <listRel:taxable>false</listRel:taxable>
+                        <listRel:aging>0.0</listRel:aging>
+                        <listRel:giveAccess>true</listRel:giveAccess>
+                        <listRel:accessRole internalId="14">
+                            <platformCore:name>Customer Center</platformCore:name>
+                        </listRel:accessRole>
+                        <listRel:receivablesAccount internalId="-10">
+                            <platformCore:name>Use System Preference</platformCore:name>
+                        </listRel:receivablesAccount>
+                        <listRel:webLead>Yes</listRel:webLead>
+                        <listRel:lastModifiedDate>2013-05-22T09:31:17.000-07:00</listRel:lastModifiedDate>
+                        <listRel:stage>_customer</listRel:stage>
+                        <listRel:emailTransactions>false</listRel:emailTransactions>
+                        <listRel:printTransactions>false</listRel:printTransactions>
+                        <listRel:faxTransactions>false</listRel:faxTransactions>
+                        <listRel:isBudgetApproved>false</listRel:isBudgetApproved>
+                        <listRel:globalSubscriptionStatus>_softOptOut</listRel:globalSubscriptionStatus>
+                    </platformCore:record>
+                    <platformCore:record xsi:type="listRel:Customer" internalId="6" xmlns:listRel="urn:relationships_2013_2.lists.webservices.netsuite.com">
+                        <listRel:entityId>2 Seba222367s G</listRel:entityId>
+                        <listRel:isPerson>true</listRel:isPerson>
+                        <listRel:firstName>Seba222367s</listRel:firstName>
+                        <listRel:lastName>G</listRel:lastName>
+                        <listRel:entityStatus internalId="13">
+                            <platformCore:name>CUSTOMER-Closed Won</platformCore:name>
+                        </listRel:entityStatus>
+                        <listRel:phone>223132123</listRel:phone>
+                        <listRel:email>sgurin1@montevideo.com.uy</listRel:email>
+                        <listRel:defaultAddress>Seba G&lt;br&gt;asd&lt;br&gt;asdas 12&lt;br&gt;Montevideo  222222&lt;br&gt;Uganda</listRel:defaultAddress>
+                        <listRel:isInactive>false</listRel:isInactive>
+                        <listRel:language>_usEnglish</listRel:language>
+                        <listRel:dateCreated>2013-05-13T13:02:51.000-07:00</listRel:dateCreated>
+                        <listRel:emailPreference>_default</listRel:emailPreference>
+                        <listRel:subsidiary internalId="1">
+                            <platformCore:name>Parent Company</platformCore:name>
+                        </listRel:subsidiary>
+                        <listRel:creditHoldOverride>_auto</listRel:creditHoldOverride>
+                        <listRel:unbilledOrders>1304.42</listRel:unbilledOrders>
+                        <listRel:currency internalId="1">
+                            <platformCore:name>US Dollar</platformCore:name>
+                        </listRel:currency>
+                        <listRel:shipComplete>false</listRel:shipComplete>
+                        <listRel:taxable>false</listRel:taxable>
+                        <listRel:aging>0.0</listRel:aging>
+                        <listRel:giveAccess>true</listRel:giveAccess>
+                        <listRel:accessRole internalId="14">
+                            <platformCore:name>Customer Center</platformCore:name>
+                        </listRel:accessRole>
+                        <listRel:receivablesAccount internalId="-10">
+                            <platformCore:name>Use System Preference</platformCore:name>
+                        </listRel:receivablesAccount>
+                        <listRel:webLead>Yes</listRel:webLead>
+                        <listRel:lastModifiedDate>2013-06-10T12:55:54.000-07:00</listRel:lastModifiedDate>
+                        <listRel:stage>_customer</listRel:stage>
+                        <listRel:emailTransactions>false</listRel:emailTransactions>
+                        <listRel:printTransactions>false</listRel:printTransactions>
+                        <listRel:faxTransactions>false</listRel:faxTransactions>
+                        <listRel:isBudgetApproved>false</listRel:isBudgetApproved>
+                        <listRel:globalSubscriptionStatus>_confirmedOptOut</listRel:globalSubscriptionStatus>
+                    </platformCore:record>
+                </platformCore:recordList>
+            </platformCore:searchResult>
+        </searchResponse>
+    </soapenv:Body>
+</soapenv:Envelope>
+
+
+
+
+
+
+
+
+
+
+
+add customer request
+<soapenv:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+    <soapenv:Header>
+        <ns1:preferences soapenv:mustUnderstand="0" soapenv:actor="http://schemas.xmlsoap.org/soap/actor/next" xmlns:ns1="urn:messages.platform.webservices.netsuite.com">
+            <ns2:ignoreReadOnlyFields xmlns:ns2="urn:messages_2013_2.platform.webservices.netsuite.com">true</ns2:ignoreReadOnlyFields>
+        </ns1:preferences>
+        <ns3:searchPreferences soapenv:mustUnderstand="0" soapenv:actor="http://schemas.xmlsoap.org/soap/actor/next" xmlns:ns3="urn:messages.platform.webservices.netsuite.com">
+            <ns4:bodyFieldsOnly xmlns:ns4="urn:messages_2013_2.platform.webservices.netsuite.com">true</ns4:bodyFieldsOnly>
+            <ns5:pageSize xmlns:ns5="urn:messages_2013_2.platform.webservices.netsuite.com">20</ns5:pageSize>
+        </ns3:searchPreferences>
+    </soapenv:Header>
+    <soapenv:Body>
+        <add xmlns="urn:messages_2013_2.platform.webservices.netsuite.com">
+            <record xsi:type="ns6:Customer" xmlns:ns6="urn:relationships_2013_2.lists.webservices.netsuite.com">
+                {{#fields fields}}
+                <ns6:entityId xsi:type="xsd:string">Name wstest1</ns6:entityId>
+                <ns6:companyName xsi:type="xsd:string">Comp wstest1</ns6:companyName>
+                <ns6:entityStatus xsi:type="ns7:RecordRef" internalId="13" xmlns:ns7="urn:core_2013_2.platform.webservices.netsuite.com"/>
+                <ns6:email xsi:type="xsd:string">email@wstest1.com</ns6:email>
+                <ns6:emailPreference xsi:type="ns8:EmailPreference" xmlns:ns8="urn:types.relationships_2013_2.lists.webservices.netsuite.com">_hTML</ns6:emailPreference>
+                <ns6:addressbookList xsi:type="ns6:CustomerAddressbookList" replaceAll="false">
+                    <ns6:addressbook xsi:type="ns6:CustomerAddressbook">
+                        <ns6:defaultShipping xsi:type="xsd:boolean">true</ns6:defaultShipping>
+                        <ns6:defaultBilling xsi:type="xsd:boolean">false</ns6:defaultBilling>
+                        <ns6:attention xsi:type="xsd:string">William Sanders</ns6:attention>
+                        <ns6:addressee xsi:type="xsd:string">William Sanders</ns6:addressee>
+                        <ns6:addr1 xsi:type="xsd:string">Zapican 7711 apto 201</ns6:addr1>
+                        <ns6:addr2 xsi:type="xsd:string"/>
+                        <ns6:addr3 xsi:type="xsd:string"/>
+                        <ns6:city xsi:type="xsd:string">San Francisco</ns6:city>
+                        <ns6:zip xsi:type="xsd:string">94131</ns6:zip>
+                        <ns6:country xsi:type="ns9:Country" xmlns:ns9="urn:types.common_2013_2.platform.webservices.netsuite.com">_unitedStates</ns6:country>
+                        <ns6:state xsi:type="xsd:string">WA</ns6:state>
+                    </ns6:addressbook>
+                </ns6:addressbookList>
+            </record>
+        </add>
+    </soapenv:Body>
+</soapenv:Envelope>
+
+
+
+
+
+
+
+add customer response:
+<soapenv:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+    <soapenv:Header>
+        <platformMsgs:documentInfo xmlns:platformMsgs="urn:messages_2013_2.platform.webservices.netsuite.com">
+            <platformMsgs:nsId>WEBSERVICES_3690872_06102015537453574538891715_65c700739597d</platformMsgs:nsId>
+        </platformMsgs:documentInfo>
+    </soapenv:Header>
+    <soapenv:Body>
+        <addResponse xmlns="urn:messages_2013_2.platform.webservices.netsuite.com">
+            <writeResponse>
+                <platformCore:status isSuccess="true" xmlns:platformCore="urn:core_2013_2.platform.webservices.netsuite.com"/>
+                <baseRef xsi:type="platformCore:RecordRef" type="customer" internalId="1328" xmlns:platformCore="urn:core_2013_2.platform.webservices.netsuite.com"/>
+            </writeResponse>
+        </addResponse>
+    </soapenv:Body>
+</soapenv:Envelope>
+
+
+
+
+
+
+
+get customer request: 
+<soapenv:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+    <soapenv:Header>
+        <ns1:preferences soapenv:mustUnderstand="0" soapenv:actor="http://schemas.xmlsoap.org/soap/actor/next" xmlns:ns1="urn:messages.platform.webservices.netsuite.com">
+            <ns2:ignoreReadOnlyFields xmlns:ns2="urn:messages_2013_2.platform.webservices.netsuite.com">true</ns2:ignoreReadOnlyFields>
+        </ns1:preferences>
+        <ns3:searchPreferences soapenv:mustUnderstand="0" soapenv:actor="http://schemas.xmlsoap.org/soap/actor/next" xmlns:ns3="urn:messages.platform.webservices.netsuite.com">
+            <ns4:bodyFieldsOnly xmlns:ns4="urn:messages_2013_2.platform.webservices.netsuite.com">true</ns4:bodyFieldsOnly>
+            <ns5:pageSize xmlns:ns5="urn:messages_2013_2.platform.webservices.netsuite.com">20</ns5:pageSize>
+        </ns3:searchPreferences>
+    </soapenv:Header>
+    <soapenv:Body>
+        <get xmlns="urn:messages_2013_2.platform.webservices.netsuite.com">
+            <baseRef xsi:type="ns6:RecordRef" type="customer" internalId="1328" xmlns:ns6="urn:core_2013_2.platform.webservices.netsuite.com"/>
+        </get>
+    </soapenv:Body>
+</soapenv:Envelope>
+
+
+
+
+
+
+
+
+get customer response
+<soapenv:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+    <soapenv:Header>
+        <platformMsgs:documentInfo xmlns:platformMsgs="urn:messages_2013_2.platform.webservices.netsuite.com">
+            <platformMsgs:nsId>WEBSERVICES_3690872_06102015533887904241447624_2667d593f7b6e</platformMsgs:nsId>
+        </platformMsgs:documentInfo>
+    </soapenv:Header>
+    <soapenv:Body>
+        <getResponse xmlns="urn:messages_2013_2.platform.webservices.netsuite.com">
+            <readResponse>
+                <platformCore:status isSuccess="true" xmlns:platformCore="urn:core_2013_2.platform.webservices.netsuite.com"/>
+                <record xsi:type="listRel:Customer" internalId="1328" xmlns:listRel="urn:relationships_2013_2.lists.webservices.netsuite.com">
+                    <listRel:customForm internalId="-2" xmlns:platformCore="urn:core_2013_2.platform.webservices.netsuite.com">
+                        <platformCore:name>Standard Customer Form</platformCore:name>
+                    </listRel:customForm>
+                    <listRel:entityId>754 Comp wstest1</listRel:entityId>
+                    <listRel:isPerson>false</listRel:isPerson>
+                    <listRel:companyName>Comp wstest1</listRel:companyName>
+                    <listRel:entityStatus internalId="13" xmlns:platformCore="urn:core_2013_2.platform.webservices.netsuite.com">
+                        <platformCore:name>CUSTOMER-Closed Won</platformCore:name>
+                    </listRel:entityStatus>
+                    <listRel:email>email@wstest1.com</listRel:email>
+                    <listRel:isInactive>false</listRel:isInactive>
+                    <listRel:language>_usEnglish</listRel:language>
+                    <listRel:dateCreated>2015-06-10T17:13:43.000-07:00</listRel:dateCreated>
+                    <listRel:emailPreference>_hTML</listRel:emailPreference>
+                    <listRel:subsidiary internalId="1" xmlns:platformCore="urn:core_2013_2.platform.webservices.netsuite.com">
+                        <platformCore:name>Parent Company</platformCore:name>
+                    </listRel:subsidiary>
+                    <listRel:taxExempt>true</listRel:taxExempt>
+                    <listRel:creditHoldOverride>_auto</listRel:creditHoldOverride>
+                    <listRel:balance>0.0</listRel:balance>
+                    <listRel:overdueBalance>0.0</listRel:overdueBalance>
+                    <listRel:unbilledOrders>0.0</listRel:unbilledOrders>
+                    <listRel:currency internalId="1" xmlns:platformCore="urn:core_2013_2.platform.webservices.netsuite.com">
+                        <platformCore:name>US Dollar</platformCore:name>
+                    </listRel:currency>
+                    <listRel:depositBalance>0.0</listRel:depositBalance>
+                    <listRel:shipComplete>false</listRel:shipComplete>
+                    <listRel:taxable>false</listRel:taxable>
+                    <listRel:giveAccess>false</listRel:giveAccess>
+                    <listRel:accessRole internalId="14" xmlns:platformCore="urn:core_2013_2.platform.webservices.netsuite.com">
+                        <platformCore:name>Customer Center</platformCore:name>
+                    </listRel:accessRole>
+                    <listRel:sendEmail>false</listRel:sendEmail>
+                    <listRel:receivablesAccount internalId="-10" xmlns:platformCore="urn:core_2013_2.platform.webservices.netsuite.com">
+                        <platformCore:name>Use System Preference</platformCore:name>
+                    </listRel:receivablesAccount>
+                    <listRel:webLead>No</listRel:webLead>
+                    <listRel:lastModifiedDate>2015-06-10T17:13:44.000-07:00</listRel:lastModifiedDate>
+                    <listRel:stage>_customer</listRel:stage>
+                    <listRel:emailTransactions>false</listRel:emailTransactions>
+                    <listRel:printTransactions>false</listRel:printTransactions>
+                    <listRel:faxTransactions>false</listRel:faxTransactions>
+                    <listRel:isBudgetApproved>false</listRel:isBudgetApproved>
+                    <listRel:globalSubscriptionStatus>_softOptOut</listRel:globalSubscriptionStatus>
+                    <listRel:addressbookList>
+                        <listRel:addressbook>
+                            <listRel:defaultShipping>true</listRel:defaultShipping>
+                            <listRel:defaultBilling>false</listRel:defaultBilling>
+                            <listRel:isResidential>false</listRel:isResidential>
+                            <listRel:label>Zapican 7711 apto 201</listRel:label>
+                            <listRel:attention>William Sanders</listRel:attention>
+                            <listRel:addressee>William Sanders</listRel:addressee>
+                            <listRel:addr1>Zapican 7711 apto 201</listRel:addr1>
+                            <listRel:city>San Francisco</listRel:city>
+                            <listRel:zip>94131</listRel:zip>
+                            <listRel:country>_unitedStates</listRel:country>
+                            <listRel:addrText>William Sanders
+William Sanders
+Zapican 7711 apto 201
+San Francisco WA 94131</listRel:addrText>
+                            <listRel:override>false</listRel:override>
+                            <listRel:internalId>777</listRel:internalId>
+                            <listRel:state>WA</listRel:state>
+                        </listRel:addressbook>
+                    </listRel:addressbookList>
+                    <listRel:currencyList>
+                        <listRel:currency>
+                            <listRel:currency internalId="1" xmlns:platformCore="urn:core_2013_2.platform.webservices.netsuite.com">
+                                <platformCore:name>US Dollar</platformCore:name>
+                            </listRel:currency>
+                            <listRel:balance>0.0</listRel:balance>
+                            <listRel:depositBalance>0.0</listRel:depositBalance>
+                            <listRel:overdueBalance>0.0</listRel:overdueBalance>
+                            <listRel:unbilledOrders>0.0</listRel:unbilledOrders>
+                            <listRel:overrideCurrencyFormat>false</listRel:overrideCurrencyFormat>
+                            <listRel:symbolPlacement>_beforeNumber</listRel:symbolPlacement>
+                        </listRel:currency>
+                    </listRel:currencyList>
+                </record>
+            </readResponse>
+        </getResponse>
+    </soapenv:Body>
+</soapenv:Envelope>
+
+
+
+
+
+
+
+
+
+
+
+
+getList of customers 3,6 request: 
+<soapenv:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+    <soapenv:Header>
+        <ns1:preferences soapenv:mustUnderstand="0" soapenv:actor="http://schemas.xmlsoap.org/soap/actor/next" xmlns:ns1="urn:messages.platform.webservices.netsuite.com">
+            <ns2:ignoreReadOnlyFields xmlns:ns2="urn:messages_2013_2.platform.webservices.netsuite.com">true</ns2:ignoreReadOnlyFields>
+        </ns1:preferences>
+        <ns3:searchPreferences soapenv:mustUnderstand="0" soapenv:actor="http://schemas.xmlsoap.org/soap/actor/next" xmlns:ns3="urn:messages.platform.webservices.netsuite.com">
+            <ns4:bodyFieldsOnly xmlns:ns4="urn:messages_2013_2.platform.webservices.netsuite.com">true</ns4:bodyFieldsOnly>
+            <ns5:pageSize xmlns:ns5="urn:messages_2013_2.platform.webservices.netsuite.com">20</ns5:pageSize>
+        </ns3:searchPreferences>
+    </soapenv:Header>
+    <soapenv:Body>
+        <getList xmlns="urn:messages_2013_2.platform.webservices.netsuite.com">
+            <baseRef xsi:type="ns6:RecordRef" type="customer" internalId="3" xmlns:ns6="urn:core_2013_2.platform.webservices.netsuite.com"/>
+            <baseRef xsi:type="ns7:RecordRef" type="customer" internalId="6" xmlns:ns7="urn:core_2013_2.platform.webservices.netsuite.com"/>
+        </getList>
+    </soapenv:Body>
+</soapenv:Envelope>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+getList of customers 3,6, response: 
+
+
+<soapenv:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+    <soapenv:Header>
+        <platformMsgs:documentInfo xmlns:platformMsgs="urn:messages_2013_2.platform.webservices.netsuite.com">
+            <platformMsgs:nsId>WEBSERVICES_3690872_06102015533671503167832128_bce342b14fb25</platformMsgs:nsId>
+        </platformMsgs:documentInfo>
+    </soapenv:Header>
+    <soapenv:Body>
+        <getListResponse xmlns="urn:messages_2013_2.platform.webservices.netsuite.com">
+            <readResponseList>
+                <readResponse>
+                    <platformCore:status isSuccess="true" xmlns:platformCore="urn:core_2013_2.platform.webservices.netsuite.com"/>
+                    <record xsi:type="listRel:Customer" internalId="3" xmlns:listRel="urn:relationships_2013_2.lists.webservices.netsuite.com">
+                        <listRel:customForm internalId="-2" xmlns:platformCore="urn:core_2013_2.platform.webservices.netsuite.com">
+                            <platformCore:name>Standard Customer Form</platformCore:name>
+                        </listRel:customForm>
+                        <listRel:entityId>1 Sebasti&#225;n Gurin</listRel:entityId>
+                        <listRel:isPerson>true</listRel:isPerson>
+                        <listRel:firstName>Sebasti&#225;n</listRel:firstName>
+                        <listRel:lastName>Gurin</listRel:lastName>
+                        <listRel:entityStatus internalId="13" xmlns:platformCore="urn:core_2013_2.platform.webservices.netsuite.com">
+                            <platformCore:name>CUSTOMER-Closed Won</platformCore:name>
+                        </listRel:entityStatus>
+                        <listRel:phone>3216549</listRel:phone>
+                        <listRel:email>sgurin@montevideo.com.uy</listRel:email>
+                        <listRel:defaultAddress>Sebasti&#225;n Gurin
+asdasd
+Sss 123
+FF 345
+22222 asdasd
+Germany</listRel:defaultAddress>
+                        <listRel:isInactive>false</listRel:isInactive>
+                        <listRel:language>_usEnglish</listRel:language>
+                        <listRel:dateCreated>2013-04-24T09:33:43.000-07:00</listRel:dateCreated>
+                        <listRel:emailPreference>_default</listRel:emailPreference>
+                        <listRel:subsidiary internalId="1" xmlns:platformCore="urn:core_2013_2.platform.webservices.netsuite.com">
+                            <platformCore:name>Parent Company</platformCore:name>
+                        </listRel:subsidiary>
+                        <listRel:taxExempt>true</listRel:taxExempt>
+                        <listRel:creditHoldOverride>_auto</listRel:creditHoldOverride>
+                        <listRel:balance>0.0</listRel:balance>
+                        <listRel:overdueBalance>0.0</listRel:overdueBalance>
+                        <listRel:unbilledOrders>151.0</listRel:unbilledOrders>
+                        <listRel:currency internalId="1" xmlns:platformCore="urn:core_2013_2.platform.webservices.netsuite.com">
+                            <platformCore:name>US Dollar</platformCore:name>
+                        </listRel:currency>
+                        <listRel:depositBalance>0.0</listRel:depositBalance>
+                        <listRel:shipComplete>false</listRel:shipComplete>
+                        <listRel:taxable>false</listRel:taxable>
+                        <listRel:giveAccess>true</listRel:giveAccess>
+                        <listRel:accessRole internalId="14" xmlns:platformCore="urn:core_2013_2.platform.webservices.netsuite.com">
+                            <platformCore:name>Customer Center</platformCore:name>
+                        </listRel:accessRole>
+                        <listRel:sendEmail>false</listRel:sendEmail>
+                        <listRel:receivablesAccount internalId="-10" xmlns:platformCore="urn:core_2013_2.platform.webservices.netsuite.com">
+                            <platformCore:name>Use System Preference</platformCore:name>
+                        </listRel:receivablesAccount>
+                        <listRel:webLead>Yes</listRel:webLead>
+                        <listRel:lastModifiedDate>2013-05-22T09:31:17.000-07:00</listRel:lastModifiedDate>
+                        <listRel:stage>_customer</listRel:stage>
+                        <listRel:emailTransactions>false</listRel:emailTransactions>
+                        <listRel:printTransactions>false</listRel:printTransactions>
+                        <listRel:faxTransactions>false</listRel:faxTransactions>
+                        <listRel:isBudgetApproved>false</listRel:isBudgetApproved>
+                        <listRel:globalSubscriptionStatus>_softOptOut</listRel:globalSubscriptionStatus>
+                        <listRel:addressbookList>
+                            <listRel:addressbook>
+                                <listRel:defaultShipping>true</listRel:defaultShipping>
+                                <listRel:defaultBilling>true</listRel:defaultBilling>
+                                <listRel:isResidential>true</listRel:isResidential>
+                                <listRel:attention>Sebasti&#225;n Gurin</listRel:attention>
+                                <listRel:addressee>asdasd</listRel:addressee>
+                                <listRel:phone>3216549</listRel:phone>
+                                <listRel:addr1>Sss 123</listRel:addr1>
+                                <listRel:addr2>FF 345</listRel:addr2>
+                                <listRel:city>asdasd</listRel:city>
+                                <listRel:zip>22222</listRel:zip>
+                                <listRel:country>_germany</listRel:country>
+                                <listRel:addrText>Sebasti&#225;n Gurin
+asdasd
+Sss 123
+FF 345
+22222 asdasd
+Germany</listRel:addrText>
+                                <listRel:override>false</listRel:override>
+                                <listRel:internalId>1</listRel:internalId>
+                            </listRel:addressbook>
+                        </listRel:addressbookList>
+                        <listRel:contactRolesList>
+                            <listRel:contactRoles>
+                                <listRel:giveAccess>false</listRel:giveAccess>
+                                <listRel:contact internalId="3" xmlns:platformCore="urn:core_2013_2.platform.webservices.netsuite.com">
+                                    <platformCore:name>1</platformCore:name>
+                                </listRel:contact>
+                                <listRel:email>sgurin@montevideo.com.uy</listRel:email>
+                                <listRel:role internalId="14" xmlns:platformCore="urn:core_2013_2.platform.webservices.netsuite.com">
+                                    <platformCore:name>Customer Center</platformCore:name>
+                                </listRel:role>
+                                <listRel:sendEmail>false</listRel:sendEmail>
+                            </listRel:contactRoles>
+                        </listRel:contactRolesList>
+                        <listRel:currencyList>
+                            <listRel:currency>
+                                <listRel:currency internalId="2" xmlns:platformCore="urn:core_2013_2.platform.webservices.netsuite.com">
+                                    <platformCore:name>British pound</platformCore:name>
+                                </listRel:currency>
+                                <listRel:balance>0.0</listRel:balance>
+                                <listRel:depositBalance>0.0</listRel:depositBalance>
+                                <listRel:overdueBalance>0.0</listRel:overdueBalance>
+                                <listRel:unbilledOrders>0.0</listRel:unbilledOrders>
+                                <listRel:overrideCurrencyFormat>false</listRel:overrideCurrencyFormat>
+                                <listRel:symbolPlacement>_beforeNumber</listRel:symbolPlacement>
+                            </listRel:currency>
+                            <listRel:currency>
+                                <listRel:currency internalId="1" xmlns:platformCore="urn:core_2013_2.platform.webservices.netsuite.com">
+                                    <platformCore:name>US Dollar</platformCore:name>
+                                </listRel:currency>
+                                <listRel:balance>0.0</listRel:balance>
+                                <listRel:depositBalance>0.0</listRel:depositBalance>
+                                <listRel:overdueBalance>0.0</listRel:overdueBalance>
+                                <listRel:unbilledOrders>151.0</listRel:unbilledOrders>
+                                <listRel:overrideCurrencyFormat>false</listRel:overrideCurrencyFormat>
+                                <listRel:symbolPlacement>_beforeNumber</listRel:symbolPlacement>
+                            </listRel:currency>
+                        </listRel:currencyList>
+                        <listRel:creditCardsList>
+                            <listRel:creditCards>
+                                <listRel:internalId>19</listRel:internalId>
+                                <listRel:ccNumber>***************</listRel:ccNumber>
+                                <listRel:ccExpireDate>2017-01-01T00:00:00.000-08:00</listRel:ccExpireDate>
+                                <listRel:ccName>Name</listRel:ccName>
+                                <listRel:paymentMethod internalId="6" xmlns:platformCore="urn:core_2013_2.platform.webservices.netsuite.com">
+                                    <platformCore:name>American Express</platformCore:name>
+                                </listRel:paymentMethod>
+                                <listRel:ccDefault>true</listRel:ccDefault>
+                            </listRel:creditCards>
+                            <listRel:creditCards>
+                                <listRel:internalId>18</listRel:internalId>
+                                <listRel:ccNumber>****************</listRel:ccNumber>
+                                <listRel:ccExpireDate>2017-01-01T00:00:00.000-08:00</listRel:ccExpireDate>
+                                <listRel:ccName>Name</listRel:ccName>
+                                <listRel:paymentMethod internalId="6" xmlns:platformCore="urn:core_2013_2.platform.webservices.netsuite.com">
+                                    <platformCore:name>American Express</platformCore:name>
+                                </listRel:paymentMethod>
+                                <listRel:ccDefault>false</listRel:ccDefault>
+                            </listRel:creditCards>
+                            <listRel:creditCards>
+                                <listRel:internalId>13</listRel:internalId>
+                                <listRel:ccNumber>****************</listRel:ccNumber>
+                                <listRel:ccExpireDate>2020-01-01T00:00:00.000-08:00</listRel:ccExpireDate>
+                                <listRel:ccName>sss</listRel:ccName>
+                                <listRel:paymentMethod internalId="5" xmlns:platformCore="urn:core_2013_2.platform.webservices.netsuite.com">
+                                    <platformCore:name>VISA</platformCore:name>
+                                </listRel:paymentMethod>
+                                <listRel:ccDefault>false</listRel:ccDefault>
+                            </listRel:creditCards>
+                        </listRel:creditCardsList>
+                    </record>
+                </readResponse>
+                <readResponse>
+                    <platformCore:status isSuccess="true" xmlns:platformCore="urn:core_2013_2.platform.webservices.netsuite.com"/>
+                    <record xsi:type="listRel:Customer" internalId="6" xmlns:listRel="urn:relationships_2013_2.lists.webservices.netsuite.com">
+                        <listRel:customForm internalId="-2" xmlns:platformCore="urn:core_2013_2.platform.webservices.netsuite.com">
+                            <platformCore:name>Standard Customer Form</platformCore:name>
+                        </listRel:customForm>
+                        <listRel:entityId>2 Seba222367s G</listRel:entityId>
+                        <listRel:isPerson>true</listRel:isPerson>
+                        <listRel:firstName>Seba222367s</listRel:firstName>
+                        <listRel:lastName>G</listRel:lastName>
+                        <listRel:entityStatus internalId="13" xmlns:platformCore="urn:core_2013_2.platform.webservices.netsuite.com">
+                            <platformCore:name>CUSTOMER-Closed Won</platformCore:name>
+                        </listRel:entityStatus>
+                        <listRel:phone>223132123</listRel:phone>
+                        <listRel:email>sgurin1@montevideo.com.uy</listRel:email>
+                        <listRel:defaultAddress>Seba G
+asd
+asdas 12
+Montevideo  222222
+Uganda</listRel:defaultAddress>
+                        <listRel:isInactive>false</listRel:isInactive>
+                        <listRel:language>_usEnglish</listRel:language>
+                        <listRel:dateCreated>2013-05-13T13:02:51.000-07:00</listRel:dateCreated>
+                        <listRel:emailPreference>_default</listRel:emailPreference>
+                        <listRel:subsidiary internalId="1" xmlns:platformCore="urn:core_2013_2.platform.webservices.netsuite.com">
+                            <platformCore:name>Parent Company</platformCore:name>
+                        </listRel:subsidiary>
+                        <listRel:taxExempt>true</listRel:taxExempt>
+                        <listRel:creditHoldOverride>_auto</listRel:creditHoldOverride>
+                        <listRel:balance>0.0</listRel:balance>
+                        <listRel:overdueBalance>0.0</listRel:overdueBalance>
+                        <listRel:unbilledOrders>1304.42</listRel:unbilledOrders>
+                        <listRel:currency internalId="1" xmlns:platformCore="urn:core_2013_2.platform.webservices.netsuite.com">
+                            <platformCore:name>US Dollar</platformCore:name>
+                        </listRel:currency>
+                        <listRel:depositBalance>0.0</listRel:depositBalance>
+                        <listRel:shipComplete>false</listRel:shipComplete>
+                        <listRel:taxable>false</listRel:taxable>
+                        <listRel:giveAccess>true</listRel:giveAccess>
+                        <listRel:accessRole internalId="14" xmlns:platformCore="urn:core_2013_2.platform.webservices.netsuite.com">
+                            <platformCore:name>Customer Center</platformCore:name>
+                        </listRel:accessRole>
+                        <listRel:sendEmail>false</listRel:sendEmail>
+                        <listRel:receivablesAccount internalId="-10" xmlns:platformCore="urn:core_2013_2.platform.webservices.netsuite.com">
+                            <platformCore:name>Use System Preference</platformCore:name>
+                        </listRel:receivablesAccount>
+                        <listRel:webLead>Yes</listRel:webLead>
+                        <listRel:lastModifiedDate>2013-06-10T12:55:54.000-07:00</listRel:lastModifiedDate>
+                        <listRel:stage>_customer</listRel:stage>
+                        <listRel:emailTransactions>false</listRel:emailTransactions>
+                        <listRel:printTransactions>false</listRel:printTransactions>
+                        <listRel:faxTransactions>false</listRel:faxTransactions>
+                        <listRel:isBudgetApproved>false</listRel:isBudgetApproved>
+                        <listRel:globalSubscriptionStatus>_confirmedOptOut</listRel:globalSubscriptionStatus>
+                        <listRel:addressbookList>
+                            <listRel:addressbook>
+                                <listRel:defaultShipping>true</listRel:defaultShipping>
+                                <listRel:defaultBilling>true</listRel:defaultBilling>
+                                <listRel:isResidential>false</listRel:isResidential>
+                                <listRel:label>asdas 12</listRel:label>
+                                <listRel:attention>Seba G</listRel:attention>
+                                <listRel:addressee>asd</listRel:addressee>
+                                <listRel:phone>223132123</listRel:phone>
+                                <listRel:addr1>asdas 12</listRel:addr1>
+                                <listRel:city>Montevideo</listRel:city>
+                                <listRel:zip>222222</listRel:zip>
+                                <listRel:country>_uganda</listRel:country>
+                                <listRel:addrText>Seba G
+asd
+asdas 12
+Montevideo  222222
+Uganda</listRel:addrText>
+                                <listRel:override>false</listRel:override>
+                                <listRel:internalId>2</listRel:internalId>
+                            </listRel:addressbook>
+                        </listRel:addressbookList>
+                        <listRel:contactRolesList>
+                            <listRel:contactRoles>
+                                <listRel:giveAccess>false</listRel:giveAccess>
+                                <listRel:contact internalId="6" xmlns:platformCore="urn:core_2013_2.platform.webservices.netsuite.com">
+                                    <platformCore:name>2</platformCore:name>
+                                </listRel:contact>
+                                <listRel:email>sgurin1@montevideo.com.uy</listRel:email>
+                                <listRel:role internalId="14" xmlns:platformCore="urn:core_2013_2.platform.webservices.netsuite.com">
+                                    <platformCore:name>Customer Center</platformCore:name>
+                                </listRel:role>
+                                <listRel:sendEmail>false</listRel:sendEmail>
+                            </listRel:contactRoles>
+                        </listRel:contactRolesList>
+                        <listRel:currencyList>
+                            <listRel:currency>
+                                <listRel:currency internalId="1" xmlns:platformCore="urn:core_2013_2.platform.webservices.netsuite.com">
+                                    <platformCore:name>US Dollar</platformCore:name>
+                                </listRel:currency>
+                                <listRel:balance>0.0</listRel:balance>
+                                <listRel:depositBalance>0.0</listRel:depositBalance>
+                                <listRel:overdueBalance>0.0</listRel:overdueBalance>
+                                <listRel:unbilledOrders>1304.42</listRel:unbilledOrders>
+                                <listRel:overrideCurrencyFormat>false</listRel:overrideCurrencyFormat>
+                                <listRel:symbolPlacement>_beforeNumber</listRel:symbolPlacement>
+                            </listRel:currency>
+                        </listRel:currencyList>
+                        <listRel:creditCardsList>
+                            <listRel:creditCards>
+                                <listRel:internalId>4</listRel:internalId>
+                                <listRel:ccNumber>****************</listRel:ccNumber>
+                                <listRel:ccExpireDate>2015-01-01T00:00:00.000-08:00</listRel:ccExpireDate>
+                                <listRel:ccName>Seba G</listRel:ccName>
+                                <listRel:paymentMethod internalId="5" xmlns:platformCore="urn:core_2013_2.platform.webservices.netsuite.com">
+                                    <platformCore:name>VISA</platformCore:name>
+                                </listRel:paymentMethod>
+                                <listRel:ccDefault>true</listRel:ccDefault>
+                            </listRel:creditCards>
+                        </listRel:creditCardsList>
+                    </record>
+                </readResponse>
+            </readResponseList>
+        </getListResponse>
+    </soapenv:Body>
+</soapenv:Envelope>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+getList response error:
+<soapenv:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+    <soapenv:Header>
+        <platformMsgs:documentInfo xmlns:platformMsgs="urn:messages_2013_2.platform.webservices.netsuite.com">
+            <platformMsgs:nsId>WEBSERVICES_3690872_061020155337247851556458850_81216aff47d7</platformMsgs:nsId>
+        </platformMsgs:documentInfo>
+    </soapenv:Header>
+    <soapenv:Body>
+        <getListResponse xmlns="urn:messages_2013_2.platform.webservices.netsuite.com">
+            <readResponseList>
+                <readResponse>
+                    <platformCore:status isSuccess="false" xmlns:platformCore="urn:core_2013_2.platform.webservices.netsuite.com">
+                        <platformCore:statusDetail type="ERROR">
+                            <platformCore:code>UNEXPECTED_ERROR</platformCore:code>
+                            <platformCore:message>An unexpected error occurred. Error ID: iarhur2v10brxusyd852l</platformCore:message>
+                        </platformCore:statusDetail>
+                    </platformCore:status>
+                </readResponse>
+            </readResponseList>
+        </getListResponse>
+    </soapenv:Body>
+</soapenv:Envelope>
+
+
+
+
+
+
+delete customer response error: 
+
+<soapenv:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+    <soapenv:Header>
+        <platformMsgs:documentInfo xmlns:platformMsgs="urn:messages_2013_2.platform.webservices.netsuite.com">
+            <platformMsgs:nsId>WEBSERVICES_3690872_061020155288424801990208636_22b1980bb7f5</platformMsgs:nsId>
+        </platformMsgs:documentInfo>
+    </soapenv:Header>
+    <soapenv:Body>
+        <updateResponse xmlns="urn:messages_2013_2.platform.webservices.netsuite.com">
+            <writeResponse>
+                <platformCore:status isSuccess="false" xmlns:platformCore="urn:core_2013_2.platform.webservices.netsuite.com">
+                    <platformCore:statusDetail type="ERROR">
+                        <platformCore:code>PSWD_REQD</platformCore:code>
+                        <platformCore:message>You must provide a password to give this person access to your account.</platformCore:message>
+                    </platformCore:statusDetail>
+                </platformCore:status>
+                <baseRef xsi:type="platformCore:RecordRef" type="customer" internalId="3" xmlns:platformCore="urn:core_2013_2.platform.webservices.netsuite.com"/>
+            </writeResponse>
+        </updateResponse>
+    </soapenv:Body>
+</soapenv:Envelope>
+
+
+
+
+
+
+
+
+
+
+
+
+search custom record type internalid=175 - no query, request:
+
+<soapenv:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+    <soapenv:Header>
+        <ns1:preferences soapenv:mustUnderstand="0" soapenv:actor="http://schemas.xmlsoap.org/soap/actor/next" xmlns:ns1="urn:messages.platform.webservices.netsuite.com">
+            <ns2:ignoreReadOnlyFields xmlns:ns2="urn:messages_2013_2.platform.webservices.netsuite.com">true</ns2:ignoreReadOnlyFields>
+        </ns1:preferences>
+        <ns3:searchPreferences soapenv:mustUnderstand="0" soapenv:actor="http://schemas.xmlsoap.org/soap/actor/next" xmlns:ns3="urn:messages.platform.webservices.netsuite.com">
+            <ns4:bodyFieldsOnly xmlns:ns4="urn:messages_2013_2.platform.webservices.netsuite.com">true</ns4:bodyFieldsOnly>
+            <ns5:pageSize xmlns:ns5="urn:messages_2013_2.platform.webservices.netsuite.com">20</ns5:pageSize>
+        </ns3:searchPreferences>
+    </soapenv:Header>
+    <soapenv:Body>
+        <search xmlns="urn:messages_2013_2.platform.webservices.netsuite.com">
+            <searchRecord xsi:type="ns6:CustomRecordSearch" xmlns:ns6="urn:customization_2013_2.setup.webservices.netsuite.com">
+                <ns6:basic xsi:type="ns7:CustomRecordSearchBasic" xmlns:ns7="urn:common_2013_2.platform.webservices.netsuite.com">
+                    <ns7:recType xsi:type="ns8:RecordRef" internalId="175" xmlns:ns8="urn:core_2013_2.platform.webservices.netsuite.com"/>
+                </ns6:basic>
+            </searchRecord>
+        </search>
+    </soapenv:Body>
+</soapenv:Envelope>
+
+
+
+
+
+
+
+
+
+
+search custom record type internalid=175 - no query, response:
+
+<soapenv:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+    <soapenv:Header>
+        <platformMsgs:documentInfo xmlns:platformMsgs="urn:messages_2013_2.platform.webservices.netsuite.com">
+            <platformMsgs:nsId>WEBSERVICES_3690872_0610201553004099622156708_198c6ad42e48cb</platformMsgs:nsId>
+        </platformMsgs:documentInfo>
+    </soapenv:Header>
+    <soapenv:Body>
+        <searchResponse xmlns="urn:messages_2013_2.platform.webservices.netsuite.com">
+            <platformCore:searchResult xmlns:platformCore="urn:core_2013_2.platform.webservices.netsuite.com">
+                <platformCore:status isSuccess="true"/>
+                <platformCore:totalRecords>820</platformCore:totalRecords>
+                <platformCore:pageSize>20</platformCore:pageSize>
+                <platformCore:totalPages>41</platformCore:totalPages>
+                <platformCore:pageIndex>1</platformCore:pageIndex>
+                <platformCore:searchId>WEBSERVICES_3690872_0610201553004099622156708_198c6ad42e48cb</platformCore:searchId>
+                <platformCore:recordList>
+                    <platformCore:record xsi:type="setupCustom:CustomRecord" internalId="2" xmlns:setupCustom="urn:customization_2013_2.setup.webservices.netsuite.com">
+                        <setupCustom:isInactive>true</setupCustom:isInactive>
+                        <setupCustom:created>2014-01-24T06:06:33.000-08:00</setupCustom:created>
+                        <setupCustom:lastModified>2014-01-31T07:18:05.000-08:00</setupCustom:lastModified>
+                        <setupCustom:name>list 2</setupCustom:name>
+                        <setupCustom:owner internalId="739">
+                            <platformCore:name>damian dasilva</platformCore:name>
+                        </setupCustom:owner>
+                        <setupCustom:recType internalId="175">
+                            <platformCore:name>Product Lists</platformCore:name>
+                        </setupCustom:recType>
+                        <setupCustom:customFieldList>
+                            <platformCore:customField xsi:type="platformCore:StringCustomFieldRef" scriptId="custrecord_ns_pl_pl_description" internalId="883">
+                                <platformCore:value>list 2 description</platformCore:value>
+                            </platformCore:customField>
+                            <platformCore:customField xsi:type="platformCore:SelectCustomFieldRef" scriptId="custrecord_ns_pl_pl_owner" internalId="884">
+                                <platformCore:value typeId="-2" internalId="13">
+                                    <platformCore:name>6 Sebasti&#225;n Demetriosdf gsdfg sdf gsdf gsdfg Gurins</platformCore:name>
+                                </platformCore:value>
+                            </platformCore:customField>
+                            <platformCore:customField xsi:type="platformCore:SelectCustomFieldRef" scriptId="custrecord_ns_pl_pl_scope" internalId="885">
+                                <platformCore:value typeId="176" internalId="1">
+                                    <platformCore:name>public</platformCore:name>
+                                </platformCore:value>
+                            </platformCore:customField>
+                            <platformCore:customField xsi:type="platformCore:SelectCustomFieldRef" scriptId="custrecord_ns_pl_pl_type" internalId="886">
+                                <platformCore:value typeId="177" internalId="1">
+                                    <platformCore:name>default</platformCore:name>
+                                </platformCore:value>
+                            </platformCore:customField>
+                        </setupCustom:customFieldList>
+                    </platformCore:record>
+                    <platformCore:record xsi:type="setupCustom:CustomRecord" internalId="3" xmlns:setupCustom="urn:customization_2013_2.setup.webservices.netsuite.com">
+                        <setupCustom:isInactive>true</setupCustom:isInactive>
+                        <setupCustom:created>2014-01-24T09:20:14.000-08:00</setupCustom:created>
+                        <setupCustom:lastModified>2014-01-30T06:51:41.000-08:00</setupCustom:lastModified>
+                        <setupCustom:name>New List</setupCustom:name>
+                        <setupCustom:owner internalId="739">
+                            <platformCore:name>damian dasilva</platformCore:name>
+                        </setupCustom:owner>
+                        <setupCustom:recType internalId="175">
+                            <platformCore:name>Product Lists</platformCore:name>
+                        </setupCustom:recType>
+                        <setupCustom:customFieldList>
+                            <platformCore:customField xsi:type="platformCore:StringCustomFieldRef" scriptId="custrecord_ns_pl_pl_description" internalId="883">
+                                <platformCore:value>New List Desc</platformCore:value>
+                            </platformCore:customField>
+                            <platformCore:customField xsi:type="platformCore:SelectCustomFieldRef" scriptId="custrecord_ns_pl_pl_owner" internalId="884">
+                                <platformCore:value typeId="-2" internalId="13">
+                                    <platformCore:name>6 Sebasti&#225;n Demetriosdf gsdfg sdf gsdf gsdfg Gurins</platformCore:name>
+                                </platformCore:value>
+                            </platformCore:customField>
+                            <platformCore:customField xsi:type="platformCore:SelectCustomFieldRef" scriptId="custrecord_ns_pl_pl_scope" internalId="885">
+                                <platformCore:value typeId="176" internalId="2">
+                                    <platformCore:name>private</platformCore:name>
+                                </platformCore:value>
+                            </platformCore:customField>
+                            <platformCore:customField xsi:type="platformCore:SelectCustomFieldRef" scriptId="custrecord_ns_pl_pl_type" internalId="886">
+                                <platformCore:value typeId="177" internalId="1">
+                                    <platformCore:name>default</platformCore:name>
+                                </platformCore:value>
+                            </platformCore:customField>
+                        </setupCustom:customFieldList>
+                    </platformCore:record>
+                </platformCore:recordList>
+            </platformCore:searchResult>
+        </searchResponse>
+    </soapenv:Body>
+</soapenv:Envelope>
+
+
+
+
+
+
+
+
+
+
+
+
+search custom record type internalid=175 - name: Electronics, request:
+
+<soapenv:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+    <soapenv:Header>
+        <ns1:preferences soapenv:mustUnderstand="0" soapenv:actor="http://schemas.xmlsoap.org/soap/actor/next" xmlns:ns1="urn:messages.platform.webservices.netsuite.com">
+            <ns2:ignoreReadOnlyFields xmlns:ns2="urn:messages_2013_2.platform.webservices.netsuite.com">true</ns2:ignoreReadOnlyFields>
+        </ns1:preferences>
+        <ns3:searchPreferences soapenv:mustUnderstand="0" soapenv:actor="http://schemas.xmlsoap.org/soap/actor/next" xmlns:ns3="urn:messages.platform.webservices.netsuite.com">
+            <ns4:bodyFieldsOnly xmlns:ns4="urn:messages_2013_2.platform.webservices.netsuite.com">true</ns4:bodyFieldsOnly>
+            <ns5:pageSize xmlns:ns5="urn:messages_2013_2.platform.webservices.netsuite.com">20</ns5:pageSize>
+        </ns3:searchPreferences>
+    </soapenv:Header>
+    <soapenv:Body>
+        <search xmlns="urn:messages_2013_2.platform.webservices.netsuite.com">
+            <searchRecord xsi:type="ns6:CustomRecordSearch" xmlns:ns6="urn:customization_2013_2.setup.webservices.netsuite.com">
+                <ns6:basic xsi:type="ns7:CustomRecordSearchBasic" xmlns:ns7="urn:common_2013_2.platform.webservices.netsuite.com">
+                    <ns7:recType xsi:type="ns8:RecordRef" internalId="175" xmlns:ns8="urn:core_2013_2.platform.webservices.netsuite.com"/>
+                    <ns7:name xsi:type="ns9:SearchStringField" operator="contains" xmlns:ns9="urn:core_2013_2.platform.webservices.netsuite.com">
+                        <ns9:searchValue xsi:type="xsd:string">Electronics</ns9:searchValue>
+                    </ns7:name>
+                </ns6:basic>
+            </searchRecord>
+        </search>
+    </soapenv:Body>
+</soapenv:Envelope>
+
+
+
+
+
+
+
+
+
+
+
+search custom record type internalid=175 - name: Electronics, response:
+
+<soapenv:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+    <soapenv:Header>
+        <platformMsgs:documentInfo xmlns:platformMsgs="urn:messages_2013_2.platform.webservices.netsuite.com">
+            <platformMsgs:nsId>WEBSERVICES_3690872_061020155294725491596103438_9eb572d6e26e</platformMsgs:nsId>
+        </platformMsgs:documentInfo>
+    </soapenv:Header>
+    <soapenv:Body>
+        <searchResponse xmlns="urn:messages_2013_2.platform.webservices.netsuite.com">
+            <platformCore:searchResult xmlns:platformCore="urn:core_2013_2.platform.webservices.netsuite.com">
+                <platformCore:status isSuccess="true"/>
+                <platformCore:totalRecords>6</platformCore:totalRecords>
+                <platformCore:pageSize>20</platformCore:pageSize>
+                <platformCore:totalPages>1</platformCore:totalPages>
+                <platformCore:pageIndex>1</platformCore:pageIndex>
+                <platformCore:searchId>WEBSERVICES_3690872_061020155294725491596103438_9eb572d6e26e</platformCore:searchId>
+                <platformCore:recordList>
+                    <platformCore:record xsi:type="setupCustom:CustomRecord" internalId="67" xmlns:setupCustom="urn:customization_2013_2.setup.webservices.netsuite.com">
+                        <setupCustom:isInactive>true</setupCustom:isInactive>
+                        <setupCustom:created>2014-01-31T09:10:28.000-08:00</setupCustom:created>
+                        <setupCustom:lastModified>2014-02-03T07:09:09.000-08:00</setupCustom:lastModified>
+                        <setupCustom:name>Electronics</setupCustom:name>
+                        <setupCustom:owner internalId="741">
+                            <platformCore:name>349</platformCore:name>
+                        </setupCustom:owner>
+                        <setupCustom:recType internalId="175">
+                            <platformCore:name>Product Lists</platformCore:name>
+                        </setupCustom:recType>
+                        <setupCustom:customFieldList>
+                            <platformCore:customField xsi:type="platformCore:StringCustomFieldRef" scriptId="custrecord_ns_pl_pl_description" internalId="883">
+                                <platformCore:value>My electronic items</platformCore:value>
+                            </platformCore:customField>
+                            <platformCore:customField xsi:type="platformCore:SelectCustomFieldRef" scriptId="custrecord_ns_pl_pl_owner" internalId="884">
+                                <platformCore:value typeId="-2" internalId="741">
+                                    <platformCore:name>349 NetSuite.com</platformCore:name>
+                                </platformCore:value>
+                            </platformCore:customField>
+                            <platformCore:customField xsi:type="platformCore:SelectCustomFieldRef" scriptId="custrecord_ns_pl_pl_scope" internalId="885">
+                                <platformCore:value typeId="176" internalId="2">
+                                    <platformCore:name>private</platformCore:name>
+                                </platformCore:value>
+                            </platformCore:customField>
+                            <platformCore:customField xsi:type="platformCore:SelectCustomFieldRef" scriptId="custrecord_ns_pl_pl_type" internalId="886">
+                                <platformCore:value typeId="177" internalId="1">
+                                    <platformCore:name>default</platformCore:name>
+                                </platformCore:value>
+                            </platformCore:customField>
+                        </setupCustom:customFieldList>
+                    </platformCore:record>
+                    <platformCore:record xsi:type="setupCustom:CustomRecord" internalId="68" xmlns:setupCustom="urn:customization_2013_2.setup.webservices.netsuite.com">
+                        <setupCustom:isInactive>true</setupCustom:isInactive>
+                        <setupCustom:created>2014-01-31T09:15:43.000-08:00</setupCustom:created>
+                        <setupCustom:lastModified>2014-01-31T10:42:07.000-08:00</setupCustom:lastModified>
+                        <setupCustom:name>Electronics</setupCustom:name>
+                        <setupCustom:owner internalId="750">
+                            <platformCore:name>354</platformCore:name>
+                        </setupCustom:owner>
+                        <setupCustom:recType internalId="175">
+                            <platformCore:name>Product Lists</platformCore:name>
+                        </setupCustom:recType>
+                        <setupCustom:customFieldList>
+                            <platformCore:customField xsi:type="platformCore:SelectCustomFieldRef" scriptId="custrecord_ns_pl_pl_owner" internalId="884">
+                                <platformCore:value typeId="-2" internalId="750">
+                                    <platformCore:name>354 foo@var.com</platformCore:name>
+                                </platformCore:value>
+                            </platformCore:customField>
+                            <platformCore:customField xsi:type="platformCore:SelectCustomFieldRef" scriptId="custrecord_ns_pl_pl_scope" internalId="885">
+                                <platformCore:value typeId="176" internalId="2">
+                                    <platformCore:name>private</platformCore:name>
+                                </platformCore:value>
+                            </platformCore:customField>
+                            <platformCore:customField xsi:type="platformCore:SelectCustomFieldRef" scriptId="custrecord_ns_pl_pl_type" internalId="886">
+                                <platformCore:value typeId="177" internalId="1">
+                                    <platformCore:name>default</platformCore:name>
+                                </platformCore:value>
+                            </platformCore:customField>
+                        </setupCustom:customFieldList>
+                    </platformCore:record>
+                </platformCore:recordList>
+            </platformCore:searchResult>
+        </searchResponse>
+    </soapenv:Body>
+</soapenv:Envelope>
+
+
+
+
+
+
+
+
+delete custom record (type id 175 record id 21) request:
+
+<soapenv:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+    <soapenv:Header>
+        <ns1:preferences soapenv:mustUnderstand="0" soapenv:actor="http://schemas.xmlsoap.org/soap/actor/next" xmlns:ns1="urn:messages.platform.webservices.netsuite.com">
+            <ns2:ignoreReadOnlyFields xmlns:ns2="urn:messages_2013_2.platform.webservices.netsuite.com">true</ns2:ignoreReadOnlyFields>
+        </ns1:preferences>
+        <ns3:searchPreferences soapenv:mustUnderstand="0" soapenv:actor="http://schemas.xmlsoap.org/soap/actor/next" xmlns:ns3="urn:messages.platform.webservices.netsuite.com">
+            <ns4:bodyFieldsOnly xmlns:ns4="urn:messages_2013_2.platform.webservices.netsuite.com">true</ns4:bodyFieldsOnly>
+            <ns5:pageSize xmlns:ns5="urn:messages_2013_2.platform.webservices.netsuite.com">20</ns5:pageSize>
+        </ns3:searchPreferences>
+    </soapenv:Header>
+    <soapenv:Body>
+        <delete xmlns="urn:messages_2013_2.platform.webservices.netsuite.com">
+            <baseRef xsi:type="ns6:CustomRecordRef" typeId="175" internalId="21" xmlns:ns6="urn:core_2013_2.platform.webservices.netsuite.com"/>
+        </delete>
+    </soapenv:Body>
+</soapenv:Envelope>
+
+
+
+
+
+
+
+
+delete custom record (type id 175 record id 21)  response:
+
+<soapenv:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+    <soapenv:Header>
+        <platformMsgs:documentInfo xmlns:platformMsgs="urn:messages_2013_2.platform.webservices.netsuite.com">
+            <platformMsgs:nsId>WEBSERVICES_3690872_06102015529963625690719624_9d28a11295a13</platformMsgs:nsId>
+        </platformMsgs:documentInfo>
+    </soapenv:Header>
+    <soapenv:Body>
+        <deleteResponse xmlns="urn:messages_2013_2.platform.webservices.netsuite.com">
+            <writeResponse>
+                <platformCore:status isSuccess="true" xmlns:platformCore="urn:core_2013_2.platform.webservices.netsuite.com"/>
+                <baseRef xsi:type="platformCore:CustomRecordRef" typeId="175" internalId="21" xmlns:platformCore="urn:core_2013_2.platform.webservices.netsuite.com"/>
+            </writeResponse>
+        </deleteResponse>
+    </soapenv:Body>
+</soapenv:Envelope>
+
+
+
+
+
+
+
+getAll records of type === taxType request:
+
+<soapenv:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+    <soapenv:Header>
+        <ns1:preferences soapenv:mustUnderstand="0" soapenv:actor="http://schemas.xmlsoap.org/soap/actor/next" xmlns:ns1="urn:messages.platform.webservices.netsuite.com">
+            <ns2:ignoreReadOnlyFields xmlns:ns2="urn:messages_2013_2.platform.webservices.netsuite.com">true</ns2:ignoreReadOnlyFields>
+        </ns1:preferences>
+        <ns3:searchPreferences soapenv:mustUnderstand="0" soapenv:actor="http://schemas.xmlsoap.org/soap/actor/next" xmlns:ns3="urn:messages.platform.webservices.netsuite.com">
+            <ns4:bodyFieldsOnly xmlns:ns4="urn:messages_2013_2.platform.webservices.netsuite.com">true</ns4:bodyFieldsOnly>
+            <ns5:pageSize xmlns:ns5="urn:messages_2013_2.platform.webservices.netsuite.com">20</ns5:pageSize>
+        </ns3:searchPreferences>
+    </soapenv:Header>
+    <soapenv:Body>
+        <getAll xmlns="urn:messages_2013_2.platform.webservices.netsuite.com">
+            <record recordType="taxType"/>
+        </getAll>
+    </soapenv:Body>
+</soapenv:Envelope>
+
+
+
+
+
+
+
+
+getAll records of type === taxType response:
+
+<soapenv:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+    <soapenv:Header>
+        <platformMsgs:documentInfo xmlns:platformMsgs="urn:messages_2013_2.platform.webservices.netsuite.com">
+            <platformMsgs:nsId>WEBSERVICES_3690872_061020155281908502103546312_d94d9b087905</platformMsgs:nsId>
+        </platformMsgs:documentInfo>
+    </soapenv:Header>
+    <soapenv:Body>
+        <getAllResponse xmlns="urn:messages_2013_2.platform.webservices.netsuite.com">
+            <platformCore:getAllResult xmlns:platformCore="urn:core_2013_2.platform.webservices.netsuite.com">
+                <platformCore:status isSuccess="true"/>
+                <platformCore:totalRecords>8</platformCore:totalRecords>
+                <platformCore:recordList>
+                    <platformCore:record xsi:type="listAcct:TaxType" internalId="-9" xmlns:listAcct="urn:accounting_2013_2.lists.webservices.netsuite.com">
+                        <listAcct:name>Other 4</listAcct:name>
+                        <listAcct:nexusesTaxList>
+                            <listAcct:nexusesTax>
+                                <listAcct:nexus internalId="1">
+                                    <platformCore:name>CA</platformCore:name>
+                                </listAcct:nexus>
+                                <listAcct:description>United States CA</listAcct:description>
+                                <listAcct:saleTaxAcct internalId="110">
+                                    <platformCore:name>Sales Taxes Payable CA</platformCore:name>
+                                </listAcct:saleTaxAcct>
+                            </listAcct:nexusesTax>
+                        </listAcct:nexusesTaxList>
+                    </platformCore:record>
+                    <platformCore:record xsi:type="listAcct:TaxType" internalId="-8" xmlns:listAcct="urn:accounting_2013_2.lists.webservices.netsuite.com">
+                        <listAcct:name>Other 3</listAcct:name>
+                        <listAcct:nexusesTaxList>
+                            <listAcct:nexusesTax>
+                                <listAcct:nexus internalId="1">
+                                    <platformCore:name>CA</platformCore:name>
+                                </listAcct:nexus>
+                                <listAcct:description>United States CA</listAcct:description>
+                                <listAcct:saleTaxAcct internalId="110">
+                                    <platformCore:name>Sales Taxes Payable CA</platformCore:name>
+                                </listAcct:saleTaxAcct>
+                            </listAcct:nexusesTax>
+                        </listAcct:nexusesTaxList>
+                    </platformCore:record>
+                    <platformCore:record xsi:type="listAcct:TaxType" internalId="-7" xmlns:listAcct="urn:accounting_2013_2.lists.webservices.netsuite.com">
+                        <listAcct:name>Other 2</listAcct:name>
+                        <listAcct:nexusesTaxList>
+                            <listAcct:nexusesTax>
+                                <listAcct:nexus internalId="1">
+                                    <platformCore:name>CA</platformCore:name>
+                                </listAcct:nexus>
+                                <listAcct:description>United States CA</listAcct:description>
+                                <listAcct:saleTaxAcct internalId="110">
+                                    <platformCore:name>Sales Taxes Payable CA</platformCore:name>
+                                </listAcct:saleTaxAcct>
+                            </listAcct:nexusesTax>
+                        </listAcct:nexusesTaxList>
+                    </platformCore:record>
+                    <platformCore:record xsi:type="listAcct:TaxType" internalId="-6" xmlns:listAcct="urn:accounting_2013_2.lists.webservices.netsuite.com">
+                        <listAcct:name>Other 1</listAcct:name>
+                        <listAcct:nexusesTaxList>
+                            <listAcct:nexusesTax>
+                                <listAcct:nexus internalId="1">
+                                    <platformCore:name>CA</platformCore:name>
+                                </listAcct:nexus>
+                                <listAcct:description>United States CA</listAcct:description>
+                                <listAcct:saleTaxAcct internalId="110">
+                                    <platformCore:name>Sales Taxes Payable CA</platformCore:name>
+                                </listAcct:saleTaxAcct>
+                            </listAcct:nexusesTax>
+                        </listAcct:nexusesTaxList>
+                    </platformCore:record>
+                    <platformCore:record xsi:type="listAcct:TaxType" internalId="-5" xmlns:listAcct="urn:accounting_2013_2.lists.webservices.netsuite.com">
+                        <listAcct:name>City</listAcct:name>
+                        <listAcct:nexusesTaxList>
+                            <listAcct:nexusesTax>
+                                <listAcct:nexus internalId="1">
+                                    <platformCore:name>CA</platformCore:name>
+                                </listAcct:nexus>
+                                <listAcct:description>United States CA</listAcct:description>
+                                <listAcct:saleTaxAcct internalId="110">
+                                    <platformCore:name>Sales Taxes Payable CA</platformCore:name>
+                                </listAcct:saleTaxAcct>
+                            </listAcct:nexusesTax>
+                        </listAcct:nexusesTaxList>
+                    </platformCore:record>
+                    <platformCore:record xsi:type="listAcct:TaxType" internalId="-4" xmlns:listAcct="urn:accounting_2013_2.lists.webservices.netsuite.com">
+                        <listAcct:name>County</listAcct:name>
+                        <listAcct:nexusesTaxList>
+                            <listAcct:nexusesTax>
+                                <listAcct:nexus internalId="1">
+                                    <platformCore:name>CA</platformCore:name>
+                                </listAcct:nexus>
+                                <listAcct:description>United States CA</listAcct:description>
+                                <listAcct:saleTaxAcct internalId="110">
+                                    <platformCore:name>Sales Taxes Payable CA</platformCore:name>
+                                </listAcct:saleTaxAcct>
+                            </listAcct:nexusesTax>
+                        </listAcct:nexusesTaxList>
+                    </platformCore:record>
+                    <platformCore:record xsi:type="listAcct:TaxType" internalId="-3" xmlns:listAcct="urn:accounting_2013_2.lists.webservices.netsuite.com">
+                        <listAcct:name>Transit</listAcct:name>
+                        <listAcct:nexusesTaxList>
+                            <listAcct:nexusesTax>
+                                <listAcct:nexus internalId="1">
+                                    <platformCore:name>CA</platformCore:name>
+                                </listAcct:nexus>
+                                <listAcct:description>United States CA</listAcct:description>
+                                <listAcct:saleTaxAcct internalId="110">
+                                    <platformCore:name>Sales Taxes Payable CA</platformCore:name>
+                                </listAcct:saleTaxAcct>
+                            </listAcct:nexusesTax>
+                        </listAcct:nexusesTaxList>
+                    </platformCore:record>
+                    <platformCore:record xsi:type="listAcct:TaxType" internalId="-2" xmlns:listAcct="urn:accounting_2013_2.lists.webservices.netsuite.com">
+                        <listAcct:name>State</listAcct:name>
+                        <listAcct:nexusesTaxList>
+                            <listAcct:nexusesTax>
+                                <listAcct:nexus internalId="1">
+                                    <platformCore:name>CA</platformCore:name>
+                                </listAcct:nexus>
+                                <listAcct:description>United States CA</listAcct:description>
+                                <listAcct:saleTaxAcct internalId="110">
+                                    <platformCore:name>Sales Taxes Payable CA</platformCore:name>
+                                </listAcct:saleTaxAcct>
+                            </listAcct:nexusesTax>
+                        </listAcct:nexusesTaxList>
+                    </platformCore:record>
+                </platformCore:recordList>
+            </platformCore:getAllResult>
+        </getAllResponse>
+    </soapenv:Body>
+</soapenv:Envelope>

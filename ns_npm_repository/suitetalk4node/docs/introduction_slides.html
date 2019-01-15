@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Title</title>
+    <meta charset="utf-8">
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body { font-family: 'Droid Serif'; }
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: normal;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+
+class: center, middle
+
+# suitetalk4node
+
+
+
+---
+
+## About the project
+
+*suitetalk4node* is a project started a month ago with the need of using netsuite SOAP services from node.js. Is so a *WORK IN PROGRESS*. Right now it support most of suitetalk operations (add, update, search, delete, addlist) and it tries to emulate the same XML API but in JavaScript/json. 
+
+Is a test driven development and contain working unit tests against some known records like file, customer, item. The idea is that evolves with the needs of our automation preconditions (that are to be develop). 
+
+
+---
+
+## Motivation: automation preconditions
+
+Our initial motivation was the need of *automation test preconditions*. Examples: 
+
+ 1) search for a matrix parent item in the webstore. 
+
+ 2) Create a sales order record with certain characteristics. 
+
+ 3) Have a customer with certain roles. 
+
+
+
+---
+
+## Motivation: Automation preconditions: 
+###why suitetalk ? 
+
+Also we want the *source of truth to be the account* and not the application* (that is what we want to test). 
+
+In other words we could be using our own application services to read many preconditions easily, and we don't want to do so.
+
+For this both *suitetalk or suitelets* can be used. In our case we chose suitetalk because has better governance and because the user must not depend on any script to be installed in the target account. 
+
+In the ideal world we want to be able tu run automation *on any account, even real client sites!*. Suitetalk is optimal for this.
+
+
+
+---
+
+## Suitetalk in JavaScript and node 
+
+We want a JAvaScript suitetalk API: All our code, devtools and automation is written in JavaScript and we don't want to change that fact. 
+
+In the practice this was a problem because javascript/node ecosystem JSON and REST are the defacto standars and XML and SOAP are not common. 
+
+We tried to consume the SOAP WSDL from node but *didn't success because the low quality of SOAP libraries in node/javascript*. 
+
+So because we were *hurry to implement this* we proceeded with the unconventional approach of generating the SOAP XML using templates. The job was made, the code is very clear and we have most operations implemented and tested add, addList, searchBasic. 
+
+
+---
+
+## Future: high level API
+
+The API for calling an operation try to be equivalent to XML's and is acceptable, but not the responses. 
+
+Currently our response objects are equivalent to XML response objects and cannot be easy to access them. The following example shows how hard is to access a search result record list and the error code if any from the search response object. 
+
+```javascript
+var results = response.searchResponse[0].searchResult[0].recordList[0].record; 
+var isSuccess=response.addResponse[0].writeResponse[0].status[0].$.isSuccess; 
+var isUserError = response.addResponse[0].writeResponse[0].status[0].statusDetail[0].code[0] === 'USER_ERROR'; 
+end
+```
+
+####So we will implement an API layer that gives a higher level APIs: TODO proposal
+---
+
+
+
+
+---
+##Using it - add and callbacks
+
+  var addCommand1 = {
+    recordType: 'customer'
+  , fields: [
+      {name: 'firstName', value: 'Sebastian123234345ws'}
+    , {name: 'lastName', value: 'Gurin123234345ws'}
+    , {name: 'phone', value: '123234345'}
+    , {name: 'companyName', value: 'ABC company X123123ws'}
+    ]
+  }; 
+  suitetalk.add(addCommand1, function(error, response, soap)
+  {
+    expect(error).toBeFalsy(); 
+    if(error)
+    {
+      console.log('ERROR: ', error); 
+    }
+    else
+    {
+      var writeResponse = response.addResponse[0].writeResponse[0]; 
+      expect(writeResponse.status[0].$.isSuccess).toBe('true');
+      sampleCustomerId = writeResponse.baseRef[0].$.internalId; 
+    }
+    cb();
+  }); 
+
+
+
+---
+
+##Using it - search and promises
+
+  suitetalk.searchBasic({
+    recordType: 'folder'
+  , filters: {
+      parent: {
+        type: 'SearchMultiSelectField'
+      , operator: 'anyOf'
+      , searchValue: [{
+          type: 'RecordRef' //TODO: change type to nstype as did for add fields
+          , internalId: 1
+        }]
+      }
+    }
+  })
+  .then(function(response)
+  {
+    var now = response.searchResponse[0].searchResult[0].totalRecords[0];
+    expect(parseInt(now) === parseInt(rootFolderSearchTotalRecords)+1).toBe(true);
+    testUtil.log('search folder, count: '+now); 
+    cb();
+  })
+  .catch(function(error)
+  {
+    console.log(error.stack); 
+    expect(error).toBeFalsy(); 
+    cb();
+  }); 
+
+
+    </textarea>
+    <script src="https://gnab.github.io/remark/downloads/remark-latest.min.js">
+    </script>
+    <script>
+      var slideshow = remark.create();
+    </script>
+  </body>
+</html>

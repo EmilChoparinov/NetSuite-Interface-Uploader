@@ -1,0 +1,20 @@
+{
+  "name": "suitetalk",
+  "version": "1.1.0",
+  "description": "suitetalk API for nodejs. For version 2015_1 to 2016_1.",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "node node_modules/jasmine/bin/jasmine.js"
+  },
+  "author": "PSG Ecommerce",
+  "dependencies": {
+    "handlebars": "4.0.11",
+    "q": "1.5.1",
+    "request": "2.83.0",
+    "underscore": "1.8.3",
+    "xml2js": "0.4.19"
+  },
+  "devDependencies": {
+    "jasmine": "2.8.0"
+  }
+}

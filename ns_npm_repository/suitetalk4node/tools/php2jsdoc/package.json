@@ -1,0 +1,15 @@
+{
+  "name": "php2jsdoc",
+  "version": "1.0.0",
+  "description": "extract class information from netsuite php suitetalk project to short-jsdoc format",
+  "main": "php2jsdoc.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "short-jsdoc": "^0.2.1",
+    "underscore": "^1.8.3"
+  }
+}

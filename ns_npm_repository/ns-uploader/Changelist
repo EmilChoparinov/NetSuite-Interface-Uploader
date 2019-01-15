@@ -1,0 +1,11 @@
+#version 0.0.1
+
+ * works using addlist. known limitations: a folder cannot contain more than 100mb in its first level files (in total it can contain unlimited size)
+
+ * dependency to shelljs deleted for releasing :(
+ * implemented the final solution using operation add (file by file)
+ * add support for remote manifest and if exists only upload those files with changes
+
+# version 0.0.2
+
+ * updated libraries

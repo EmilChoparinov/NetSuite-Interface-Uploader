@@ -1,0 +1,545 @@
+this was taken using 2015_1 php client downloaded from netsuite help
+
+
+
+add file request
+
+<SOAP-ENV:Envelope 
+    xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+    xmlns:ns="ns"
+    xmlns:nscore="urn:core_2015_1.platform.webservices.netsuite.com"
+    xmlns:nscommon="urn:common_2015_1.platform.webservices.netsuite.com"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:nsmessages="urn:messages_2015_1.platform.webservices.netsuite.com"
+    xmlns:nsrelationships="urn:relationships_2015_1.lists.webservices.netsuite.com"
+    xmlns:nsfilecabinet="urn:filecabinet_2015_1.documents.webservices.netsuite.com">  
+    >
+    <SOAP-ENV:Header>
+        <passport  xmlns="urn:messages_2015_1.platform.webservices.netsuite.com">
+            <email xmlns="urn:core_2015_1.platform.webservices.netsuite.com">s@gurin.com</email>
+            <password xmlns="urn:core_2015_1.platform.webservices.netsuite.com">test098</password>
+            <account xmlns="urn:core_2015_1.platform.webservices.netsuite.com">3690872</account>
+            <role xmlns="urn:core_2015_1.platform.webservices.netsuite.com" internalId="3"/>
+        </passport>
+        
+    </SOAP-ENV:Header>
+    <SOAP-ENV:Body>
+        <nsmessages:add>
+            <nsmessages:record xsi:type="nsfilecabinet:File" >
+                <nsfilecabinet:name xsi:type="xsd:string">newFile1.txt</nsfilecabinet:name>
+                <nsfilecabinet:fileType>_PLAINTEXT</nsfilecabinet:fileType>
+                <nsfilecabinet:content>aGVsbG8gd29ybGQ=</nsfilecabinet:content>
+                <nsfilecabinet:folder xsi:type="nscore:RecordRef" type="folder" internalId="11689"/>
+            </nsmessages:record>
+        </nsmessages:add>
+    </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
+
+
+
+add file response: 
+
+<?xml version="1.0" encoding="UTF-8"?><soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><soapenv:Header><platformMsgs:documentInfo xmlns:platformMsgs="urn:messages_2015_1.platform.webservices.netsuite.com"><platformMsgs:nsId>WEBSERVICES_3690872_06162015599421911290993758_eccf22c5811ba</platformMsgs:nsId></platformMsgs:documentInfo></soapenv:Header><soapenv:Body><addResponse xmlns="urn:messages_2015_1.platform.webservices.netsuite.com"><writeResponse><platformCore:status isSuccess="true" xmlns:platformCore="urn:core_2015_1.platform.webservices.netsuite.com"/><baseRef internalId="109061" type="file" xsi:type="platformCore:RecordRef" xmlns:platformCore="urn:core_2015_1.platform.webservices.netsuite.com"/></writeResponse></addResponse></soapenv:Body></soapenv:Envelope>
+
+
+
+
+
+add folder in parent folder with internalid 1, request: 
+
+
+<SOAP-ENV:Envelope 
+    xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+    xmlns:ns="ns"
+    xmlns:nscore="urn:core_2015_1.platform.webservices.netsuite.com"
+    xmlns:nscommon="urn:common_2015_1.platform.webservices.netsuite.com"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:nsmessages="urn:messages_2015_1.platform.webservices.netsuite.com"
+    xmlns:nsrelationships="urn:relationships_2015_1.lists.webservices.netsuite.com"
+    xmlns:nsfilecabinet="urn:filecabinet_2015_1.documents.webservices.netsuite.com">  
+    >
+    <SOAP-ENV:Header>
+        <passport  xmlns="urn:messages_2015_1.platform.webservices.netsuite.com">
+            <email xmlns="urn:core_2015_1.platform.webservices.netsuite.com">s@gurin.com</email>
+            <password xmlns="urn:core_2015_1.platform.webservices.netsuite.com">test098</password>
+            <account xmlns="urn:core_2015_1.platform.webservices.netsuite.com">3690872</account>
+            <role xmlns="urn:core_2015_1.platform.webservices.netsuite.com" internalId="3"/>
+        </passport>
+        
+    </SOAP-ENV:Header>
+    <SOAP-ENV:Body>
+        <nsmessages:add>
+            <nsmessages:record xsi:type="nsfilecabinet:Folder" >
+                <nsfilecabinet:name xsi:type="xsd:string">wstest1</nsfilecabinet:name>
+                <nsfilecabinet:parent xsi:type="nscore:RecordRef" type="folder" internalId="1"/>
+            </nsmessages:record>
+        </nsmessages:add>
+    </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
+
+
+
+add folder response
+
+<?xml version="1.0" encoding="UTF-8"?><soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><soapenv:Header><platformMsgs:documentInfo xmlns:platformMsgs="urn:messages_2015_1.platform.webservices.netsuite.com"><platformMsgs:nsId>WEBSERVICES_3690872_0616201559514907570667825_88a23d5a56b660</platformMsgs:nsId></platformMsgs:documentInfo></soapenv:Header><soapenv:Body><addResponse xmlns="urn:messages_2015_1.platform.webservices.netsuite.com"><writeResponse><platformCore:status isSuccess="true" xmlns:platformCore="urn:core_2015_1.platform.webservices.netsuite.com"/><baseRef internalId="39675" type="folder" xsi:type="platformCore:RecordRef" xmlns:platformCore="urn:core_2015_1.platform.webservices.netsuite.com"/></writeResponse></addResponse></soapenv:Body></soapenv:Envelope>
+
+
+
+
+
+add customer request:
+
+<SOAP-ENV:Envelope xmlns:ns4="ns" xmlns:ns3="urn:core_2015_1.platform.webservices.netsuite.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="urn:relationships_2015_1.lists.webservices.netsuite.com" xmlns:ns2="urn:messages_2015_1.platform.webservices.netsuite.com">
+    <SOAP-ENV:Header>
+        <ns4:passport xsi:type="ns3:Passport">
+            <ns3:email>s@gurin.com</ns3:email>
+            <ns3:password>*******</ns3:password>
+            <ns3:account>3690872</ns3:account>
+            <ns3:role internalId="3"/>
+        </ns4:passport>
+    </SOAP-ENV:Header>
+    <SOAP-ENV:Body>
+        <ns2:add>
+            <ns2:record xsi:type="ns1:Customer">
+                <ns1:firstName>John</ns1:firstName>
+                <ns1:lastName>Doe</ns1:lastName>
+                <ns1:companyName>ABC company X </ns1:companyName>
+                <ns1:phone>123456789</ns1:phone>
+            </ns2:record>
+        </ns2:add>
+    </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
+
+
+
+
+
+
+
+
+
+add custgomer response:
+
+<soapenv:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+    <soapenv:Header>
+        <platformMsgs:documentInfo xmlns:platformMsgs="urn:messages_2015_1.platform.webservices.netsuite.com">
+            <platformMsgs:nsId>WEBSERVICES_3690872_061120154414484001470613033_e882f5e455a3</platformMsgs:nsId>
+        </platformMsgs:documentInfo>
+    </soapenv:Header>
+    <soapenv:Body>
+        <addResponse xmlns="urn:messages_2015_1.platform.webservices.netsuite.com">
+            <writeResponse>
+                <platformCore:status isSuccess="true" xmlns:platformCore="urn:core_2015_1.platform.webservices.netsuite.com"/>
+                <baseRef xsi:type="platformCore:RecordRef" type="customer" internalId="1428" xmlns:platformCore="urn:core_2015_1.platform.webservices.netsuite.com"/>
+            </writeResponse>
+        </addResponse>
+    </soapenv:Body>
+</soapenv:Envelope>
+
+
+
+
+
+
+
+
+
+
+search customer starts with j request
+
+<SOAP-ENV:Envelope xmlns:ns4="ns" xmlns:ns3="urn:messages_2015_1.platform.webservices.netsuite.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="urn:core_2015_1.platform.webservices.netsuite.com" xmlns:ns2="urn:common_2015_1.platform.webservices.netsuite.com">
+    <SOAP-ENV:Header>
+        <ns4:searchPreferences xsi:type="ns3:SearchPreferences">
+            <ns3:bodyFieldsOnly>false</ns3:bodyFieldsOnly>
+            <ns3:returnSearchColumns>true</ns3:returnSearchColumns>
+            <ns3:pageSize>20</ns3:pageSize>
+        </ns4:searchPreferences>
+        <ns4:passport xsi:type="ns1:Passport">
+            <ns1:email>s@gurin.com</ns1:email>
+            <ns1:password>*******</ns1:password>
+            <ns1:account>3690872</ns1:account>
+            <ns1:role internalId="3"/>
+        </ns4:passport>
+    </SOAP-ENV:Header>
+    <SOAP-ENV:Body>
+        <ns3:search>
+            <ns3:searchRecord xsi:type="ns2:EmployeeSearchBasic">
+                <ns2:email operator="startsWith">
+                    <ns1:searchValue>j</ns1:searchValue>
+                </ns2:email>
+            </ns3:searchRecord>
+        </ns3:search>
+    </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
+
+
+        </ns:searchPreferences> </SOAP-ENV:Header>
+    <SOAP-ENV:Body>
+        <nsmessages:search>
+            <nsmessages:searchRecord xsi:type="nscommon:ItemSearchBasic">
+                <nscommon:displayName>
+                    <nscore:searchValue>item2</nscore:searchValue>
+                </nscommon:displayName>
+            </nsmessages:searchRecord>
+        </nsmessages:search>
+    </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
+
+
+
+
+
+
+
+search customer starts with j response
+
+<soapenv:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+    <soapenv:Header>
+        <platformMsgs:documentInfo xmlns:platformMsgs="urn:messages_2015_1.platform.webservices.netsuite.com">
+            <platformMsgs:nsId>WEBSERVICES_3690872_06112015441906120674965384_dd61dfcab3e3b</platformMsgs:nsId>
+        </platformMsgs:documentInfo>
+    </soapenv:Header>
+    <soapenv:Body>
+        <searchResponse xmlns="urn:messages_2015_1.platform.webservices.netsuite.com">
+            <platformCore:searchResult xmlns:platformCore="urn:core_2015_1.platform.webservices.netsuite.com">
+                <platformCore:status isSuccess="true"/>
+                <platformCore:totalRecords>6</platformCore:totalRecords>
+                <platformCore:pageSize>20</platformCore:pageSize>
+                <platformCore:totalPages>1</platformCore:totalPages>
+                <platformCore:pageIndex>1</platformCore:pageIndex>
+                <platformCore:searchId>WEBSERVICES_3690872_06112015441906120674965384_dd61dfcab3e3b</platformCore:searchId>
+                <platformCore:recordList>
+                    <platformCore:record xsi:type="listEmp:Employee" internalId="786" xmlns:listEmp="urn:employees_2015_1.lists.webservices.netsuite.com">
+                        <listEmp:entityId>Juan C Silva</listEmp:entityId>
+                        <listEmp:salutation>Juan Silva Pers</listEmp:salutation>
+                        <listEmp:firstName>Juan</listEmp:firstName>
+                        <listEmp:middleName>Carlos</listEmp:middleName>
+                        <listEmp:lastName>Silva</listEmp:lastName>
+                        <listEmp:email>juansanuy@gmail.com</listEmp:email>
+                        <listEmp:isInactive>false</listEmp:isInactive>
+                        <listEmp:lastModifiedDate>2014-02-05T06:24:27.000-08:00</listEmp:lastModifiedDate>
+                        <listEmp:dateCreated>2014-02-05T06:24:27.000-08:00</listEmp:dateCreated>
+                        <listEmp:initials>JCS</listEmp:initials>
+                        <listEmp:subsidiary internalId="1">
+                            <platformCore:name>Parent Company</platformCore:name>
+                        </listEmp:subsidiary>
+                        <listEmp:globalSubscriptionStatus>_softOptOut</listEmp:globalSubscriptionStatus>
+                        <listEmp:currency internalId="1">
+                            <platformCore:name>US Dollar</platformCore:name>
+                        </listEmp:currency>
+                        <listEmp:isSalesRep>false</listEmp:isSalesRep>
+                        <listEmp:hireDate>2014-02-05T00:00:00.000-08:00</listEmp:hireDate>
+                        <listEmp:gender>_omitted</listEmp:gender>
+                        <listEmp:giveAccess>true</listEmp:giveAccess>
+                        <listEmp:concurrentWebServicesUser>false</listEmp:concurrentWebServicesUser>
+                        <listEmp:commissionPaymentPreference>_systemPreference</listEmp:commissionPaymentPreference>
+                        <listEmp:rolesList>
+                            <listEmp:roles>
+                                <listEmp:selectedRole internalId="3">
+                                    <platformCore:name>Administrator</platformCore:name>
+                                </listEmp:selectedRole>
+                            </listEmp:roles>
+                        </listEmp:rolesList>
+                    </platformCore:record>
+                    <platformCore:record xsi:type="listEmp:Employee" internalId="290" xmlns:listEmp="urn:employees_2015_1.lists.webservices.netsuite.com">
+                        <listEmp:entityId>jorge sosa</listEmp:entityId>
+                        <listEmp:firstName>jorge</listEmp:firstName>
+                        <listEmp:lastName>sosa</listEmp:lastName>
+                        <listEmp:email>jsosa@netsuite.com</listEmp:email>
+                        <listEmp:isInactive>false</listEmp:isInactive>
+                        <listEmp:lastModifiedDate>2013-10-16T10:19:39.000-07:00</listEmp:lastModifiedDate>
+                        <listEmp:dateCreated>2013-10-07T10:49:40.000-07:00</listEmp:dateCreated>
+                        <listEmp:initials>JS</listEmp:initials>
+                        <listEmp:subsidiary internalId="1">
+                            <platformCore:name>Parent Company</platformCore:name>
+                        </listEmp:subsidiary>
+                        <listEmp:globalSubscriptionStatus>_confirmedOptOut</listEmp:globalSubscriptionStatus>
+                        <listEmp:currency internalId="1">
+                            <platformCore:name>US Dollar</platformCore:name>
+                        </listEmp:currency>
+                        <listEmp:isSalesRep>false</listEmp:isSalesRep>
+                        <listEmp:hireDate>2013-10-07T00:00:00.000-07:00</listEmp:hireDate>
+                        <listEmp:gender>_omitted</listEmp:gender>
+                        <listEmp:giveAccess>true</listEmp:giveAccess>
+                        <listEmp:concurrentWebServicesUser>false</listEmp:concurrentWebServicesUser>
+                        <listEmp:commissionPaymentPreference>_systemPreference</listEmp:commissionPaymentPreference>
+                        <listEmp:rolesList>
+                            <listEmp:roles>
+                                <listEmp:selectedRole internalId="3">
+                                    <platformCore:name>Administrator</platformCore:name>
+                                </listEmp:selectedRole>
+                            </listEmp:roles>
+                        </listEmp:rolesList>
+                    </platformCore:record>
+                </platformCore:recordList>
+            </platformCore:searchResult>
+        </searchResponse>
+    </soapenv:Body>
+</soapenv:Envelope>
+
+
+
+
+
+
+
+
+
+
+get customer id 21
+
+<SOAP-ENV:Envelope xmlns:ns3="ns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="urn:core_2015_1.platform.webservices.netsuite.com" xmlns:ns2="urn:messages_2015_1.platform.webservices.netsuite.com">
+    <SOAP-ENV:Header>
+        <ns3:passport xsi:type="ns1:Passport">
+            <ns1:email>s@gurin.com</ns1:email>
+            <ns1:password>*******</ns1:password>
+            <ns1:account>3690872</ns1:account>
+            <ns1:role internalId="3"/>
+        </ns3:passport>
+    </SOAP-ENV:Header>
+    <SOAP-ENV:Body>
+        <ns2:get>
+            <ns2:baseRef xsi:type="ns1:RecordRef" type="customer" internalId="21"/>
+        </ns2:get>
+    </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
+
+
+
+
+get customer id 21 response
+<soapenv:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+    <soapenv:Header>
+        <platformMsgs:documentInfo xmlns:platformMsgs="urn:messages_2015_1.platform.webservices.netsuite.com">
+            <platformMsgs:nsId>WEBSERVICES_3690872_061120154410433851667572658_a0073694a1b7</platformMsgs:nsId>
+        </platformMsgs:documentInfo>
+    </soapenv:Header>
+    <soapenv:Body>
+        <getResponse xmlns="urn:messages_2015_1.platform.webservices.netsuite.com">
+            <readResponse>
+                <platformCore:status isSuccess="true" xmlns:platformCore="urn:core_2015_1.platform.webservices.netsuite.com"/>
+                <record xsi:type="listRel:Customer" internalId="21" xmlns:listRel="urn:relationships_2015_1.lists.webservices.netsuite.com">
+                    <listRel:customForm internalId="-2" xmlns:platformCore="urn:core_2015_1.platform.webservices.netsuite.com">
+                        <platformCore:name>Standard Customer Form</platformCore:name>
+                    </listRel:customForm>
+                    <listRel:entityId>12 yyyyyyxxxccc xcxcxc</listRel:entityId>
+                    <listRel:isPerson>true</listRel:isPerson>
+                    <listRel:firstName>yyyyyyxxxccc</listRel:firstName>
+                    <listRel:lastName>xcxcxc</listRel:lastName>
+                    <listRel:companyName>ssss</listRel:companyName>
+                    <listRel:entityStatus internalId="6" xmlns:platformCore="urn:core_2015_1.platform.webservices.netsuite.com">
+                        <platformCore:name>LEAD-Unqualified</platformCore:name>
+                    </listRel:entityStatus>
+                    <listRel:email>s2@gurin.com</listRel:email>
+                    <listRel:isInactive>false</listRel:isInactive>
+                    <listRel:language>_usEnglish</listRel:language>
+                    <listRel:dateCreated>2013-08-20T10:34:37.000-07:00</listRel:dateCreated>
+                    <listRel:emailPreference>_default</listRel:emailPreference>
+                    <listRel:subsidiary internalId="1" xmlns:platformCore="urn:core_2015_1.platform.webservices.netsuite.com">
+                        <platformCore:name>Parent Company</platformCore:name>
+                    </listRel:subsidiary>
+                    <listRel:taxExempt>true</listRel:taxExempt>
+                    <listRel:creditHoldOverride>_auto</listRel:creditHoldOverride>
+                    <listRel:balance>0.0</listRel:balance>
+                    <listRel:overdueBalance>0.0</listRel:overdueBalance>
+                    <listRel:unbilledOrders>0.0</listRel:unbilledOrders>
+                    <listRel:currency internalId="1" xmlns:platformCore="urn:core_2015_1.platform.webservices.netsuite.com">
+                        <platformCore:name>US Dollar</platformCore:name>
+                    </listRel:currency>
+                    <listRel:depositBalance>0.0</listRel:depositBalance>
+                    <listRel:shipComplete>false</listRel:shipComplete>
+                    <listRel:taxable>false</listRel:taxable>
+                    <listRel:giveAccess>true</listRel:giveAccess>
+                    <listRel:accessRole internalId="14" xmlns:platformCore="urn:core_2015_1.platform.webservices.netsuite.com">
+                        <platformCore:name>Customer Center</platformCore:name>
+                    </listRel:accessRole>
+                    <listRel:sendEmail>false</listRel:sendEmail>
+                    <listRel:receivablesAccount internalId="-10" xmlns:platformCore="urn:core_2015_1.platform.webservices.netsuite.com">
+                        <platformCore:name>Use System Preference</platformCore:name>
+                    </listRel:receivablesAccount>
+                    <listRel:webLead>Yes</listRel:webLead>
+                    <listRel:lastModifiedDate>2013-08-20T10:34:38.000-07:00</listRel:lastModifiedDate>
+                    <listRel:stage>_lead</listRel:stage>
+                    <listRel:emailTransactions>false</listRel:emailTransactions>
+                    <listRel:printTransactions>false</listRel:printTransactions>
+                    <listRel:faxTransactions>false</listRel:faxTransactions>
+                    <listRel:isBudgetApproved>false</listRel:isBudgetApproved>
+                    <listRel:globalSubscriptionStatus>_softOptOut</listRel:globalSubscriptionStatus>
+                    <listRel:contactRolesList>
+                        <listRel:contactRoles>
+                            <listRel:giveAccess>false</listRel:giveAccess>
+                            <listRel:contact internalId="21" xmlns:platformCore="urn:core_2015_1.platform.webservices.netsuite.com">
+                                <platformCore:name>12</platformCore:name>
+                            </listRel:contact>
+                            <listRel:email>s2@gurin.com</listRel:email>
+                            <listRel:role internalId="14" xmlns:platformCore="urn:core_2015_1.platform.webservices.netsuite.com">
+                                <platformCore:name>Customer Center</platformCore:name>
+                            </listRel:role>
+                            <listRel:sendEmail>false</listRel:sendEmail>
+                        </listRel:contactRoles>
+                    </listRel:contactRolesList>
+                    <listRel:currencyList>
+                        <listRel:currency>
+                            <listRel:currency internalId="1" xmlns:platformCore="urn:core_2015_1.platform.webservices.netsuite.com">
+                                <platformCore:name>US Dollar</platformCore:name>
+                            </listRel:currency>
+                            <listRel:balance>0.0</listRel:balance>
+                            <listRel:depositBalance>0.0</listRel:depositBalance>
+                            <listRel:overdueBalance>0.0</listRel:overdueBalance>
+                            <listRel:unbilledOrders>0.0</listRel:unbilledOrders>
+                            <listRel:overrideCurrencyFormat>false</listRel:overrideCurrencyFormat>
+                            <listRel:symbolPlacement>_beforeNumber</listRel:symbolPlacement>
+                        </listRel:currency>
+                    </listRel:currencyList>
+                </record>
+            </readResponse>
+        </getResponse>
+    </soapenv:Body>
+</soapenv:Envelope>
+
+
+
+
+
+
+
+
+get customer error - record not found response:
+
+<soapenv:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+    <soapenv:Header>
+        <platformMsgs:documentInfo xmlns:platformMsgs="urn:messages_2015_1.platform.webservices.netsuite.com">
+            <platformMsgs:nsId>WEBSERVICES_3690872_061120154408431502078361657_acaf264ba1ca</platformMsgs:nsId>
+        </platformMsgs:documentInfo>
+    </soapenv:Header>
+    <soapenv:Body>
+        <getResponse xmlns="urn:messages_2015_1.platform.webservices.netsuite.com">
+            <readResponse>
+                <platformCore:status isSuccess="false" xmlns:platformCore="urn:core_2015_1.platform.webservices.netsuite.com">
+                    <platformCore:statusDetail type="ERROR">
+                        <platformCore:code>RCRD_DSNT_EXIST</platformCore:code>
+                        <platformCore:message>That record does not exist.</platformCore:message>
+                    </platformCore:statusDetail>
+                </platformCore:status>
+            </readResponse>
+        </getResponse>
+    </soapenv:Body>
+</soapenv:Envelope>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+search folder in parent id 11689 request
+
+<SOAP-ENV:Body>
+    <nsmessages:search>
+        <nsmessages:searchRecord xsi:type="nscommon:FolderSearchBasic">
+          <nscommon:parent xsi:type="nscore:SearchMultiSelectField" operator="anyOf">
+                <nscore:searchValue xsi:type="nscore:RecordRef" internalId="11689"/>
+          </nscommon:parent>
+        </nsmessages:searchRecord>
+    </nsmessages:search>
+</SOAP-ENV:Body>
+
+
+
+
+
+
+
+
+
+addList  of files requerst:
+
+<SOAP-ENV:Envelope 
+    xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+    xmlns:ns="ns"
+    xmlns:nscore="urn:core_2015_1.platform.webservices.netsuite.com"
+    xmlns:nscommon="urn:common_2015_1.platform.webservices.netsuite.com"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:nsmessages="urn:messages_2015_1.platform.webservices.netsuite.com"
+    xmlns:nsrelationships="urn:relationships_2015_1.lists.webservices.netsuite.com"
+    xmlns:nsfilecabinet="urn:filecabinet_2015_1.documents.webservices.netsuite.com">  
+    >
+    <SOAP-ENV:Header>
+        <passport  xmlns="urn:messages_2015_1.platform.webservices.netsuite.com">
+            <email xmlns="urn:core_2015_1.platform.webservices.netsuite.com">s@gurin.com</email>
+            <password xmlns="urn:core_2015_1.platform.webservices.netsuite.com">test098</password>
+            <account xmlns="urn:core_2015_1.platform.webservices.netsuite.com">3690872</account>
+            <role xmlns="urn:core_2015_1.platform.webservices.netsuite.com" internalId="3"/>
+        </passport>
+        
+    </SOAP-ENV:Header>
+    <SOAP-ENV:Body>
+        <nsmessages:addList>
+            <nsmessages:record xsi:type="nsfilecabinet:File" >
+                <nsfilecabinet:name xsi:type="xsd:string">newFile1.txt</nsfilecabinet:name>
+                <nsfilecabinet:fileType>_PLAINTEXT</nsfilecabinet:fileType>
+                <nsfilecabinet:content>aGVsbG8gd29ybGQ=</nsfilecabinet:content>
+                <nsfilecabinet:folder xsi:type="nscore:RecordRef" type="folder" internalId="40375"/>
+            </nsmessages:record>
+
+            <nsmessages:record xsi:type="nsfilecabinet:File" >
+                <nsfilecabinet:name xsi:type="xsd:string">newFile2.txt</nsfilecabinet:name>
+                <nsfilecabinet:fileType>_PLAINTEXT</nsfilecabinet:fileType>
+                <nsfilecabinet:content>aGVsbG8gd29ybGQ=</nsfilecabinet:content>
+                <nsfilecabinet:folder xsi:type="nscore:RecordRef" type="folder" internalId="40375"/>
+            </nsmessages:record>
+            
+        </nsmessages:addList>
+    </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
+
+
+
+
+
+
+
+
+
+
+
+getDataCenterUrls request
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope 
+    xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:ns="ns"
+    xmlns:nscore="urn:core_2015_1.platform.webservices.netsuite.com"
+    xmlns:nscommon="urn:common_2015_1.platform.webservices.netsuite.com"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:nsmessages="urn:messages_2015_1.platform.webservices.netsuite.com"
+>
+    <SOAP-ENV:Header>
+        <nsmessages:passport>
+            <nscore:email>s@gurin.com</nscore:email>
+            <nscore:password>test098</nscore:password>
+            <nscore:account>3690872</nscore:account>
+            <nscore:role internalId="3"/>
+        </nsmessages:passport>
+        </SOAP-ENV:Header>
+    <SOAP-ENV:Body>
+        <nsmessages:getDataCenterUrls>
+            <nsmessages:account>3690872</nsmessages:account>
+        </nsmessages:getDataCenterUrls>
+    </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
+
+getDataCenterUrls response
+<?xml version="1.0" encoding="UTF-8"?><soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><soapenv:Header><platformMsgs:documentInfo xmlns:platformMsgs="urn:messages_2015_1.platform.webservices.netsuite.com"><platformMsgs:nsId>WEBSERVICES__06202015292937757556241908_1e1292bdd610aed57520</platformMsgs:nsId></platformMsgs:documentInfo></soapenv:Header><soapenv:Body><getDataCenterUrlsResponse xmlns="urn:messages_2015_1.platform.webservices.netsuite.com"><platformCore:getDataCenterUrlsResult xmlns:platformCore="urn:core_2015_1.platform.webservices.netsuite.com"><platformCore:status isSuccess="true"/><platformCore:dataCenterUrls><platformCore:restDomain>https://rest.netsuite.com</platformCore:restDomain><platformCore:webservicesDomain>https://webservices.netsuite.com</platformCore:webservicesDomain><platformCore:systemDomain>https://system.netsuite.com</platformCore:systemDomain></platformCore:dataCenterUrls></platformCore:getDataCenterUrlsResult></getDataCenterUrlsResponse></soapenv:Body></soapenv:Envelope>

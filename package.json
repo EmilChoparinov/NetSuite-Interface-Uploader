@@ -10,14 +10,20 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:extension.helloWorld"
+		"*"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
 		"commands": [
 			{
-				"command": "extension.helloWorld",
-				"title": "Hello World"
+				"command": "extension.nsiUploadFile",
+				"title": "Upload File",
+				"category": "NSI"
+			},
+			{
+				"command": "extension.nsiSyncFile",
+				"title": "Sync File",
+				"category": "NSI"
 			}
 		]
 	},

@@ -3,7 +3,6 @@ import { readdirSync } from 'fs';
 import { join } from 'path';
 
 export const activate = (context: vscode.ExtensionContext) => {
-	console.log('Congratulations, your extension "netsuite-interface-uploader" is now active!');
 	readdirSync(
 		join(__dirname, './commands')
 	)
@@ -16,7 +15,6 @@ export const activate = (context: vscode.ExtensionContext) => {
 			command.runCommand(context);
 		});
 
-	console.log('NSI Loaded all commands');
 	vscode.window.showInformationMessage('NSI Loaded');
 };
 

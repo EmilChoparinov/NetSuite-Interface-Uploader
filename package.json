@@ -16,12 +16,22 @@
 	"contributes": {
 		"commands": [
 			{
-				"command": "extension.nsiUploadFile",
+				"command": "extension.uploadFile",
 				"title": "Upload File",
 				"category": "NSI"
 			},
 			{
-				"command": "extension.nsiSyncFile",
+				"command": "extension.addAccount",
+				"title": "Add Account",
+				"category": "NSI"
+			},
+			{
+				"command": "extension.selectAccount",
+				"title": "Select Account",
+				"category": "NSI"
+			},
+			{
+				"command": "extension.yncFile",
 				"title": "Sync File",
 				"category": "NSI"
 			}
@@ -40,5 +50,9 @@
 		"tslint": "^5.8.0",
 		"@types/node": "^8.10.25",
 		"@types/mocha": "^2.2.42"
+	},
+	"dependencies": {
+		"@types/crypto-js": "^3.1.43",
+		"crypto-js": "^3.1.9-1"
 	}
 }

@@ -39,15 +39,11 @@ export class EncryptionManager {
     // SHA256 key that will be used to decrypt credentials
     public key: string;
 
-    // VSCode extensions context to save encrypted data into VSCode
-    private context: ExtensionContext;
-
     // external manager to be used to to save encrypted data to the
     // file system instead of VSCodes extension
     private storageManager: StorageManager;
     constructor(masterPassword: string, context: ExtensionContext) {
         this.key = SHA256(masterPassword).toString();
-        this.context = context;
         this.storageManager = new StorageManager(context);
     }
 
@@ -74,6 +70,7 @@ export class EncryptionManager {
 
         // update the account listing for internal access
         await this.updateAccountListing(account);
+        await this.updatePasswordListing();
     }
 
     /**
@@ -117,7 +114,6 @@ export class EncryptionManager {
 
         // get the encrypted data as a string
         const encrypedData = await this.storageManager.getFile(accountId);
-
         const plainTextDecryption =
 
             // use AES decryption method to decrypt to proper set of bytes
@@ -136,24 +132,10 @@ export class EncryptionManager {
      * **NOTE: THIS ONLY WORKS IF THERE IS A SINGLE MASTER PASSWORD**
      */
     public async verifyMasterPassword() {
+        const passwords: passwords =
+            JSON.parse(await this.storageManager.getFile('passwords'));
 
-        // gets all the names of the accounts
-        const accountIds: accountNames =
-            JSON.parse(await this.storageManager.getFile('accounts'));
-
-        // if the length of accounts is 0, then that means there is nothing
-        // to decrypt, therefore just return true
-        if (accountIds.ids.length === 0) { return true; }
-
-        // get one of them
-        const accountId = accountIds.ids.pop();
-
-        // decrypt to plaintext
-        const plainTextDecryption = await this.decrypt(accountId);
-
-        // if the decyption was successful, then it returns a string greater
-        // than 0
-        return plainTextDecryption.length !== 0;
+        return !!passwords[this.key];
     }
 
     /**
@@ -185,6 +167,22 @@ export class EncryptionManager {
         }
 
         this.storageManager.updateFile('accounts', JSON.stringify(accountIds));
+    }
+
+    private async updatePasswordListing() {
+        let passwords = await this.storageManager.getFile('passwords');
+
+        let nextPasswords: passwords;
+        if (!!passwords) {
+            nextPasswords = JSON.parse(passwords);
+            nextPasswords[this.key] = true;
+        } else {
+            nextPasswords = {
+                [this.key]: true
+            };
+        }
+
+        this.storageManager.updateFile('passwords', JSON.stringify(nextPasswords));
     }
 
     /**

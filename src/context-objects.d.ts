@@ -8,3 +8,7 @@ declare type credentials = {
 declare type accountNames = {
     ids: string[]
 }
+
+declare type passwords = {
+    [key: string]: true
+}

@@ -3,6 +3,7 @@ import { readdirSync } from 'fs';
 import { join } from 'path';
 
 export const activate = (context: vscode.ExtensionContext) => {
+	deactivate(context);
 	readdirSync(
 		join(__dirname, './commands')
 	)
@@ -19,5 +20,5 @@ export const activate = (context: vscode.ExtensionContext) => {
 };
 
 export const deactivate = (context: vscode.ExtensionContext) => {
-	context.globalState.update('masterkey', null);
+	context.workspaceState.update('masterkey', undefined);
 };

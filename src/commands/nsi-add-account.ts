@@ -1,13 +1,17 @@
 import * as vscode from 'vscode';
-import { newAccountPrompt } from '../prompts/new-acc-prompt';
+import { AskForMasterPasswordPrompt } from '../prompts/master-password';
+import { AddAccountSeries } from '../prompts/add-account/entry';
 
 export const runCommand = (context: vscode.ExtensionContext) => {
 
     let disposable = vscode.commands.registerCommand('extension.addAccount', async () => {
         vscode.window.showInformationMessage('file sync body');
-        const data = newAccountPrompt(context);
+        const isMasterEntered = await new AskForMasterPasswordPrompt(context).runPrompt();
+        if (isMasterEntered) {
+            await new AddAccountSeries().runPrompt();
+        }
     });
-    
-    
-	context.subscriptions.push(disposable);
+
+
+    context.subscriptions.push(disposable);
 };

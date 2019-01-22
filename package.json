@@ -1,58 +1,59 @@
 {
-	"name": "netsuite-interface-uploader",
-	"displayName": "Netsuite Interface Uploader",
-	"description": "",
-	"version": "0.0.1",
-	"engines": {
-		"vscode": "^1.30.0"
-	},
-	"categories": [
-		"Other"
-	],
-	"activationEvents": [
-		"*"
-	],
-	"main": "./out/extension.js",
-	"contributes": {
-		"commands": [
-			{
-				"command": "extension.uploadFile",
-				"title": "Upload File",
-				"category": "NSI"
-			},
-			{
-				"command": "extension.addAccount",
-				"title": "Add Account",
-				"category": "NSI"
-			},
-			{
-				"command": "extension.selectAccount",
-				"title": "Select Account",
-				"category": "NSI"
-			},
-			{
-				"command": "extension.yncFile",
-				"title": "Sync File",
-				"category": "NSI"
-			}
-		]
-	},
-	"scripts": {
-		"vscode:prepublish": "npm run compile",
-		"compile": "tsc -p ./",
-		"watch": "tsc -watch -p ./",
-		"postinstall": "node ./node_modules/vscode/bin/install",
-		"test": "npm run compile && node ./node_modules/vscode/bin/test"
-	},
-	"devDependencies": {
-		"typescript": "^3.1.4",
-		"vscode": "^1.1.25",
-		"tslint": "^5.8.0",
-		"@types/node": "^8.10.25",
-		"@types/mocha": "^2.2.42"
-	},
-	"dependencies": {
-		"@types/crypto-js": "^3.1.43",
-		"crypto-js": "^3.1.9-1"
-	}
+  "name": "netsuite-interface-uploader",
+  "displayName": "Netsuite Interface Uploader",
+  "description": "",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.30.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "*"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "extension.uploadFile",
+        "title": "Upload File",
+        "category": "NSI"
+      },
+      {
+        "command": "extension.addAccount",
+        "title": "Add Account",
+        "category": "NSI"
+      },
+      {
+        "command": "extension.selectAccount",
+        "title": "Select Account",
+        "category": "NSI"
+      },
+      {
+        "command": "extension.yncFile",
+        "title": "Sync File",
+        "category": "NSI"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "postinstall": "node ./node_modules/vscode/bin/install",
+    "test": "npm run compile && node ./node_modules/vscode/bin/test"
+  },
+  "devDependencies": {
+    "typescript": "^3.1.4",
+    "vscode": "^1.1.25",
+    "tslint": "^5.8.0",
+    "@types/node": "^8.10.25",
+    "@types/mocha": "^2.2.42"
+  },
+  "dependencies": {
+    "@types/crypto-js": "^3.1.43",
+    "crypto-js": "^3.1.9-1",
+    "node-suitetalk": "0.0.2"
+  }
 }

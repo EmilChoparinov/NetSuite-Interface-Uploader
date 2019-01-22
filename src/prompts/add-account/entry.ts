@@ -15,7 +15,8 @@ export class AddAccountSeries extends Prompt {
     }
 
     async continue(email: string): Promise<boolean> {
-        await new PasswordPrompt().runPrompt();
+        const password = await new PasswordPrompt();
+        await password.runPrompt();
         return false;
     }
 

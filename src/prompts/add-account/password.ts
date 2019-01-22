@@ -13,8 +13,8 @@ export class PasswordPrompt extends Prompt {
         return true;
     }
 
-    continue(answer: string): Promise<boolean> {
-        throw new Error("Method not implemented.");
+    async continue(answer: string): Promise<boolean> {
+        return false;
     }
 
 }

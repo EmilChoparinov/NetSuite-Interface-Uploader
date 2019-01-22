@@ -1,6 +1,7 @@
 export abstract class Prompt {
 
     success = true;
+    answer: string;
 
     abstract async continue(answer: string): Promise<boolean>;
     abstract prompt(): Thenable<string>;
@@ -8,14 +9,14 @@ export abstract class Prompt {
 
     async runPrompt() {
         if (await this.showPrompt()) {
-            let answer: string;
+            this.answer = '';
             do {
-                answer = await this.prompt();
-                if (answer === undefined) {
+                this.answer = await this.prompt();
+                if (this.answer === undefined) {
                     this.success = false;
                     break;
                 }
-            } while (await this.continue(answer));
+            } while (await this.continue(this.answer));
         }
         return this.success;
     }

@@ -31,8 +31,13 @@
         "category": "NSI"
       },
       {
-        "command": "extension.yncFile",
+        "command": "extension.syncFile",
         "title": "Sync File",
+        "category": "NSI"
+      },
+      {
+        "command": "extension.purgeCredentials",
+        "title": "Purge All Credentials",
         "category": "NSI"
       }
     ]
@@ -45,15 +50,17 @@
     "test": "npm run compile && node ./node_modules/vscode/bin/test"
   },
   "devDependencies": {
-    "typescript": "^3.1.4",
-    "vscode": "^1.1.25",
-    "tslint": "^5.8.0",
+    "@types/mocha": "^2.2.42",
     "@types/node": "^8.10.25",
-    "@types/mocha": "^2.2.42"
+    "@types/rimraf": "^2.0.2",
+    "tslint": "^5.8.0",
+    "typescript": "^3.1.4",
+    "vscode": "^1.1.25"
   },
   "dependencies": {
     "@types/crypto-js": "^3.1.43",
     "crypto-js": "^3.1.9-1",
-    "node-suitetalk": "0.0.2"
+    "node-suitetalk": "0.0.2",
+    "rimraf": "^2.6.3"
   }
 }

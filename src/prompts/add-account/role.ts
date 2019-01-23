@@ -43,7 +43,9 @@ export class Role extends Prompt {
         const loginOptions = await loginPromise;
         this.loginOptionsRaw = loginOptions;
 
-        return window.showQuickPick(this.generateLabels());
+        return window.showQuickPick(this.generateLabels(), {
+            placeHolder: 'SCDeployer / Developer Role'
+        });
     }
 
     async continue(label: string, aggregate: objectAggregate): Promise<boolean> {

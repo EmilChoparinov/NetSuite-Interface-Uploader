@@ -1,5 +1,5 @@
 
-import { writeFile, readFile, existsSync, mkdirSync } from 'fs';
+import { writeFile, readFile, existsSync, mkdirSync, writeFileSync } from 'fs';
 import { ExtensionContext } from 'vscode';
 
 export class StorageManager {
@@ -7,14 +7,14 @@ export class StorageManager {
     context: ExtensionContext;
     constructor(context: ExtensionContext) {
         this.context = context;
-        this.ensureManagerFolderExists();
+        this.ensureBaseExists();
     }
 
-    private ensureManagerFolderExists() {
+    private ensureBaseExists() {
         const path = this.context.asAbsolutePath('manager');
         const isPathExists = existsSync(path);
         if (isPathExists) { return true; }
-        return mkdirSync(path);
+        mkdirSync(path);
     }
 
     public getFile(filename: string): Promise<string> {

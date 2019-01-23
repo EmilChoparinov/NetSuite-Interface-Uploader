@@ -21,4 +21,5 @@ export const activate = (context: vscode.ExtensionContext) => {
 
 export const deactivate = (context: vscode.ExtensionContext) => {
 	context.workspaceState.update('masterkey', undefined);
+	context.workspaceState.update('credential', undefined);
 };

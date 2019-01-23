@@ -78,9 +78,14 @@ export class EncryptionManager {
      */
     public async decryptAll() {
 
+        const accountsFile = await this.storageManager.getFile('accounts');
+
+        // if the accounts file is empty then its really empty
+        if (accountsFile.length === 0) { return []; }
+
         // get a list of all the accounts entered into VSCodes storage
         const accountIds: accountNames =
-            JSON.parse(await this.storageManager.getFile('accounts'));
+            JSON.parse(accountsFile);
 
         // array of decryption objects containing netsuite credentials 
         const decryptionData: credentials[] = [];
@@ -129,11 +134,17 @@ export class EncryptionManager {
     /**
      * verification method if the current password is proper to decode
      * 
-     * **NOTE: THIS ONLY WORKS IF THERE IS A SINGLE MASTER PASSWORD**
      */
     public async verifyMasterPassword() {
+
+        const passwordsFile = await this.storageManager.getFile('passwords');
+
+        // if the file does not exist and is empty, then that means there currently isn't a masterpassword
+        // at all to use
+        if (passwordsFile.length === 0) { return true; }
+
         const passwords: passwords =
-            JSON.parse(await this.storageManager.getFile('passwords'));
+            JSON.parse(passwordsFile);
 
         return !!passwords[this.key];
     }
@@ -169,7 +180,7 @@ export class EncryptionManager {
         this.storageManager.updateFile('accounts', JSON.stringify(accountIds));
     }
 
-    private async updatePasswordListing() {
+    public async updatePasswordListing() {
         let passwords = await this.storageManager.getFile('passwords');
 
         let nextPasswords: passwords;

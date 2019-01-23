@@ -1,1 +1,1 @@
-type objectAggregate = { [name: string]: string };
+type objectAggregate = { [name: string]: any };

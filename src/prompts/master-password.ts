@@ -11,12 +11,12 @@ export class AskForMasterPasswordPrompt extends Prompt {
     }
 
     async showPrompt() {
-        return await this.containsMasterKey();
+        return !(await this.containsMasterKey());
     }
-    
+
     async containsMasterKey() {
         const key = await this.context.workspaceState.get('masterkey');
-        return !key;
+        return key !== undefined;
     }
 
     prompt() {
@@ -31,6 +31,7 @@ export class AskForMasterPasswordPrompt extends Prompt {
         const isCorrect = await manager.verifyMasterPassword();
         if (isCorrect) {
             await this.context.workspaceState.update('masterkey', manager.key);
+            await manager.updatePasswordListing();
         }
         return !isCorrect;
     }

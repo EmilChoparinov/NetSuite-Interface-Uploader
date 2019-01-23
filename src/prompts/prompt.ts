@@ -1,10 +1,10 @@
 export abstract class Prompt {
 
-    text: string;
+    text: string | string[];
     name: string;
     success = true;
 
-    abstract async continue(answer: string, currentAggregate: objectAggregate): Promise<boolean>;
+    abstract async continue(answer: string | string[], currentAggregate: objectAggregate): Promise<boolean>;
     abstract prompt(currentAggregate: objectAggregate): Thenable<string>;
     abstract async showPrompt(): Promise<boolean>;
 
@@ -36,14 +36,22 @@ export class PromptSeries {
         return this;
     }
 
-    public async run(): Promise<objectAggregate> {
+    public async run(): Promise<{ success: boolean, capturedData: objectAggregate }> {
         const objectAggregate: objectAggregate = {};
+        let success = true;
 
         for (let currentPrompt of this.series) {
             const isPromptSuccessful = await currentPrompt.runPrompt(objectAggregate);
-            if (!isPromptSuccessful) { break; }
+
+            if (!isPromptSuccessful) {
+                success = false;
+                break;
+            }
         }
 
-        return objectAggregate;
+        return {
+            success,
+            capturedData: objectAggregate
+        };
     }
 }

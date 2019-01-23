@@ -1,23 +1,13 @@
-import { Prompt } from "../prompt";
-import { window } from "vscode";
+import { PromptSeries } from "../prompt";
+import { EmailPrompt } from "./email";
 import { PasswordPrompt } from "./password";
+import { window } from "vscode";
+import { Role as RolePrompt } from "./role";
 
-export class AddAccountSeries extends Prompt {
-
-    async showPrompt(): Promise<boolean> {
-        return true;
-    }
-
-    prompt(): Thenable<string> {
-        return window.showInputBox({
-            prompt: 'Enter the Email:'
-        });
-    }
-
-    async continue(email: string): Promise<boolean> {
-        const password = await new PasswordPrompt();
-        await password.runPrompt();
-        return false;
-    }
-
-}
+export const addAccountSeries = async () => {
+    return await new PromptSeries()
+        .next(new EmailPrompt())
+        .next(new PasswordPrompt())
+        .next(new RolePrompt())
+        .run();
+};

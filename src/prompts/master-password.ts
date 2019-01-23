@@ -11,6 +11,10 @@ export class AskForMasterPasswordPrompt extends Prompt {
     }
 
     async showPrompt() {
+        return await this.containsMasterKey();
+    }
+    
+    async containsMasterKey() {
         const key = await this.context.workspaceState.get('masterkey');
         return !key;
     }

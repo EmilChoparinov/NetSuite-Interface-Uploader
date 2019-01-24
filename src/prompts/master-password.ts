@@ -3,14 +3,14 @@ import * as vscode from 'vscode';
 import { EncryptionManager } from "../password-encryption-manager";
 import { Prompt } from "./prompt";
 
-export class AskForMasterPasswordPrompt extends Prompt {
+export class AskForMasterPasswordPrompt extends Prompt<objectAggregate> {
     context: ExtensionContext;
     constructor(context: ExtensionContext) {
         super();
         this.context = context;
     }
 
-    async showPrompt() {
+    async shouldPromptBeRendered() {
         return !(await this.containsMasterKey());
     }
 
@@ -19,14 +19,14 @@ export class AskForMasterPasswordPrompt extends Prompt {
         return key !== undefined;
     }
 
-    prompt() {
+    getPrompt() {
         return vscode.window.showInputBox({
             prompt: 'Enter your Master Password',
             password: true
         });
     }
 
-    async continue(password: string) {
+    async postPromptRender(password: string) {
         const manager = new EncryptionManager(password, this.context);
         const isCorrect = await manager.verifyMasterPassword();
         if (isCorrect) {

@@ -1,43 +1,46 @@
-export abstract class Prompt {
+export abstract class Prompt<T> {
 
     text: string | string[];
     name: string;
     success = true;
 
-    abstract async continue(answer: string | string[], currentAggregate: objectAggregate): Promise<boolean>;
-    abstract prompt(currentAggregate: objectAggregate): Thenable<string>;
-    abstract async showPrompt(): Promise<boolean>;
+    abstract async postPromptRender(answer: string | string[], currentAggregate: T): Promise<boolean>;
+    abstract getPrompt(currentAggregate: T): Thenable<string>;
+    abstract async shouldPromptBeRendered(currentAggregate: T): Promise<boolean>;
 
-    public async runPrompt(currentAggregate: objectAggregate) {
-        this.success = await this.showPrompt();
+    public async runPrompt(currentAggregate: T) {
+        this.success = await this.shouldPromptBeRendered(currentAggregate);
 
         if (this.success) {
             this.text = '';
 
             do {
-                this.text = await this.prompt(currentAggregate);
+                this.text = await this.getPrompt(currentAggregate);
                 if (this.text === undefined) {
+                    this.onCancelled(currentAggregate);
                     this.success = false;
                     break;
                 }
 
-            } while (await this.continue(this.text, currentAggregate));
+            } while (await this.postPromptRender(this.text, currentAggregate));
         }
 
         return this.success;
     }
+
+    public onCancelled(currentAggregate: T) { }
 }
 
-export class PromptSeries {
+export class PromptSeries<T> {
 
-    series: Prompt[] = [];
-    public next(prompt: Prompt): PromptSeries {
+    series: Prompt<T>[] = [];
+    public next(prompt: Prompt<T>): PromptSeries<T> {
         this.series.push(prompt);
         return this;
     }
 
-    public async run(): Promise<{ success: boolean, capturedData: objectAggregate }> {
-        const objectAggregate: objectAggregate = {};
+    public async run(): Promise<{ success: boolean, capturedData: T }> {
+        const objectAggregate: T = {} as T;
         let success = true;
 
         for (let currentPrompt of this.series) {

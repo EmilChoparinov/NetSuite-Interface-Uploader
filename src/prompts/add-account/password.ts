@@ -1,21 +1,21 @@
 import { Prompt } from "../prompt";
 import { window } from "vscode";
 
-export class PasswordPrompt extends Prompt {
+export class PasswordPrompt extends Prompt<objectAggregate> {
 
 
-    prompt(): Thenable<string> {
+    getPrompt(): Thenable<string> {
         return window.showInputBox({
             prompt: 'Specific Account\'s Password:',
             password: true,
             ignoreFocusOut: true
         });
     }
-    async showPrompt(): Promise<boolean> {
+    async shouldPromptBeRendered(): Promise<boolean> {
         return true;
     }
 
-    async continue(answer: string, aggregate: objectAggregate): Promise<boolean> {
+    async postPromptRender(answer: string, aggregate: objectAggregate): Promise<boolean> {
         aggregate.password = answer;
         return false;
     }

@@ -55,11 +55,7 @@ export class EncryptionManager {
      */
     public async encrypt(account: credentials) {
 
-        // stringify the credentials to prepare for AES encryption
-        const jsonCredentials = JSON.stringify(account);
-
-        // encrypt and retrive the Utf8 encrypted cipher
-        const cipherText = AES.encrypt(jsonCredentials, this.key).toString();
+        const cipherText = this.getCipherText(account);
 
         // generate a unique has based on the unique combiniation of data from 
         // the given credentials
@@ -115,14 +111,31 @@ export class EncryptionManager {
      * 
      * @param accountId unique name of the account
      */
-    private async decrypt(accountId: string) {
+    public async decrypt(accountId: string) {
 
         // get the encrypted data as a string
         const encrypedData = await this.storageManager.getFile(accountId);
+
+        const plainTextDecryption = this.getDecipheredText(encrypedData);
+
+        return plainTextDecryption;
+    }
+
+    public getCipherText(account: credentials) {
+        // stringify the credentials to prepare for AES encryption
+        const jsonCredentials = JSON.stringify(account);
+
+        // encrypt and retrive the Utf8 encrypted cipher
+        const cipherText = AES.encrypt(jsonCredentials, this.key).toString();
+
+        return cipherText;
+    }
+
+    public getDecipheredText(cipher: string) {
         const plainTextDecryption =
 
             // use AES decryption method to decrypt to proper set of bytes
-            AES.decrypt(encrypedData, this.key)
+            AES.decrypt(cipher, this.key)
 
                 // declare to use toString using the Utf8 encode property to
                 // get the json in a readible format
@@ -154,7 +167,7 @@ export class EncryptionManager {
      * 
      * @param account account object full of credentials
      */
-    private getName(account: credentials) {
+    public getName(account: credentials) {
         return SHA256(account.email + account.roleId + account.account).toString();
     }
 
@@ -205,5 +218,16 @@ export class EncryptionManager {
         const accountCipher = this.getName(account);
         const storedData = await this.storageManager.getFile(accountCipher);
         return !!storedData;
+    }
+
+    public async removeAccount(accountId: string) {
+        await this.storageManager.removeFile(accountId);
+
+        const accountListing = await this.storageManager.getFile('accounts');
+        let parsedAccountListings: accountNames = JSON.parse(accountListing);
+        parsedAccountListings.ids = parsedAccountListings.ids.filter(id => id !== accountId);
+
+        this.storageManager.updateFile('accounts', JSON.stringify(parsedAccountListings));
+
     }
 }

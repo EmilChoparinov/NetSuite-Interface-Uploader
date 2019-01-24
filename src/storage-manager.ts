@@ -1,6 +1,7 @@
 
-import { writeFile, readFile, existsSync, mkdirSync, writeFileSync } from 'fs';
+import { writeFile, readFile, existsSync, mkdirSync, writeFileSync, unlink } from 'fs';
 import { ExtensionContext } from 'vscode';
+import { resolve } from 'url';
 
 export class StorageManager {
 
@@ -22,6 +23,7 @@ export class StorageManager {
             readFile(
                 this.context.asAbsolutePath(`./manager/${filename}`),
                 (err, data) => {
+                    if (err) { reject(err); }
                     return (data) ? resolve(data.toString('utf8')) : resolve('');
                 }
             );
@@ -29,13 +31,23 @@ export class StorageManager {
     }
 
     public updateFile(filename: string, stringData: string) {
-        return new Promise((resolve) => {
+        return new Promise((resolve, reject) => {
             writeFile(
                 this.context.asAbsolutePath(`./manager/${filename}`), stringData,
                 (err) => {
+                    if (err) { return reject(err); }
                     resolve();
                 }
             );
+        });
+    }
+
+    public removeFile(filename: string) {
+        return new Promise((resolve, reject) => {
+            unlink(this.context.asAbsolutePath(`./manager/${filename}`), (err) => {
+                if (err) { return reject(err); }
+                resolve();
+            });
         });
     }
 }

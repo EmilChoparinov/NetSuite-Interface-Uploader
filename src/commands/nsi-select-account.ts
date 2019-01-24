@@ -1,7 +1,6 @@
 import * as vscode from 'vscode';
-import { AskForMasterPasswordPrompt } from '../prompts/master-password';
-import { EncryptionManager } from '../password-encryption-manager';
 import { SelectAccountPrompt } from '../prompts/select-account';
+import { EncryptionManager } from '../password-encryption-manager';
 
 export const runCommand = (context: vscode.ExtensionContext) => {
 
@@ -14,6 +13,7 @@ export const runCommand = (context: vscode.ExtensionContext) => {
             const chosenCredential = credentialInfo['credential'];
 
             context.workspaceState.update('credential', chosenCredential);
+            vscode.window.showInformationMessage(`Your Project Credentials Were Successfully Set`);
         }
     });
 

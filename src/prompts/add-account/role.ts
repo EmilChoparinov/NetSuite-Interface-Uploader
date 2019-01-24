@@ -3,7 +3,7 @@ import { window } from "vscode";
 
 import { Util } from 'node-suitetalk';
 
-export class Role extends Prompt {
+export class Role extends Prompt<objectAggregate> {
 
     util: any;
     loginOptionsRaw: any[];
@@ -13,7 +13,7 @@ export class Role extends Prompt {
         this.util = new Util();
     }
 
-    async showPrompt(): Promise<boolean> {
+    async shouldPromptBeRendered(): Promise<boolean> {
         return true;
     }
 
@@ -27,7 +27,7 @@ export class Role extends Prompt {
         return mappedLabels;
     }
 
-    async prompt(currentAggregate: { [name: string]: string; }): Promise<string> {
+    async getPrompt(currentAggregate: { [name: string]: string; }): Promise<string> {
         const loginPromise = new Promise<any[]>((resolve, reject) => {
             this.util.getLoginOptions({
                 email: currentAggregate.email,
@@ -48,7 +48,7 @@ export class Role extends Prompt {
         });
     }
 
-    async continue(label: string, aggregate: objectAggregate): Promise<boolean> {
+    async postPromptRender(label: string, aggregate: objectAggregate): Promise<boolean> {
         aggregate.roleId = this.loginOptionsByLabel[label].role.internalId;
         aggregate.account = this.loginOptionsByLabel[label].account.internalId;
         return false;

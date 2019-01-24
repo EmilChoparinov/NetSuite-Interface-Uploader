@@ -2,12 +2,49 @@ import * as vscode from 'vscode';
 import { EncryptionManager } from '../password-encryption-manager';
 import { AskForMasterPasswordPrompt } from '../prompts/master-password';
 
+import * as Uploader from './../../ns_npm_repository/ns-uploader';
+
 export const runCommand = (context: vscode.ExtensionContext) => {
+
     let disposable = vscode.commands.registerCommand('extension.uploadFile', async () => {
-        await new AskForMasterPasswordPrompt(context).runPrompt({});
-        const manager = new EncryptionManager(context.workspaceState.get('masterkey'), context);
-        console.log(await manager.verifyMasterPassword());
-        console.log(await manager.decryptAll());
+        const accountSize = await EncryptionManager.getSize(context);
+
+        if (accountSize < 1) {
+            const credentialQuestion =
+                await vscode.window.showInformationMessage('You have not entered any NetSuite Credential\'s to upload with yet.', 'Add Account', 'Close');
+            if (credentialQuestion === 'Add Account') {
+                await vscode.commands.executeCommand('extension.addAccount');
+            }
+            else { return; }
+        }
+
+        let credential = context.workspaceState.get('credential') as string;
+
+        if (!credential) {
+            const credentialQuestion =
+                await vscode.window.showInformationMessage('You must also have an account selected for this project', 'Select Now', 'Close');
+            if (credentialQuestion === 'Select Now') {
+                await vscode.commands.executeCommand('extension.selectAccount');
+            } else { return; }
+        }
+
+        credential = context.workspaceState.get('credential');
+
+        const masterPasswordPrompt = new AskForMasterPasswordPrompt(context);
+        await masterPasswordPrompt.runPrompt({});
+
+        const isMasterEntered = await masterPasswordPrompt.containsMasterKey();
+        if (isMasterEntered) {
+            const manager = new EncryptionManager(context.workspaceState.get('masterkey'), context);
+            const decipheredText = manager.getDecipheredText(credential);
+            const credentialJSON = JSON.parse(decipheredText) as credentials;
+
+            const uploader = new Uploader(credentialJSON);
+
+            uploader.mkdir(-15, 'testing')
+                .then(res => console.log('suc', res))
+                .fail(err => console.log('err', err));
+        }
     });
 
     context.subscriptions.push(disposable);

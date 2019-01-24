@@ -64,8 +64,12 @@
   },
   "dependencies": {
     "@types/crypto-js": "^3.1.43",
+    "credentials-inquirer": "file:ns_npm_repository/credentials-inquirer",
     "crypto-js": "^3.1.9-1",
     "node-suitetalk": "0.0.2",
-    "rimraf": "^2.6.3"
+    "ns-uploader": "file:ns_npm_repository/ns-uploader",
+    "q": "^1.5.1",
+    "rimraf": "^2.6.3",
+    "suitetalk": "file:ns_npm_repository/suitetalk4node"
   }
 }

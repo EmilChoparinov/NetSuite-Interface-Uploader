@@ -1,12 +1,11 @@
 import * as vscode from 'vscode';
 import { SelectAccountPrompt } from '../prompts/select-account';
-import { EncryptionManager } from '../password-encryption-manager';
 
 export const runCommand = (context: vscode.ExtensionContext) => {
 
     let disposable = vscode.commands.registerCommand('extension.selectAccount', async () => {
         const selectAccountPrompt = new SelectAccountPrompt(context);
-        const credentialInfo = {} as { [credential: string]: credentials };
+        const credentialInfo = {} as { credential: string };
         await selectAccountPrompt.runPrompt(credentialInfo);
 
         if (selectAccountPrompt.success) {

@@ -23,7 +23,6 @@ export class StorageManager {
             readFile(
                 this.context.asAbsolutePath(`./manager/${filename}`),
                 (err, data) => {
-                    if (err) { reject(err); }
                     return (data) ? resolve(data.toString('utf8')) : resolve('');
                 }
             );

@@ -230,4 +230,13 @@ export class EncryptionManager {
         this.storageManager.updateFile('accounts', JSON.stringify(parsedAccountListings));
 
     }
+
+
+    public static async getSize(context: ExtensionContext) {
+        const accountListing = await new StorageManager(context).getFile('accounts');
+
+        if (accountListing.length === 0) { return 0; }
+
+        return (JSON.parse(accountListing) as accountNames).ids.length;
+    }
 }

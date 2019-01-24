@@ -37,7 +37,12 @@
       },
       {
         "command": "extension.purgeCredentials",
-        "title": "Purge All Credentials",
+        "title": "Purge Credentials",
+        "category": "NSI"
+      },
+      {
+        "command": "extension.editAccount",
+        "title": "Edit Account",
         "category": "NSI"
       }
     ]

@@ -4,7 +4,6 @@ import { window, ExtensionContext } from "vscode";
 import { join } from "path";
 import { deactivate } from "../../extension";
 import { SelectAccountPrompt } from "../select-account";
-import { resolve } from "url";
 import { EncryptionManager } from "../../password-encryption-manager";
 import rimraf = require("rimraf");
 
@@ -17,12 +16,19 @@ export class PurgePrompt extends Prompt<objectAggregate> {
     }
 
     async shouldPromptBeRendered(aggregate: objectAggregate): Promise<boolean> {
+        const accountCount = await EncryptionManager.getSize(this.context);
+        if (accountCount < 1) {
+            window.showInformationMessage('There are No Credentials Stored');
+            return false;
+        }
+        
         if (aggregate.purgeAll) {
             await this.purgeAll().catch((e) => {
                 console.log('ERROR', e);
             });
             deactivate(this.context);
             window.showInformationMessage('All Credentials Purged Successfully');
+            return false;
         }
         return true;
     }

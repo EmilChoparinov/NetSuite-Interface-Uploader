@@ -31,11 +31,6 @@
         "category": "NSI"
       },
       {
-        "command": "extension.syncFile",
-        "title": "Sync File",
-        "category": "NSI"
-      },
-      {
         "command": "extension.purgeCredentials",
         "title": "Purge Credentials",
         "category": "NSI"

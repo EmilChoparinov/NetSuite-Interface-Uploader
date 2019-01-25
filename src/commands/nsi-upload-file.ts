@@ -39,13 +39,40 @@ export const runCommand = (context: vscode.ExtensionContext) => {
             const decipheredText = manager.getDecipheredText(credential);
             const credentialJSON = JSON.parse(decipheredText) as credentials;
 
-            const uploader = new Uploader(credentialJSON);
 
-            uploader.mkdir(-15, 'testing')
-                .then(res => console.log('suc', res))
-                .fail(err => console.log('err', err));
+            const uploader = new Uploader(credentialJSON);
+            const name = getName(vscode.window.activeTextEditor.document.fileName);
+
+            uploader.addOrUpdateFile(
+                -15,
+                name,
+                vscode.window.activeTextEditor.document.getText(),
+            )
+                .then(result => {
+                    vscode.window.showInformationMessage(`File '${name}' was successfully uploaded to the SuiteScripts Folder`, 'Close');
+                })
+                .catch(async error => {
+                    const decision =
+                        await vscode.window.showErrorMessage(
+                            'ERROR OCCURED, please click OPEN and review the issue',
+                            'Open Error', 'Close'
+                        );
+                    if (decision === 'Open Error') {
+                        const document = await vscode.workspace.openTextDocument({
+                            language: 'json',
+                            content: error
+                        });
+
+                        await vscode.window.showTextDocument(document);
+                    }
+                });
         }
     });
 
     context.subscriptions.push(disposable);
+};
+
+const getName = (filePath: string) => {
+    const paths = filePath.split('\\');
+    return paths.pop();
 };

@@ -1,65 +1,44 @@
 # netsuite-interface-uploader README
 
-This is the README for your extension "netsuite-interface-uploader". After writing up a brief description, we recommend including the following sections.
+This extension allows you to quickly upload SuiteScript documents to NetSuite. It also contains features that seamlessly allows you to switch quickly between a set of NetSuite accounts at anytime. All accounts entered are also encrypted with AES.
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+### Adding Accounts
 
-For example if there is an image subfolder under your extension project workspace:
+Add accounts through the 'Add Account' command. A wizard will appear which asks you to enter your master password for this current session if not entered yet, then proceeds to ask the information needed to upload.
 
-\!\[feature X\]\(images/feature-x.png\)
+### Edit Account
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+Edit a specific account through the 'Edit Account' command. This will give you a the ability to select a specific account, which it will then decrypt for you and open it in a new window. Once you're done editing, NSI will automatically replace the old account with your changes.
 
-## Requirements
+### Purge Credentials
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+Remove the credentials that are currently stored in the computer. It allows you to delete all credentials stored or you can select a couple to remove. Selecting a couple will display data about the credentials so it will require the passkey.
 
-## Extension Settings
+### Select Account
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+Select the Account you want to use *within your current workspace* with the 'Select Account' command. You can have multiple different workspaces active with all different NetSuite accounts being used. Once you have selected the account to use, you can start uploading a file.
 
-For example:
+### Upload File
 
-This extension contributes the following settings:
-
-* `myExtension.enable`: enable/disable this extension
-* `myExtension.thing`: set to `blah` to do something
-
-## Known Issues
-
-Calling out known issues can help limit users opening duplicate issues against your extension.
-
-## Release Notes
-
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
+Upload the current file you have open with the 'Upload File' command. This will start a process in which whatever you have currently open in front of you will upload to NetSuite with the name being the files name.
 
 -----------------------------------------------------------------------------------------------------------
 
-## Working with Markdown
+## Requirements
 
-**Note:** You can author your README using Visual Studio Code.  Here are some useful editor keyboard shortcuts:
+In order for the uploader to work, *you must have uploading permissions on your role or a deployer role*. For information on how to create this role, view [this article](https://developers.suitecommerce.com/section1536122387#subsect1536120034).
 
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux)
-* Toggle preview (`Shift+CMD+V` on macOS or `Shift+Ctrl+V` on Windows and Linux)
-* Press `Ctrl+Space` (Windows, Linux) or `Cmd+Space` (macOS) to see a list of Markdown snippets
+## Known Issues
 
-### For more information
 
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
+## Release Notes
 
-**Enjoy!**
+## 0.0.1 - 2018-01-25 - Emil Choparinov
+### Added
+- Add Acount (create)
+- Select Account (review)
+- Edit Account (update)
+- Purge Credentials (delete)
+- Upload File

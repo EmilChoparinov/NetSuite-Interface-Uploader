@@ -1,7 +1,13 @@
 # Change Log
 All notable changes to the "netsuite-interface-uploader" extension will be documented in this file.
 
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
+## 0.0.1 - 2018-01-25 - Emil Choparinov
+### Added
+- Add Acount (create)
+- Select Account (review)
+- Edit Account (update)
+- Purge Credentials (delete)
+- Upload File
 
 ## [Unreleased]
 - Initial release

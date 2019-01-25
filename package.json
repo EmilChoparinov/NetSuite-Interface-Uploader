@@ -39,8 +39,22 @@
         "command": "extension.editAccount",
         "title": "Edit Account",
         "category": "NSI"
+      },
+      {
+        "command": "extension.toggleUploadButton",
+        "title": "Toggle Upload Button",
+        "category": "NSI"
       }
-    ]
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "when": "resourceLangId == javascript",
+          "command": "extension.uploadFile",
+          "group": "1_modification@1"
+        }
+      ]
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",

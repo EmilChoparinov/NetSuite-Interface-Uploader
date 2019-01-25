@@ -48,8 +48,34 @@ export const runCommand = (context: vscode.ExtensionContext) => {
                 name,
                 vscode.window.activeTextEditor.document.getText(),
             )
-                .then(result => {
-                    vscode.window.showInformationMessage(`File '${name}' was successfully uploaded to the SuiteScripts Folder`, 'Close');
+                .then(async result => {
+                    await vscode.window.showInformationMessage(
+                        `File '${name}' was successfully uploaded to the SuiteScripts Folder`,
+                        'Close'
+                    );
+
+                    const hasAskedButtonQuestion = context.globalState.get('button');
+
+                    if (hasAskedButtonQuestion === undefined) {
+                        const buttonAnswer =
+                            await vscode.window.showInformationMessage(
+                                'Would you like to add a button to upload?',
+                                'Yes', 'No'
+                            );
+
+                        if (buttonAnswer === 'Yes') {
+                            vscode.commands.executeCommand('extension.toggleUploadButton');
+                            
+                        }
+                        else if (buttonAnswer === 'No') {
+                            vscode.window.showInformationMessage(
+                                'If you change your mind, use the \'Toggle Upload Button\' command',
+                                'Close'
+                            );
+                        }
+                    }
+
+
                 })
                 .catch(async error => {
                     const decision =

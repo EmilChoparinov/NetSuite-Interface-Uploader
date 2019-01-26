@@ -36,3 +36,14 @@ export class AskForMasterPasswordPrompt extends Prompt<objectAggregate> {
         return !isCorrect;
     }
 }
+
+export const ensureMasterPasswordExists = async (context: ExtensionContext) => {
+    // requires master password, this ensures it exists when opening an
+    // encryption manager
+    const masterPasswordPrompt = new AskForMasterPasswordPrompt(context);
+    await masterPasswordPrompt.runPrompt({});
+
+    // get the conditional to ensure that if the user entered escape,
+    // the next code block doesn't run
+    return await masterPasswordPrompt.containsMasterKey();
+};

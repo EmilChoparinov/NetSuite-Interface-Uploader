@@ -2,6 +2,7 @@ import { Prompt } from "../prompt";
 import { window } from "vscode";
 
 import { Util } from 'node-suitetalk';
+import { openFile } from "../../utils/open-file";
 
 export class Role extends Prompt<objectAggregate> {
 
@@ -28,7 +29,7 @@ export class Role extends Prompt<objectAggregate> {
     }
 
     async getPrompt(currentAggregate: { [name: string]: string; }): Promise<string> {
-        const loginPromise = new Promise<any[]>((resolve, reject) => {
+        const loginPromise = new Promise<any>((resolve, reject) => {
             this.util.getLoginOptions({
                 email: currentAggregate.email,
                 password: currentAggregate.password
@@ -38,9 +39,17 @@ export class Role extends Prompt<objectAggregate> {
             });
         });
 
-        loginPromise.catch((stuff) => { console.log(stuff); });
+        loginPromise.catch(async (err) => {
+            await openFile(JSON.stringify(err, null, 4));
+        });
 
         const loginOptions = await loginPromise;
+
+        if (loginOptions.error) {
+            window.showErrorMessage(loginOptions.error.message, 'Close');
+            return;
+        }
+
         this.loginOptionsRaw = loginOptions;
 
         return window.showQuickPick(this.generateLabels(), {

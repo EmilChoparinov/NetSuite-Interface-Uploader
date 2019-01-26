@@ -19,8 +19,14 @@ export class Role extends Prompt<objectAggregate> {
     }
 
     generateLabels() {
+
+        // for each option, general a label and map it to the loginOptionsLabel field
         const mappedLabels = this.loginOptionsRaw.map((option) => {
+
+            // generate the label
             const label = `${option.account.type}: ${option.role.name} (${option.account.internalId})`;
+            
+            // map the label to the credential option
             this.loginOptionsByLabel[label] = option;
             return label;
         });
@@ -30,6 +36,8 @@ export class Role extends Prompt<objectAggregate> {
 
     async getPrompt(currentAggregate: { [name: string]: string; }): Promise<string> {
         const loginPromise = new Promise<any>((resolve, reject) => {
+
+            // get the role options from NetSuite
             this.util.getLoginOptions({
                 email: currentAggregate.email,
                 password: currentAggregate.password
@@ -39,12 +47,16 @@ export class Role extends Prompt<objectAggregate> {
             });
         });
 
+        // if there is an error, show the error
         loginPromise.catch(async (err) => {
+            window.showErrorMessage('Error Occured', 'Close');
             await openFile(JSON.stringify(err, null, 4));
         });
 
+        // wait for the options to go through
         const loginOptions = await loginPromise;
 
+        // if there is an error, show the error message and stop the process
         if (loginOptions.error) {
             window.showErrorMessage(loginOptions.error.message, 'Close');
             return;
@@ -52,12 +64,15 @@ export class Role extends Prompt<objectAggregate> {
 
         this.loginOptionsRaw = loginOptions;
 
+        // generate the selector for the roles
         return window.showQuickPick(this.generateLabels(), {
             placeHolder: 'SCDeployer / Developer Role'
         });
     }
 
     async postPromptRender(label: string, aggregate: objectAggregate): Promise<boolean> {
+
+        // aggregate the roleId and account id
         aggregate.roleId = this.loginOptionsByLabel[label].role.internalId;
         aggregate.account = this.loginOptionsByLabel[label].account.internalId;
         return false;

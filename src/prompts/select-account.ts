@@ -1,6 +1,6 @@
 import { Prompt } from "./prompt";
 import { ExtensionContext } from "vscode";
-import { AskForMasterPasswordPrompt } from "./master-password";
+import { AskForMasterPasswordPrompt, ensureMasterPasswordExists } from "./master-password";
 import { EncryptionManager } from "../password-encryption-manager";
 import * as vscode from 'vscode';
 
@@ -16,6 +16,13 @@ export class SelectAccountPrompt extends Prompt<objectAggregate> {
         this.credentialMap = {};
     }
 
+    /**
+     * sets if the selector allows multiple selection
+     * 
+     * false by default
+     * 
+     * @param newState if the selection should be for multiple accounts
+     */
     public setMulti(newState: boolean) {
         this.multiSelect = newState;
         return this;
@@ -25,24 +32,30 @@ export class SelectAccountPrompt extends Prompt<objectAggregate> {
         const manager = new EncryptionManager(this.context.workspaceState.get('masterkey'), this.context);
         const credentials = await manager.decryptAll();
 
-
+        // mapping credentials to be and put into the credentialMap field while 
+        // the labels
         const formattedCredentials = credentials.map((credential) => {
             const currentLabel = `${credential.email} (${credential.account})`;
             this.credentialMap[currentLabel] = credential;
             return currentLabel;
         });
 
+        // created the window that will show the selector
         return vscode.window.showQuickPick(formattedCredentials, { canPickMany: this.multiSelect });
     }
 
     async shouldPromptBeRendered(): Promise<boolean> {
-        const masterPasswordPrompt = new AskForMasterPasswordPrompt(this.context);
-        await masterPasswordPrompt.runPrompt({});
-
-        return await masterPasswordPrompt.containsMasterKey();
+        // requires that the master password has been entered
+        return await ensureMasterPasswordExists(this.context);
     }
 
-    async postPromptRender(credentialLabel: string | string[], currentAggregate: objectAggregate): Promise<boolean> {
+    async postPromptRender(
+        credentialLabel: string | string[],
+        currentAggregate: objectAggregate
+    ): Promise<boolean> {
+
+        // since there is a multi-select option, there are two
+        // seperate post processes that could be done
         if (typeof credentialLabel === 'string') {
             return await this.continueAsString(credentialLabel, currentAggregate);
         }
@@ -50,6 +63,8 @@ export class SelectAccountPrompt extends Prompt<objectAggregate> {
     }
 
     private async continueAsString(credentialLabel: string, currentAggregate: objectAggregate) {
+
+        // adds the encrypted plaintext to the aggregate object
         currentAggregate['credential'] =
             new EncryptionManager(
                 this.context.workspaceState.get('masterkey'),
@@ -65,6 +80,7 @@ export class SelectAccountPrompt extends Prompt<objectAggregate> {
                 this.context
             );
 
+        // loops and adds the encrypted plaintext to an array in the aggregate object
         currentAggregate.credentials = credentialLabels.map((credentialLabel) => {
             return manager.getName(this.credentialMap[credentialLabel]);
         });

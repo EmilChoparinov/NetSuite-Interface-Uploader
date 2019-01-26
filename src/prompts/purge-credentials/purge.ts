@@ -16,12 +16,15 @@ export class PurgePrompt extends Prompt<objectAggregate> {
     }
 
     async shouldPromptBeRendered(aggregate: objectAggregate): Promise<boolean> {
+
+        // dont allow a purge if there are no credentials
         const accountCount = await EncryptionManager.getSize(this.context);
         if (accountCount < 1) {
             window.showInformationMessage('There are No Credentials Stored');
             return false;
         }
-        
+
+        // if purgall was selected, purge all the data stored
         if (aggregate.purgeAll) {
             await this.purgeAll().catch((e) => {
                 console.log('ERROR', e);
@@ -33,6 +36,9 @@ export class PurgePrompt extends Prompt<objectAggregate> {
         return true;
     }
 
+    /**
+     * purges the manager folder
+     */
     private purgeAll() {
         return new Promise((resolve, reject) => {
             rimraf(join(__dirname, '../../../manager'), (err) => {
@@ -42,11 +48,18 @@ export class PurgePrompt extends Prompt<objectAggregate> {
         });
     }
 
+
     getPrompt(aggregate: objectAggregate): Thenable<string> {
+
+        // if the prompt should be rendered, then it must be for selecting 
+        // specific accounts
         const selectAccount = new SelectAccountPrompt(this.context);
         selectAccount.setMulti(true);
 
         return new Promise<string>(resolve => {
+
+            // run the prompt and return the credentials for the post prompt 
+            // render to use
             selectAccount.runPrompt(aggregate).then(() => {
                 resolve(aggregate.credentials);
             });
@@ -54,6 +67,8 @@ export class PurgePrompt extends Prompt<objectAggregate> {
     }
 
     async postPromptRender(selections: string[], aggregate: objectAggregate): Promise<boolean> {
+
+        // create the manager and remove all the accounts that have been selected
         const manager = new EncryptionManager(this.context.workspaceState.get('masterkey'), this.context);
         selections.forEach(async account => {
             await manager.removeAccount(account);

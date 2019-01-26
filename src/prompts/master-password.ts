@@ -29,15 +29,21 @@ export class AskForMasterPasswordPrompt extends Prompt<objectAggregate> {
     async postPromptRender(password: string) {
         const manager = new EncryptionManager(password, this.context);
         const isCorrect = await manager.verifyMasterPassword();
+
+        // if the master password was correctly entered, add the key
+        // and update the password listing
         if (isCorrect) {
             await this.context.workspaceState.update('masterkey', manager.key);
             await manager.updatePasswordListing();
         }
+
+        // continue rendering until the prompt is correct or cancelled
         return !isCorrect;
     }
 }
 
 export const ensureMasterPasswordExists = async (context: ExtensionContext) => {
+
     // requires master password, this ensures it exists when opening an
     // encryption manager
     const masterPasswordPrompt = new AskForMasterPasswordPrompt(context);

@@ -177,14 +177,22 @@ export class EncryptionManager {
      * @param account accunt object full of credentials
      */
     private async updateAccountListing(account: credentials) {
+
+        // get the accounts
         let accounts = await this.storageManager.getFile('accounts');
         let accountIds: accountNames;
 
+        // if the accounts exists, parse and update them
         if (!!accounts) {
             accountIds = JSON.parse(accounts);
+
+            // push the new one in
             accountIds.ids.push(this.getName(account));
+
             this.storageManager.updateFile('accounts', JSON.stringify(accountIds));
         } else {
+
+            // if they don't exist, create a new JSON and store it instead
             accountIds = {
                 ids: [this.getName(account)]
             };
@@ -193,19 +201,33 @@ export class EncryptionManager {
         this.storageManager.updateFile('accounts', JSON.stringify(accountIds));
     }
 
+    /**
+     * updates the listings object for passwords to keep track of all hashed master
+     * password
+     */
     public async updatePasswordListing() {
+
+        // get the passwords
         let passwords = await this.storageManager.getFile('passwords');
 
         let nextPasswords: passwords;
+
+        // if the passwords file exists, update it
         if (!!passwords) {
             nextPasswords = JSON.parse(passwords);
+
+            // add the password
             nextPasswords[this.key] = true;
         } else {
+
+            // if the passwords do not exist, create a new JSOn
+            // and update it
             nextPasswords = {
                 [this.key]: true
             };
         }
 
+        // save the file with the updated credentials
         this.storageManager.updateFile('passwords', JSON.stringify(nextPasswords));
     }
 
@@ -220,23 +242,36 @@ export class EncryptionManager {
         return !!storedData;
     }
 
+    /**
+     * removes the account from storage
+     * 
+     * @param accountId unique hash name of the account stored
+     */
     public async removeAccount(accountId: string) {
+
+        // removes the file from storage
         await this.storageManager.removeFile(accountId);
 
+        // get ths account listings
         const accountListing = await this.storageManager.getFile('accounts');
+
+        // updates the account listings and saves the file again
         let parsedAccountListings: accountNames = JSON.parse(accountListing);
         parsedAccountListings.ids = parsedAccountListings.ids.filter(id => id !== accountId);
-
         this.storageManager.updateFile('accounts', JSON.stringify(parsedAccountListings));
 
     }
 
 
+    /**
+     * gets the size of how many accounts there are currently stored
+     * 
+     * @param context extension context
+     */
     public static async getSize(context: ExtensionContext) {
         const accountListing = await new StorageManager(context).getFile('accounts');
 
         if (accountListing.length === 0) { return 0; }
-
         return (JSON.parse(accountListing) as accountNames).ids.length;
     }
 }

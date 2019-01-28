@@ -6,7 +6,7 @@
     "url": "https://github.com/EmilChoparinov/NetSuite-Interface-Uploader"
   },
   "description": "",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "engines": {
     "vscode": "^1.30.0"
   },

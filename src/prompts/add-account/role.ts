@@ -25,7 +25,7 @@ export class Role extends Prompt<objectAggregate> {
 
             // generate the label
             const label = `${option.account.type}: ${option.role.name} (${option.account.internalId})`;
-            
+
             // map the label to the credential option
             this.loginOptionsByLabel[label] = option;
             return label;
@@ -70,11 +70,30 @@ export class Role extends Prompt<objectAggregate> {
         });
     }
 
+    /**
+     * gets the molecule from a NetSuite data center url
+     * 
+     * @param dataCenterUrl the data center url to extract the molecule from
+     */
+    private getDomainMolecule(dataCenterUrl: string) {
+
+        // get the ending of the first part called system to remove
+        const systemStartIdx = dataCenterUrl.indexOf('system');
+        const systemEndIdx = systemStartIdx + 6;
+
+        // get the starting of the word netsuite to remove
+        const netsuiteStartIdx = dataCenterUrl.indexOf('netsuite');
+
+        return dataCenterUrl.slice(systemEndIdx + 1, netsuiteStartIdx - 1);
+    }
+
     async postPromptRender(label: string, aggregate: objectAggregate): Promise<boolean> {
 
         // aggregate the roleId and account id
         aggregate.roleId = this.loginOptionsByLabel[label].role.internalId;
         aggregate.account = this.loginOptionsByLabel[label].account.internalId;
+        aggregate.molecule = this.getDomainMolecule(this.loginOptionsByLabel[label].dataCenterURLs.systemDomain);
+        if (aggregate.molecule.length === 0) { delete aggregate.molecule; }
         return false;
     }
 

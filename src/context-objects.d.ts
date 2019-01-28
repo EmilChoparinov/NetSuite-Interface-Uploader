@@ -2,7 +2,8 @@ declare type credentials = {
     email: string,
     password: string,
     roleId: string,
-    account: string
+    account: string,
+    molecule?: string
 }
 
 declare type accountNames = {

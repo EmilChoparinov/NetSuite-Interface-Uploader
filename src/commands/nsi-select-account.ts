@@ -3,7 +3,7 @@ import { SelectAccountPrompt } from '../prompts/select-account';
 
 export const runCommand = (context: vscode.ExtensionContext) => {
 
-    let disposable = vscode.commands.registerCommand('extension.selectAccount', async () => {
+    let disposable = vscode.commands.registerCommand('nsi.selectAccount', async () => {
 
         // run the select account prompt
         const selectAccountPrompt = new SelectAccountPrompt(context);

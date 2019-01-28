@@ -7,7 +7,7 @@ import { openFile } from '../utils/open-file';
 
 export const runCommand = (context: vscode.ExtensionContext) => {
 
-    let disposable = vscode.commands.registerCommand('extension.uploadFile', async () => {
+    let disposable = vscode.commands.registerCommand('nsi.uploadFile', async () => {
 
         // make sure that the user already has an account entered
         const accountSize = await EncryptionManager.getSize(context);
@@ -21,7 +21,7 @@ export const runCommand = (context: vscode.ExtensionContext) => {
                     'Add Account', 'Close'
                 );
             if (credentialQuestion === 'Add Account') {
-                await vscode.commands.executeCommand('extension.addAccount');
+                await vscode.commands.executeCommand('nsi.addAccount');
             }
             else { return false; }
         }
@@ -39,7 +39,7 @@ export const runCommand = (context: vscode.ExtensionContext) => {
                 );
 
             if (credentialQuestion === 'Select Now') {
-                await vscode.commands.executeCommand('extension.selectAccount');
+                await vscode.commands.executeCommand('nsi.selectAccount');
             } else { return false; }
         }
 
@@ -100,7 +100,7 @@ export const runCommand = (context: vscode.ExtensionContext) => {
                                 );
 
                             if (buttonAnswer === 'Yes') {
-                                await vscode.commands.executeCommand('extension.toggleUploadButton');
+                                await vscode.commands.executeCommand('nsi.toggleUploadButton');
 
                             }
                             else if (buttonAnswer === 'No') {

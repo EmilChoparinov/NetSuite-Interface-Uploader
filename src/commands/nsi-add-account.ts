@@ -5,7 +5,7 @@ import { EncryptionManager } from '../password-encryption-manager';
 
 export const runCommand = (context: vscode.ExtensionContext) => {
 
-    let disposable = vscode.commands.registerCommand('extension.addAccount', async () => {
+    let disposable = vscode.commands.registerCommand('nsi.addAccount', async () => {
 
         const isMasterEntered = await ensureMasterPasswordExists(context);
         if (isMasterEntered) {

@@ -17,37 +17,37 @@
   "contributes": {
     "commands": [
       {
-        "command": "extension.uploadFile",
+        "command": "nsi.uploadFile",
         "title": "Upload File",
         "category": "NSI"
       },
       {
-        "command": "extension.addAccount",
+        "command": "nsi.addAccount",
         "title": "Add Account",
         "category": "NSI"
       },
       {
-        "command": "extension.selectAccount",
+        "command": "nsi.selectAccount",
         "title": "Select Account",
         "category": "NSI"
       },
       {
-        "command": "extension.purgeCredentials",
+        "command": "nsi.purgeCredentials",
         "title": "Purge Credentials",
         "category": "NSI"
       },
       {
-        "command": "extension.editAccount",
+        "command": "nsi.editAccount",
         "title": "Edit Account",
         "category": "NSI"
       },
       {
-        "command": "extension.toggleUploadButton",
+        "command": "nsi.toggleUploadButton",
         "title": "Toggle Upload Button",
         "category": "NSI"
       },
       {
-        "command": "extension.walkthrough",
+        "command": "nsi.walkthrough",
         "title": "NSI Usage Walkthrough",
         "category": "NSI"
       }

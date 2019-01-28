@@ -3,7 +3,7 @@ import { ensureMasterPasswordExists } from '../prompts/master-password';
 
 export const runCommand = (context: vscode.ExtensionContext) => {
 
-    let disposable = vscode.commands.registerCommand('extension.walkthrough', async () => {
+    let disposable = vscode.commands.registerCommand('nsi.walkthrough', async () => {
         showTutorialMessage(
             'Welcome To NSI, this extension allows you to upload ' +
             'SuiteScripts seamlessly an NetSuite account. To continue, ' +
@@ -23,7 +23,7 @@ export const runCommand = (context: vscode.ExtensionContext) => {
             );
 
             const didAddAccountCommandFinish =
-                await vscode.commands.executeCommand('extension.addAccount');
+                await vscode.commands.executeCommand('nsi.addAccount');
 
             if (!didAddAccountCommandFinish) { return false; }
 
@@ -39,7 +39,7 @@ export const runCommand = (context: vscode.ExtensionContext) => {
             );
 
             const didSelectAccountCommandFinish =
-                await vscode.commands.executeCommand('extension.selectAccount');
+                await vscode.commands.executeCommand('nsi.selectAccount');
 
             if (!didSelectAccountCommandFinish) { return false; }
 

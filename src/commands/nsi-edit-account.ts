@@ -6,7 +6,7 @@ import { openFile } from '../utils/open-file';
 
 export const runCommand = (context: vscode.ExtensionContext) => {
 
-    let disposable = vscode.commands.registerCommand('extension.editAccount', async () => {
+    let disposable = vscode.commands.registerCommand('nsi.editAccount', async () => {
 
         // make sure an account exists first
         const accountSize = await EncryptionManager.getSize(context);
@@ -16,9 +16,9 @@ export const runCommand = (context: vscode.ExtensionContext) => {
             // command and run it if possible
             const clickedButton = await vscode.window.showInformationMessage('There are no accounts to edit.', 'Add Account', 'Close');
             if (clickedButton === 'Add Account') {
-                await vscode.commands.executeCommand('extension.addAccount');
+                await vscode.commands.executeCommand('nsi.addAccount');
                 vscode.window.showInformationMessage(
-                    `Run 'extension.addAccount' if you want to edit the account you just added.`,
+                    `Run 'Edit Account' if you want to edit the account you just added.`,
                     'Close'
                 );
                 return false;

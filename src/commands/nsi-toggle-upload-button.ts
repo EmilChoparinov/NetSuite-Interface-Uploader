@@ -5,7 +5,7 @@ export const runCommand = (context: vscode.ExtensionContext) => {
     // on command run, create a button
     const button = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left);
     button.text = 'NSI Upload';
-    button.command = 'extension.uploadFile';
+    button.command = 'nsi.uploadFile';
     
     // use the initial state to see if the button should be default to show
     const initialButtonState = context.globalState.get('button');
@@ -14,7 +14,7 @@ export const runCommand = (context: vscode.ExtensionContext) => {
         button.show();
     }
 
-    let disposable = vscode.commands.registerCommand('extension.toggleUploadButton', async () => {
+    let disposable = vscode.commands.registerCommand('nsi.toggleUploadButton', async () => {
         
         // when the command is run, get the new state
         const currentButtonState = context.globalState.get('button');

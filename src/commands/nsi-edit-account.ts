@@ -53,6 +53,8 @@ export const runCommand = (context: vscode.ExtensionContext) => {
                 'Close this file when you are done editing. Saving will do nothing'
             );
 
+            // promise wrapper to return a boolean value if the command was 
+            // successfully run
             return new Promise((resolve) => {
                 // create a listener to wait for the temp file to be closed
                 const closeEvent = vscode.workspace.onDidCloseTextDocument(async (closedDocument) => {

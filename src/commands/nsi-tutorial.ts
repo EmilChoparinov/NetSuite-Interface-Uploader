@@ -22,7 +22,10 @@ export const runCommand = (context: vscode.ExtensionContext) => {
                 'command to add other accounts later.'
             );
 
-            await vscode.commands.executeCommand('extension.addAccount');
+            const didAddAccountCommandFinish =
+                await vscode.commands.executeCommand('extension.addAccount');
+
+            if (!didAddAccountCommandFinish) { return false; }
 
             completedAddAccount.completed = true;
 
@@ -35,7 +38,10 @@ export const runCommand = (context: vscode.ExtensionContext) => {
                 `your current workspace.`
             );
 
-            await vscode.commands.executeCommand('extension.selectAccount');
+            const didSelectAccountCommandFinish =
+                await vscode.commands.executeCommand('extension.selectAccount');
+
+            if (!didSelectAccountCommandFinish) { return false; }
 
             completedSelectAccount.completed = true;
 
@@ -45,7 +51,8 @@ export const runCommand = (context: vscode.ExtensionContext) => {
                 `the Context Menu when clicking on a file or through the ` +
                 `Command Prompt (ctrl + shift + p) and typing 'Upload File'. ` +
                 'Note that the file that will always be uploaded is the one ' +
-                'you currently have open.'
+                'you currently have open. You can always run this command ' +
+                'again if you want the explaination again.'
             ).completed = true;
 
         }

@@ -67,6 +67,8 @@ export const runCommand = (context: vscode.ExtensionContext) => {
             // get the name of the js file from the path
             const name = getName(vscode.window.activeTextEditor.document.fileName);
 
+            // promise wrapper to return a boolean value if the command was 
+            // successfully run
             return new Promise((resolve) => {
                 // process the request
                 uploader.addOrUpdateFile(

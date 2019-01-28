@@ -20,7 +20,7 @@ export class PurgePrompt extends Prompt<objectAggregate> {
         // dont allow a purge if there are no credentials
         const accountCount = await EncryptionManager.getSize(this.context);
         if (accountCount < 1) {
-            window.showInformationMessage('There are No Credentials Stored');
+            window.showInformationMessage('There are no credentials stored.');
             return false;
         }
 
@@ -31,7 +31,10 @@ export class PurgePrompt extends Prompt<objectAggregate> {
             });
             deactivate(this.context);
             this.context.workspaceState.update('credential', undefined);
-            window.showInformationMessage('All Credentials Purged Successfully');
+            window.showInformationMessage(
+                'All credentials purged successfully.',
+                'Close'
+            );
             return false;
         }
         return true;
@@ -74,6 +77,12 @@ export class PurgePrompt extends Prompt<objectAggregate> {
         selections.forEach(async account => {
             await manager.removeAccount(account);
         });
+
+        window.showInformationMessage(
+            `${selections.length} account(s) purged successfully.`,
+            'Close'
+        );
+
         return false;
     }
 

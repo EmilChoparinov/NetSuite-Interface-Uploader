@@ -46,11 +46,22 @@ Check [issues](https://github.com/EmilChoparinov/NetSuite-Interface-Uploader/iss
 
 ## Release Notes
 
-## 0.0.2 - 2018-01-28 
+## 0.3.1 - 2018-01-28 
+### Added
+- Upload In Progress message on file upload
+
+### Changed
+- Tutorial command less 'in your face' about it
+
+## 0.3.0 - 2018-01-28 
+### Changed
+- Encryption to not carry over
+
+## 0.2.0 - 2018-01-28 
 ### Added
 - Tutorial Command
 
-## 0.0.1 - 2018-01-25
+## 0.1.0 - 2018-01-25
 ### Added
 - Add Acount (create)
 - Select Account (review)

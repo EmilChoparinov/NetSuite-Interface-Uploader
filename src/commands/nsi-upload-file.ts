@@ -70,6 +70,9 @@ export const runCommand = (context: vscode.ExtensionContext) => {
             // promise wrapper to return a boolean value if the command was 
             // successfully run
             return new Promise((resolve) => {
+
+                vscode.window.showInformationMessage(`Sending '${name}' to NetSuite...`);
+
                 // process the request
                 uploader.addOrUpdateFile(
 

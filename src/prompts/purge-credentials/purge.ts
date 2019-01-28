@@ -30,6 +30,7 @@ export class PurgePrompt extends Prompt<objectAggregate> {
                 console.log('ERROR', e);
             });
             deactivate(this.context);
+            this.context.workspaceState.update('credential', undefined);
             window.showInformationMessage('All Credentials Purged Successfully');
             return false;
         }

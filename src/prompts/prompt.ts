@@ -106,7 +106,7 @@ export abstract class Prompt<T> {
  */
 export class PromptSeries<T> {
 
-    series: Prompt<T>[] = [];
+    private series: Prompt<T>[] = [];
     public next(prompt: Prompt<T>): PromptSeries<T> {
         this.series.push(prompt);
         return this;

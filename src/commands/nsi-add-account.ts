@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import { AskForMasterPasswordPrompt, ensureMasterPasswordExists } from '../prompts/master-password';
+import { ensureMasterPasswordExists } from '../prompts/master-password';
 import { addAccountSeries } from '../prompts/add-account/entry';
 import { EncryptionManager } from '../password-encryption-manager';
 

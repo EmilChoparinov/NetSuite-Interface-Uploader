@@ -1,7 +1,6 @@
 import { PromptSeries } from "../prompt";
 import { EmailPrompt } from "./email";
 import { PasswordPrompt } from "./password";
-import { window } from "vscode";
 import { Role as RolePrompt } from "./role";
 
 export const addAccountSeries = async () => {

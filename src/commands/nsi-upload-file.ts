@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
 import { EncryptionManager } from '../password-encryption-manager';
-import { AskForMasterPasswordPrompt, ensureMasterPasswordExists } from '../prompts/master-password';
+import { ensureMasterPasswordExists } from '../prompts/master-password';
 
 import * as Uploader from './../../ns_npm_repository/ns-uploader';
 import { openFile } from '../utils/open-file';

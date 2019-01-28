@@ -1,7 +1,6 @@
 
-import { writeFile, readFile, existsSync, mkdirSync, writeFileSync, unlink } from 'fs';
+import { writeFile, readFile, existsSync, mkdirSync, unlink } from 'fs';
 import { ExtensionContext } from 'vscode';
-import { resolve } from 'url';
 
 export class StorageManager {
 
@@ -19,7 +18,7 @@ export class StorageManager {
     }
 
     public getFile(filename: string): Promise<string> {
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
             readFile(
                 this.context.asAbsolutePath(`./manager/${filename}`),
                 (err, data) => {

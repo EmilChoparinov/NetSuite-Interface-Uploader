@@ -1,5 +1,5 @@
 import { PromptSeries } from "../prompt";
-import { window, ExtensionContext } from "vscode";
+import { ExtensionContext } from "vscode";
 import { ConfirmPurgePrompt } from "./confirm";
 import { IsPurgeAllPrompt } from "./is-purge-all";
 import { PurgePrompt } from "./purge";

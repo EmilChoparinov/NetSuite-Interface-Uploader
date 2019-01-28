@@ -1,6 +1,6 @@
 import { Prompt } from "./prompt";
 import { ExtensionContext } from "vscode";
-import { AskForMasterPasswordPrompt, ensureMasterPasswordExists } from "./master-password";
+import { ensureMasterPasswordExists } from "./master-password";
 import { EncryptionManager } from "../password-encryption-manager";
 import * as vscode from 'vscode';
 

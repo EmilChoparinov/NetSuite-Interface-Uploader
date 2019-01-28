@@ -12,7 +12,7 @@
   "activationEvents": [
     "*"
   ],
-  "icon": "",
+  "icon": "https://raw.githubusercontent.com/EmilChoparinov/NetSuite-Interface-Uploader/master/assets/vs_icon.png",
   "main": "./out/extension.js",
   "contributes": {
     "commands": [

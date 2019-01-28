@@ -1,4 +1,4 @@
-# netsuite-interface-uploader README
+# NetSuite Interface Uploader README
 
 This extension allows you to quickly upload SuiteScript documents to NetSuite. It also contains features that seamlessly allows you to switch quickly between a set of NetSuite accounts at anytime. All accounts entered are also encrypted with AES.
 

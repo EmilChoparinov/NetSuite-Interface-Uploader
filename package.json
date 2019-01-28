@@ -1,6 +1,10 @@
 {
   "name": "netsuite-interface-uploader",
   "displayName": "Netsuite Interface Uploader",
+  "publisher": "emilchoparinov",
+  "repository": {
+    "url": "https://github.com/EmilChoparinov/NetSuite-Interface-Uploader"
+  },
   "description": "",
   "version": "0.0.1",
   "engines": {
@@ -12,7 +16,7 @@
   "activationEvents": [
     "*"
   ],
-  "icon": "https://raw.githubusercontent.com/EmilChoparinov/NetSuite-Interface-Uploader/master/assets/vs_icon.png",
+  "icon": "assets/vs_icon.jpg",
   "main": "./out/extension.js",
   "contributes": {
     "commands": [

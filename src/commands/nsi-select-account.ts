@@ -22,7 +22,9 @@ export const runCommand = (context: vscode.ExtensionContext) => {
             // store the encrypted credentials label
             context.workspaceState.update('credential', chosenCredential);
             vscode.window.showInformationMessage(`Your Project Credentials Were Successfully Set`);
+            return true;
         }
+        return false;
     });
 
     context.subscriptions.push(disposable);

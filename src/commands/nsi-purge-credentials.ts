@@ -6,6 +6,7 @@ export const runCommand = (context: vscode.ExtensionContext) => {
     let disposable = vscode.commands.registerCommand('extension.purgeCredentials', async () => {
         // just run the purge credential series here
         await purgeCredentialsSeries(context);
+        return true;
     });
 
 

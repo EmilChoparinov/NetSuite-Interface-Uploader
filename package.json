@@ -44,6 +44,11 @@
         "command": "extension.toggleUploadButton",
         "title": "Toggle Upload Button",
         "category": "NSI"
+      },
+      {
+        "command": "extension.walkthrough",
+        "title": "NSI Usage Walkthrough",
+        "category": "NSI"
       }
     ],
     "menus": {

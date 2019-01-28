@@ -16,7 +16,12 @@ export const runCommand = (context: vscode.ExtensionContext) => {
             // command and run it if possible
             const clickedButton = await vscode.window.showInformationMessage('There are no accounts to edit.', 'Add Account', 'Close');
             if (clickedButton === 'Add Account') {
-                vscode.commands.executeCommand('extension.addAccount');
+                await vscode.commands.executeCommand('extension.addAccount');
+                vscode.window.showInformationMessage(
+                    `Run 'extension.addAccount' if you want to edit the account you just added.`,
+                    'Close'
+                );
+                return false;
             }
         }
 
@@ -48,47 +53,53 @@ export const runCommand = (context: vscode.ExtensionContext) => {
                 'Close this file when you are done editing. Saving will do nothing'
             );
 
-            // create a listener to wait for the temp file to be closed
-            const closeEvent = vscode.workspace.onDidCloseTextDocument(async (closedDocument) => {
+            return new Promise((resolve) => {
+                // create a listener to wait for the temp file to be closed
+                const closeEvent = vscode.workspace.onDidCloseTextDocument(async (closedDocument) => {
 
-                // the file that must be closed should be the one that was created
-                if (closedDocument.fileName === document.fileName) {
+                    // the file that must be closed should be the one that was created
+                    if (closedDocument.fileName === document.fileName) {
 
-                    // if it was, dispose the event to stop listening
-                    closeEvent.dispose();
+                        // if it was, dispose the event to stop listening
+                        closeEvent.dispose();
 
-                    // check if the credentials are valid entered are valid
-                    const isValid = credentialsValidator(document.getText());
+                        // check if the credentials are valid entered are valid
+                        const isValid = credentialsValidator(document.getText());
 
-                    // if its valid, update the credentials stored
-                    if (isValid) {
-                        const oldCredentials: credentials = JSON.parse(decipyheredCredential);
-                        const newCredentials: credentials = JSON.parse(document.getText());
+                        // if its valid, update the credentials stored
+                        if (isValid) {
+                            const oldCredentials: credentials = JSON.parse(decipyheredCredential);
+                            const newCredentials: credentials = JSON.parse(document.getText());
 
-                        // generate the name hash that will be used to remove the account
-                        const accountId = manager.getName(oldCredentials);
+                            // generate the name hash that will be used to remove the account
+                            const accountId = manager.getName(oldCredentials);
 
-                        // remove the old data
-                        await manager.removeAccount(accountId);
+                            // remove the old data
+                            await manager.removeAccount(accountId);
 
-                        // re-encrypt
-                        await manager.encrypt(newCredentials);
+                            // re-encrypt
+                            await manager.encrypt(newCredentials);
 
-                        const reviewChanges =
-                            await vscode.window.showInformationMessage(
-                                'Credentials successfully encrypted. Would you like to view the changes?',
-                                'Yes',
-                                'No'
-                            );
+                            const reviewChanges =
+                                await vscode.window.showInformationMessage(
+                                    'Credentials successfully encrypted. Would you like to view the changes?',
+                                    'Yes',
+                                    'No'
+                                );
 
-                        if (reviewChanges === 'Yes') {
-                            openFile(JSON.stringify(newCredentials, null, 4));
+                            if (reviewChanges === 'Yes') {
+                                await openFile(JSON.stringify(newCredentials, null, 4));
+                            }
+
+                            resolve(true);
                         }
                     }
-                }
+                });
             });
 
         }
+
+        return false;
     });
 
     context.subscriptions.push(disposable);

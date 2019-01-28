@@ -27,6 +27,7 @@ export const runCommand = (context: vscode.ExtensionContext) => {
             context.globalState.update('button', true);
             button.show();
         }
+        return true;
     });
 
     context.subscriptions.push(disposable);

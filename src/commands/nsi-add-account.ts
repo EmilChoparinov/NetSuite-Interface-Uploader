@@ -21,8 +21,10 @@ export const runCommand = (context: vscode.ExtensionContext) => {
                 await manager.encrypt(capturedData);
 
                 vscode.window.showInformationMessage(`Account '${capturedData.email}' encrypted and stored`, 'Close');
+                return true;
             }
         }
+        return false;
     });
 
 

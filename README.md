@@ -35,7 +35,11 @@ In order for the uploader to work, *you must have uploading permissions on your 
 
 ## Release Notes
 
-## 0.0.1 - 2018-01-25 - Emil Choparinov
+## 0.0.2 - 2018-01-28 
+### Added
+- Tutorial Command
+
+## 0.0.1 - 2018-01-25
 ### Added
 - Add Acount (create)
 - Select Account (review)

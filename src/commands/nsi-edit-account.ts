@@ -21,8 +21,8 @@ export const runCommand = (context: vscode.ExtensionContext) => {
                     `Run 'Edit Account' if you want to edit the account you just added.`,
                     'Close'
                 );
-                return false;
             }
+            return false;
         }
 
         // create a prompt that will let the user select an account

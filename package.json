@@ -56,7 +56,7 @@
       "editor/context": [
         {
           "when": "resourceLangId == javascript",
-          "command": "extension.uploadFile",
+          "command": "nsi.uploadFile",
           "group": "1_modification@1"
         }
       ]

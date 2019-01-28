@@ -4,6 +4,10 @@ This extension allows you to quickly upload SuiteScript documents to NetSuite. I
 
 ## Features
 
+### Usage Walkthrough
+
+A tutorial command that walks you through the setup and usage of this extension. Helps you set your master password, add NetSuite credentials, select them, then upload.
+
 ### Adding Accounts
 
 Add accounts through the 'Add Account' command. A wizard will appear which asks you to enter your master password for this current session if not entered yet, then proceeds to ask the information needed to upload.
@@ -32,6 +36,7 @@ In order for the uploader to work, *you must have uploading permissions on your 
 
 ## Known Issues
 
+Check [issues](https://github.com/EmilChoparinov/NetSuite-Interface-Uploader/issues)
 
 ## Release Notes
 

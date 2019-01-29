@@ -3,6 +3,10 @@ All notable changes to the "netsuite-interface-uploader" extension will be docum
 
 ## 0.3.1 - 2018-01-28 
 ### Added
+- Support for editing available molecules
+
+## 0.3.1 - 2018-01-28 
+### Added
 - Upload In Progress message on file upload
 
 ### Changed

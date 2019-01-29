@@ -5,7 +5,7 @@
   "repository": {
     "url": "https://github.com/EmilChoparinov/NetSuite-Interface-Uploader"
   },
-  "description": "",
+  "description": "A handy tool that gives you a better SuiteScripting experience",
   "version": "0.3.1",
   "engines": {
     "vscode": "^1.30.0"

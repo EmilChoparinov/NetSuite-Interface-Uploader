@@ -46,7 +46,7 @@ Check [issues](https://github.com/EmilChoparinov/NetSuite-Interface-Uploader/iss
 
 ## Release Notes
 
-## 0.3.1 - 2018-01-28 
+## 0.3.2 - 2018-01-28 
 ### Added
 - Support for editing available molecules
 

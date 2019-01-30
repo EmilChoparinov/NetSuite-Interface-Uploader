@@ -1,9 +1,10 @@
-![](https://img.shields.io/github/issues/EmilChoparinov/NetSuite-Interface-Uploader.svg)
-![](https://img.shields.io/github/stars/EmilChoparinov/NetSuite-Interface-Uploader.svg)
-![](https://img.shields.io/github/license/EmilChoparinov/NetSuite-Interface-Uploader.svg)
+[![](https://img.shields.io/badge/Author-RSM%20US-ff5e99.svg)](https://github.com/ExploreConsulting)
+[![](https://img.shields.io/badge/Repository-NetSuite%20Interface%20Uploader-5ea6ff.svg)](https://github.com/ExploreConsulting/NetSuite-Interface-Uploader)
 
-[![](https://img.shields.io/badge/Author-Emil%20Choparinov-ff5e99.svg)](https://github.com/EmilChoparinov)
-[![](https://img.shields.io/badge/Repository-NetSuite--Interface--Uploader-5ea6ff.svg)](https://github.com/EmilChoparinov/NetSuite-Interface-Uploader)
+![](https://img.shields.io/github/issues/ExploreConsulting/NetSuite-Interface-Uploader.svg)
+![](https://img.shields.io/github/stars/ExploreConsulting/NetSuite-Interface-Uploader.svg)
+![](https://img.shields.io/github/license/ExploreConsulting/NetSuite-Interface-Uploader.svg)
+
 # NetSuite Interface Uploader README
 
 This extension allows you to quickly upload SuiteScript documents to NetSuite. It also contains features that seamlessly allows you to switch quickly between a set of NetSuite accounts at anytime. All accounts entered are also encrypted with AES.

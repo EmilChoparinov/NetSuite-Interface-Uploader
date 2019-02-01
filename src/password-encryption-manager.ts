@@ -249,6 +249,8 @@ export class EncryptionManager {
      */
     public async removeAccount(accountId: string) {
 
+        const credentials = await this.storageManager.getFile(accountId);
+
         // removes the file from storage
         await this.storageManager.removeFile(accountId);
 
@@ -259,6 +261,8 @@ export class EncryptionManager {
         let parsedAccountListings: accountNames = JSON.parse(accountListing);
         parsedAccountListings.ids = parsedAccountListings.ids.filter(id => id !== accountId);
         this.storageManager.updateFile('accounts', JSON.stringify(parsedAccountListings));
+
+        return credentials;
     }
 
 

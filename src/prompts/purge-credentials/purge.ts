@@ -75,7 +75,23 @@ export class PurgePrompt extends Prompt<objectAggregate> {
         // create the manager and remove all the accounts that have been selected
         const manager = new EncryptionManager(this.context.workspaceState.get('masterkey'), this.context);
         selections.forEach(async account => {
-            await manager.removeAccount(account);
+            // removes the account
+            const deletedCredentials = await manager.removeAccount(account);
+
+            //ensures that if the account you removed was the currently active 
+            // one, delete it
+            const decypheredDeletedCredentials =
+                manager.getDecipheredText(deletedCredentials);
+
+            const decypheredActiveCredentials =
+                manager.getDecipheredText(
+                    this.context.workspaceState.get('credential')
+                );
+
+
+            if (decypheredActiveCredentials === decypheredDeletedCredentials) {
+                this.context.workspaceState.update('credential', undefined);
+            }
         });
 
         window.showInformationMessage(

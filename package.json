@@ -51,8 +51,8 @@
         "category": "NSI"
       },
       {
-        "command": "nsi.walkthrough",
-        "title": "NSI Usage Walkthrough",
+        "command": "nsi.viewTutorial",
+        "title": "View Tutorial",
         "category": "NSI"
       }
     ],
@@ -64,7 +64,17 @@
           "group": "1_modification@1"
         }
       ]
-    }
+    },
+    "keybindings":[
+      {
+        "command": "nsi.uploadFile",
+        "key": "Ctrl+Shift+U"
+      },
+      {
+        "command": "nsi.uploadFile",
+        "key": "Ctrl+U"
+      }
+    ]
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",

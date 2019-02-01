@@ -47,7 +47,7 @@ export const runCommand = (context: vscode.ExtensionContext) => {
         credential = context.workspaceState.get('credential');
 
         // requires masterpassword
-        const isMasterEntered = ensureMasterPasswordExists(context);
+        const isMasterEntered = await ensureMasterPasswordExists(context);
         if (isMasterEntered) {
 
             // create the encryption manager to be used to decrypt the credential data of the 

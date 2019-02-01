@@ -6,7 +6,7 @@
     "url": "https://github.com/EmilChoparinov/NetSuite-Interface-Uploader"
   },
   "description": "A handy tool that gives you a better SuiteScripting experience",
-  "version": "0.3.3",
+  "version": "0.4.0",
   "engines": {
     "vscode": "^1.30.0"
   },
@@ -65,7 +65,7 @@
         }
       ]
     },
-    "keybindings":[
+    "keybindings": [
       {
         "command": "nsi.uploadFile",
         "key": "Ctrl+Shift+U"

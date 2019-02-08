@@ -67,17 +67,23 @@ export const runCommand = (context: vscode.ExtensionContext) => {
             // get the name of the js file from the path
             const name = getName(vscode.window.activeTextEditor.document.fileName);
 
+            vscode.window.showInformationMessage(`Sending '${name}' to NetSuite...`);
+
+            const endingFolderId = await uploadPath(
+                uploader,
+                vscode.workspace.workspaceFolders[0].uri.path,
+                vscode.window.activeTextEditor.document.uri.path
+            );
+
             // promise wrapper to return a boolean value if the command was 
             // successfully run
             return new Promise((resolve) => {
 
-                vscode.window.showInformationMessage(`Sending '${name}' to NetSuite...`);
-
                 // process the request
                 uploader.addOrUpdateFile(
 
-                    // -15 is the suitescript folder hardcoded in netsuite
-                    -15,
+                    // folder to send it into from netsuite
+                    endingFolderId,
 
                     // name of the file
                     name,
@@ -91,29 +97,9 @@ export const runCommand = (context: vscode.ExtensionContext) => {
                             'Close'
                         );
 
-                        // ask for convenience if they want a button to click also
-                        const hasAskedButtonQuestion = context.globalState.get('button');
+                        askUserForButton(context);
 
-                        // only ask if it has not yet been asked globally
-                        if (hasAskedButtonQuestion === undefined) {
-                            const buttonAnswer =
-                                await vscode.window.showInformationMessage(
-                                    'Would you like to add a button to upload?',
-                                    'Yes', 'No'
-                                );
-
-                            if (buttonAnswer === 'Yes') {
-                                await vscode.commands.executeCommand('nsi.toggleUploadButton');
-
-                            }
-                            else if (buttonAnswer === 'No') {
-                                vscode.window.showInformationMessage(
-                                    'If you change your mind, use the \'Toggle Upload Button\' command',
-                                    'Close'
-                                );
-                            }
-                            resolve(true);
-                        }
+                        resolve(true);
                     })
                     .catch(async error => {
                         const decision =
@@ -138,4 +124,50 @@ export const runCommand = (context: vscode.ExtensionContext) => {
 const getName = (filePath: string) => {
     const paths = filePath.split('\\');
     return paths.pop();
+};
+
+const askUserForButton = async (context: vscode.ExtensionContext) => {
+    // ask for convenience if they want a button to click also
+    const hasAskedButtonQuestion = context.globalState.get('button');
+
+    // only ask if it has not yet been asked globally
+    if (hasAskedButtonQuestion === undefined) {
+        const buttonAnswer =
+            await vscode.window.showInformationMessage(
+                'Would you like to add a button to upload?',
+                'Yes', 'No'
+            );
+
+        if (buttonAnswer === 'Yes') {
+            await vscode.commands.executeCommand('nsi.toggleUploadButton');
+
+        }
+        else if (buttonAnswer === 'No') {
+            vscode.window.showInformationMessage(
+                'If you change your mind, use the \'Toggle Upload Button\' command',
+                'Close'
+            );
+        }
+    }
+};
+
+const uploadPath = async (uploader: any, workspacePath: string, filePath: string) => {
+
+    const relativeFilePath = filePath.slice(workspacePath.length + 1);
+    const folderPaths = relativeFilePath.split('/');
+
+    // remove to file name itself
+    folderPaths.pop();
+
+    // reverse the array to pop the folders in order
+    folderPaths.reverse();
+
+    // sets the root folder
+    let currentFolderId = -15;
+    while (folderPaths.length) {
+        const currentFolderName = folderPaths.pop();
+        const { internalId } = await uploader.mkdir(currentFolderId, currentFolderName);
+        currentFolderId = internalId;
+    }
+    return currentFolderId;
 };

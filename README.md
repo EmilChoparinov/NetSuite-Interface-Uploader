@@ -47,6 +47,10 @@ Check [issues](https://github.com/EmilChoparinov/NetSuite-Interface-Uploader/iss
 
 ## Release Notes
 
+## 0.5.0 - 2019-02-08
+### Added
+- File Uploading now takes your relative workspace into account. The root of your workspace is the SuiteScripts folder in NetSuite
+
 ## 0.4.0 - 2019-01-31
 ### Patched
 - Bug where the tutorial command would have prompt issues that disappear

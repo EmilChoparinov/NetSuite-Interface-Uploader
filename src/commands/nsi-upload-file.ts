@@ -60,18 +60,19 @@ export const runCommand = (context: vscode.ExtensionContext) => {
             // parse into a JSON
             const credentialJSON = JSON.parse(decipheredText) as credentials;
 
-
             // use the NetSuite uploader to upload a file to netsuite
             const uploader = new Uploader(credentialJSON);
 
             // get the name of the js file from the path
             const name = getName(vscode.window.activeTextEditor.document.fileName);
 
+            const workspace = findWorkspace();
+
             vscode.window.showInformationMessage(`Sending '${name}' to NetSuite...`);
 
             const endingFolderId = await uploadPath(
                 uploader,
-                vscode.workspace.workspaceFolders[0].uri.path,
+                workspace.uri.path,
                 vscode.window.activeTextEditor.document.uri.path
             );
 
@@ -121,9 +122,30 @@ export const runCommand = (context: vscode.ExtensionContext) => {
     context.subscriptions.push(disposable);
 };
 
+/**
+ * get the file's name from a given path of a file
+ * 
+ * @param filePath path to a specific file
+ */
 const getName = (filePath: string) => {
     const paths = filePath.split('\\');
     return paths.pop();
+};
+
+const findWorkspace = () => {
+    const folders = vscode.workspace.workspaceFolders;
+    const fullPath = vscode.window.activeTextEditor.document.uri.path;
+
+    for (const folder of folders) {
+        const folderPath = folder.uri.path;
+        if (fullPath.includes(folderPath)) { return folder; }
+    }
+
+    vscode.window.showInformationMessage(
+        'You must have a workspace open to upload to NetSuite. Open the ' + 
+        'containing folder in VSCode.'
+    );
+
 };
 
 const askUserForButton = async (context: vscode.ExtensionContext) => {
@@ -151,6 +173,13 @@ const askUserForButton = async (context: vscode.ExtensionContext) => {
     }
 };
 
+/**
+ * virtualizes the path in netsuite with the path in you workspace
+ * 
+ * @param uploader uploader object from ns npm repo
+ * @param workspacePath path of the workspace the file exists in
+ * @param filePath full path to the file
+ */
 const uploadPath = async (uploader: any, workspacePath: string, filePath: string) => {
 
     const relativeFilePath = filePath.slice(workspacePath.length + 1);

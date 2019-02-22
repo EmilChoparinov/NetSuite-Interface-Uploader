@@ -3,6 +3,10 @@ All notable changes to the "netsuite-interface-uploader" extension will be docum
 
 ## Release Notes
 
+## 0.6.0 - 2019-02-22
+### Added
+- TypeScript Support
+
 ## 0.5.0 - 2019-02-08
 ### Added
 - File Uploading now takes your relative workspace into account. The root of your workspace is the SuiteScripts folder in NetSuite

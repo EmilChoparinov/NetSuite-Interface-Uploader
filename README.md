@@ -47,6 +47,10 @@ Check [issues](https://github.com/EmilChoparinov/NetSuite-Interface-Uploader/iss
 
 ## Release Notes
 
+## 0.6.0 - 2019-02-22
+### Added
+- TypeScript Support
+
 ## 0.5.0 - 2019-02-08
 ### Added
 - File Uploading now takes your relative workspace into account. The root of your workspace is the SuiteScripts folder in NetSuite

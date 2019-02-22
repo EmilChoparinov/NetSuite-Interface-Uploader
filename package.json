@@ -62,6 +62,11 @@
           "when": "resourceLangId == javascript",
           "command": "nsi.uploadFile",
           "group": "1_modification@1"
+        },
+        {
+          "when": "resourceLangId == typescript",
+          "command": "nsi.uploadFile",
+          "group": "1_modification@1"
         }
       ]
     },

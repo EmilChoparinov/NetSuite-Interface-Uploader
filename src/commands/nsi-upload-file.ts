@@ -4,6 +4,7 @@ import { ensureMasterPasswordExists } from '../prompts/master-password';
 
 import * as Uploader from './../../ns_npm_repository/ns-uploader';
 import { openFile } from '../utils/open-file';
+import * as ts from 'typescript';
 
 export const runCommand = (context: vscode.ExtensionContext) => {
 
@@ -76,6 +77,19 @@ export const runCommand = (context: vscode.ExtensionContext) => {
                 vscode.window.activeTextEditor.document.uri.path
             );
 
+            const currentLanguage =
+                vscode.window.activeTextEditor.document.languageId;
+
+            let code = vscode.window.activeTextEditor.document.getText();
+
+            if (currentLanguage === 'typescript') {
+                vscode.window.showInformationMessage(
+                    'Compiling TypeScript...',
+                    'Close'
+                );
+                code = await compileTypescript(code);
+            }
+
             // promise wrapper to return a boolean value if the command was 
             // successfully run
             return new Promise((resolve) => {
@@ -87,10 +101,10 @@ export const runCommand = (context: vscode.ExtensionContext) => {
                     endingFolderId,
 
                     // name of the file
-                    name,
+                    `${name}.js`,
 
                     // the text to upload
-                    vscode.window.activeTextEditor.document.getText(),
+                    code,
                 )
                     .then(async result => {
                         await vscode.window.showInformationMessage(
@@ -129,7 +143,9 @@ export const runCommand = (context: vscode.ExtensionContext) => {
  */
 const getName = (filePath: string) => {
     const paths = filePath.split('\\');
-    return paths.pop();
+    const file = paths.pop();
+    const indexOfMIME = file.lastIndexOf('.');
+    return file.slice(0, indexOfMIME);
 };
 
 const findWorkspace = () => {
@@ -142,7 +158,7 @@ const findWorkspace = () => {
     }
 
     vscode.window.showInformationMessage(
-        'You must have a workspace open to upload to NetSuite. Open the ' + 
+        'You must have a workspace open to upload to NetSuite. Open the ' +
         'containing folder in VSCode.'
     );
 
@@ -199,4 +215,21 @@ const uploadPath = async (uploader: any, workspacePath: string, filePath: string
         currentFolderId = internalId;
     }
     return currentFolderId;
+};
+
+const compileTypescript = async (sourceFile: string) => {
+    const { outputText: jsCode } = ts.transpileModule(sourceFile, {
+        compilerOptions: {
+            module: ts.ModuleKind.None,
+            moduleResolution: ts.ModuleResolutionKind.NodeJs,
+            target: ts.ScriptTarget.ES5,
+            noImplicitAny: false,
+            sourceMap: false,
+            lib: ['es5', 'dom'],
+            isolatedModules: true
+        },
+        reportDiagnostics: true
+    });
+
+    return jsCode;
 };

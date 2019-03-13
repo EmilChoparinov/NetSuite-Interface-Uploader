@@ -71,10 +71,17 @@ export const runCommand = (context: vscode.ExtensionContext) => {
 
             vscode.window.showInformationMessage(`Sending '${name}' to NetSuite...`);
 
+            let rootFolderId = context.workspaceState.get('rootFolder') as number;
+
+            // default to the suitescript folder
+            if (!rootFolderId) { rootFolderId = -15; }
+
+
             const endingFolderId = await uploadPath(
                 uploader,
                 workspace.uri.path,
-                vscode.window.activeTextEditor.document.uri.path
+                vscode.window.activeTextEditor.document.uri.path,
+                rootFolderId
             );
 
             const currentLanguage =
@@ -107,8 +114,14 @@ export const runCommand = (context: vscode.ExtensionContext) => {
                     code,
                 )
                     .then(async result => {
+
+                        let dynamicText = 'the SuiteScripts Folder';
+                        if (rootFolderId !== -15) {
+                            dynamicText = 'your designated folder';
+                        }
+
                         await vscode.window.showInformationMessage(
-                            `File '${name}' was successfully uploaded to the SuiteScripts Folder`,
+                            `File '${name}' was successfully uploaded to ${dynamicText}`,
                             'Close'
                         );
 
@@ -195,8 +208,14 @@ const askUserForButton = async (context: vscode.ExtensionContext) => {
  * @param uploader uploader object from ns npm repo
  * @param workspacePath path of the workspace the file exists in
  * @param filePath full path to the file
+ * @param rootFolderId the folder that the path should start off from
  */
-const uploadPath = async (uploader: any, workspacePath: string, filePath: string) => {
+const uploadPath = async (
+    uploader: any,
+    workspacePath: string,
+    filePath: string,
+    rootFolderId: number
+) => {
 
     const relativeFilePath = filePath.slice(workspacePath.length + 1);
     const folderPaths = relativeFilePath.split('/');
@@ -208,7 +227,8 @@ const uploadPath = async (uploader: any, workspacePath: string, filePath: string
     folderPaths.reverse();
 
     // sets the root folder
-    let currentFolderId = -15;
+    let currentFolderId = rootFolderId;
+
     while (folderPaths.length) {
         const currentFolderName = folderPaths.pop();
         const { internalId } = await uploader.mkdir(currentFolderId, currentFolderName);

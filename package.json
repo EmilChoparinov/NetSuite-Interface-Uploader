@@ -26,6 +26,11 @@
         "category": "NSI"
       },
       {
+        "command": "nsi.setRootFolder",
+        "title": "Set Project Root Folder",
+        "category": "NSI"
+      },
+      {
         "command": "nsi.addAccount",
         "title": "Add Account",
         "category": "NSI"

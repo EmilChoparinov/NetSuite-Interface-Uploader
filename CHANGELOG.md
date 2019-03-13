@@ -3,6 +3,10 @@ All notable changes to the "netsuite-interface-uploader" extension will be docum
 
 ## Release Notes
 
+## 0.7.0 - 2019-03-13
+### Added
+- You can now change your root upload folder
+
 ## 0.6.0 - 2019-02-22
 ### Added
 - TypeScript Support

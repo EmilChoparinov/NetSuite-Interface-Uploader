@@ -35,6 +35,10 @@ Select the Account you want to use *within your current workspace* with the 'Sel
 
 Upload the current file you have open with the 'Upload File' command. This will start a process in which whatever you have currently open in front of you will upload to NetSuite with the name being the files name.
 
+### Set Project Root Folder
+
+Set your current workspaces root NetSuite folder to upload with. Enter an internalid within NetSuite File Cabinet and all files will be uploaded relative to there.
+
 -----------------------------------------------------------------------------------------------------------
 
 ## Requirements
@@ -46,6 +50,10 @@ In order for the uploader to work, *you must have uploading permissions on your 
 Check [issues](https://github.com/EmilChoparinov/NetSuite-Interface-Uploader/issues)
 
 ## Release Notes
+
+## 0.7.0 - 2019-03-13
+### Added
+- You can now change your root upload folder
 
 ## 0.6.0 - 2019-02-22
 ### Added

@@ -8,11 +8,13 @@ export const runCommand = (context: vscode.ExtensionContext) => {
             ignoreFocusOut: true
         });
 
-        context.workspaceState.update('rootFolder', folderId);
-        vscode.window.showInformationMessage(
-            `The folder to be used as root for uploading has been set to '${folderId}'`,
-            'Close'
-        );
+        if (folderId && !isNaN(parseInt(folderId))) {
+            context.workspaceState.update('rootFolder', folderId);
+            vscode.window.showInformationMessage(
+                `The folder to be used as root for uploading has been set to '${folderId}'`,
+                'Close'
+            );
+        }
     });
 
     context.subscriptions.push(disposable);

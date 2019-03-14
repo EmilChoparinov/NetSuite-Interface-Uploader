@@ -3,6 +3,13 @@ All notable changes to the "netsuite-interface-uploader" extension will be docum
 
 ## Release Notes
 
+## 0.9.0 - 2019-14-13
+### Changed
+- Root folder gets set regardless if you entered in anything
+
+### Added
+- Folder setting validations 
+
 ## 0.7.0 - 2019-03-13
 ### Added
 - You can now change your root upload folder

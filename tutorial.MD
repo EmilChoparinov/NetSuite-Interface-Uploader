@@ -48,7 +48,7 @@ This also may require a master password depending on your current session
 
 You can remove credentials that you have entered using the `NSI: Purge Credentials` command. 
 
-## Without Master Password
+#### Without Master Password
 
 When running this command select `Purge All` and it will remove two things:
 
@@ -57,7 +57,7 @@ When running this command select `Purge All` and it will remove two things:
 
 This will essentially reset the extensions credential data that you have given
 
-## With Master Password
+#### With Master Password
 
 When running this command if you selected `Purge Specific Account` you will be able to select which set of credentials 
 to remove and it will remove them from the extension.

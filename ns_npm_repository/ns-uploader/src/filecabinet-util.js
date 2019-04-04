@@ -127,7 +127,8 @@ _.extend(Tool.prototype, {
 				deferred.resolve(responseBody)
 			}
 		})
-		//TODO: catch
+		// [EMIL] passing value along
+		.catch(function(err) { deferred.reject(err) });
 
 		return deferred.promise; 
 	}

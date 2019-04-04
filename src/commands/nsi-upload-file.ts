@@ -69,6 +69,8 @@ export const runCommand = (context: vscode.ExtensionContext) => {
 
             const workspace = findWorkspace();
 
+            if (!workspace) { return; }
+
             vscode.window.showInformationMessage(`Sending '${name}' to NetSuite...`);
 
             let rootFolderId = context.workspaceState.get('rootFolder') as number;
@@ -136,10 +138,18 @@ export const runCommand = (context: vscode.ExtensionContext) => {
                                 'Open Error', 'Close'
                             );
                         if (decision === 'Open Error') {
-                            await openFile(JSON.stringify(error, null, 4));
+                            await openFile(
+                                JSON.stringify({
+                                    message: error.message,
+                                    stack: error.stack
+                                },
+                                    null,
+                                    4
+                                ));
                             resolve(false);
                         }
-                    });
+                    })
+                    .done();
             });
         }
 
@@ -172,7 +182,8 @@ const findWorkspace = () => {
 
     vscode.window.showInformationMessage(
         'You must have a workspace open to upload to NetSuite. Open the ' +
-        'containing folder in VSCode.'
+        'containing folder in VSCode.',
+        'Close'
     );
 
 };
